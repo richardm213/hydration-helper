@@ -1,3 +1,4 @@
+import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import {
   Text, View, StyleSheet,
@@ -5,71 +6,46 @@ import {
   Alert,
   Image
 } from 'react-native';
-import { Button, Icon, Input } from 'react-native-elements';
-import { ScreenWidth } from 'react-native-elements/dist/helpers';
-
+import { Button, Icon, Input, Header } from 'react-native-elements';
+import { ScreenHeight, ScreenWidth } from 'react-native-elements/dist/helpers';
 const white = '#fff';
+
+
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: white,
+  header: {
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#DEFBFF',
   },
-  submitButton: {
-    backgroundColor: '#0F5059',
-    height: 50
+  center: {
+    flex: 5,
+    backgroundColor: 'white',
 
   },
-  largerTextBlue: {
-    fontSize: 24,
-    alignItems: 'center',
-    fontWeight: 'bold',
-    color: '#0F5059',
-    margin: 20,
-    padding: 20
+  footer: {
+    flex: 1,
+    backgroundColor: '#DEFBFF',
 
   },
-  largerTextWhite: {
-    fontSize: 24,
-    alignItems: 'center',
-    fontWeight: 'bold',
-    color: 'white',
-
-  },
-  input: {
-    marginLeft: 70,
-    marginRight: 70,
-    marginTop: 20,
-    marginBottom: 20
-
-  },
+  container: {
+    flex: 1,
+    flexDirection: 'column'
+  }
 });
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Icon
-        name='run-circle'
-        type='material-icons'
-        color='#0F5059'
-        size='200' />
-      <Text
-        style={styles.largerTextBlue}>
-        Please enter your minutes of exercise below:
-      </Text>
-      <Input
-        placeholder='Minutes of Exercise'
-        inputContainerStyle={styles.input}
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+      </View>
 
-      />
-      <Button
-        buttonStyle={styles.submitButton}
-        titleStyle={styles.largerTextWhite}
-        title="Submit"
-        onPress={() => Alert.alert('Your exercise has been recorded!')}
-      />
-      <StatusBar style="auto" />
-    </View>
+      <View style={styles.center}>
+      </View>
+
+      <View style={styles.footer}>
+        <NavigationContainer>
+        </NavigationContainer>
+      </View>
+
+    </SafeAreaView>
   );
 }
