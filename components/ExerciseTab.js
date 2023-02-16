@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function App() {
+export default function ExerciseTab() {
     return (
         <View style={styles.container}>
             <Icon
