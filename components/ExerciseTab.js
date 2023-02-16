@@ -6,7 +6,7 @@ import {
     Image
 } from 'react-native';
 import { Button, Icon, Input } from 'react-native-elements';
-import { ScreenWidth } from 'react-native-elements/dist/helpers';
+import { ScreenHeight, ScreenWidth } from 'react-native-elements/dist/helpers';
 
 const white = '#fff';
 const styles = StyleSheet.create({
@@ -15,14 +15,16 @@ const styles = StyleSheet.create({
         backgroundColor: white,
         flex: 1,
         justifyContent: 'center',
+        bottom: 60
     },
     submitButton: {
         backgroundColor: '#0F5059',
-        height: 50
+        height: 50,
+        borderRadius: 15,
 
     },
-    largerTextBlue: {
-        fontSize: 24,
+    largerTextBlueBold: {
+        fontSize: 22,
         alignItems: 'center',
         fontWeight: 'bold',
         color: '#0F5059',
@@ -30,11 +32,20 @@ const styles = StyleSheet.create({
         padding: 20
 
     },
+    largerTextBlue: {
+        textAlign: 'center',
+        fontSize: 22,
+        alignItems: 'center',
+        color: '#0F5059',
+        margin: 20,
+
+    },
     largerTextWhite: {
-        fontSize: 24,
+        fontSize: 22,
         alignItems: 'center',
         fontWeight: 'bold',
         color: 'white',
+        padding: 20,
 
     },
     input: {
@@ -44,18 +55,26 @@ const styles = StyleSheet.create({
         marginBottom: 20
 
     },
+    moreDetails: {
+        textAlign: 'center',
+        width: 0.85 * ScreenWidth,
+        color: '#0F5059'
+    }
 });
 
 export default function ExerciseTab() {
     return (
         <View style={styles.container}>
-            <Icon
+            <Text style={styles.moreDetails}>
+                Exercise is beneficial for your health, but it also increases your need for water.
+            </Text>
+            <Icon style={{ marginTop: 55 }}
                 name='run-circle'
                 type='material-icons'
                 color='#0F5059'
                 size='200' />
             <Text
-                style={styles.largerTextBlue}>
+                style={styles.largerTextBlueBold}>
                 Please enter your minutes of exercise below:
             </Text>
             <Input
