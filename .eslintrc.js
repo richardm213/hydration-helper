@@ -23,5 +23,7 @@ module.exports = {
     'react/jsx-filename-extension': [1, {extensions: ['.js', '.jsx']}],
     'react/react-in-jsx-scope': 0,
     'react/style-prop-object': 0,
+    'react/jsx-props-no-spreading': 0,
   },
+  settings: {'import/core-modules': ['@expo/vector-icons']},
 };
