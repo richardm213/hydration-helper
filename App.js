@@ -16,6 +16,9 @@ const exerciseIcon = ({color, size}) => (
 const waterIcon = ({color, size}) => (
   <Icon name="water" type="ionicon" color={color} size={size * 1.5} />
 );
+const settingsIcon = ({color, size}) => (
+  <MaterialIcons name="settings" color={color} size={size * 1.5} />
+);
 
 function Tabs() {
   return (
@@ -74,7 +77,14 @@ function Tabs() {
           headerTitle: 'You exercised for 57 minutes today!',
         }}
       />
-      <Tab.Screen name="Settings" component={SettingsTab} />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsTab}
+        options={{
+          tabBarIcon: settingsIcon,
+          headerTitle: 'Settings',
+        }}
+      />
     </Tab.Navigator>
   );
 }
