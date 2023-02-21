@@ -2,6 +2,7 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {MaterialIcons} from '@expo/vector-icons';
+import {Icon} from 'react-native-elements';
 import TrendsTab from './components/TrendsTab';
 import RecommendationTab from './components/RecommendationTab';
 import IntakeTab from './components/IntakeTab';
@@ -11,6 +12,9 @@ import SettingsTab from './components/SettingsTab';
 const Tab = createBottomTabNavigator();
 const exerciseIcon = ({color, size}) => (
   <MaterialIcons name="run-circle" color={color} size={size * 1.5} />
+);
+const waterIcon = ({color, size}) => (
+  <Icon name="water" type="ionicon" color={color} size={size * 1.5} />
 );
 
 function Tabs() {
@@ -53,7 +57,14 @@ function Tabs() {
         },
       }}>
       <Tab.Screen name="Trends" component={TrendsTab} />
-      <Tab.Screen name="Recommendation" component={RecommendationTab} />
+      <Tab.Screen
+        name="Recommendation"
+        component={RecommendationTab}
+        options={{
+          tabBarIcon: waterIcon,
+          headerTitle: 'Current water intake: 70%',
+        }}
+      />
       <Tab.Screen name="Intake" component={IntakeTab} />
       <Tab.Screen
         name="Exercise"
