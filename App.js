@@ -70,7 +70,7 @@ function Tabs() {
         tabBarInactiveTintColor: '#81C6D0',
 
         headerStyle: {
-          height: 130,
+          height: 80,
           backgroundColor: '#DEFBFF',
         },
         headerTitleStyle: {
