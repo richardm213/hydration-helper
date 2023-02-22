@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Switch, Text, StyleSheet, View, TextInput} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const white = '#fff';
 const styles = StyleSheet.create({
@@ -114,6 +115,9 @@ export default function SettingsTab() {
           setValue={setFluidMeasurement}
           setItems={setMeasurements}
           style={styles.dropDown}
+          onChangeValue={async value => {
+            await AsyncStorage.setItem('@measurement_type', value);
+          }}
         />
       </View>
     </View>
