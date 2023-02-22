@@ -48,8 +48,12 @@ export default function RecommendationTab() {
   useFocusEffect(() => {
     const fetchMeasurementType = async () =>
       setMeasurementType(await AsyncStorage.getItem('@measurement_type'));
-    setRecommendation(measurementType === 'ml' ? 3000 : 120);
+    const updateRecommendation = async () => {
+      setRecommendation(measurementType === 'ml' ? 3000 : 120);
+      await AsyncStorage.setItem('@recommendation', recommendation.toString());
+    };
     fetchMeasurementType();
+    updateRecommendation();
   });
   return (
     <View style={styles.container}>

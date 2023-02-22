@@ -69,6 +69,9 @@ export default function IntakeTab() {
           Alert.alert('Your entry has been recorded.');
           await AsyncStorage.setItem('@drink_type', drinkType);
           await AsyncStorage.setItem('@drink_amount', drinkAmount.toString());
+          const oldIntake = (await AsyncStorage.getItem('@intake')) || 0;
+          const newIntake = parseInt(oldIntake, 10) + drinkAmount;
+          await AsyncStorage.setItem('@intake', newIntake.toString());
         }}
       />
     </View>
