@@ -2,9 +2,11 @@ import React, {useState} from 'react';
 import {Switch, Text, StyleSheet, View, TextInput} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 
+const white = '#fff';
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    backgroundColor: white,
     flex: 1,
     justifyContent: 'center',
   },

@@ -1,10 +1,12 @@
 import {StyleSheet, Text, View} from 'react-native';
 import {Icon} from 'react-native-elements';
 
+const white = '#fff';
 const turquoise = '#0F5059';
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    backgroundColor: white,
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
