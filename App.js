@@ -10,6 +10,14 @@ import ExerciseTab from './components/ExerciseTab';
 import SettingsTab from './components/SettingsTab';
 
 const Tab = createBottomTabNavigator();
+const intakeIcon = ({color, size}) => (
+  <MaterialIcons
+    name="local-drink"
+    type="ionicon"
+    color={color}
+    size={size * 1.5}
+  />
+);
 const exerciseIcon = ({color, size}) => (
   <MaterialIcons name="run-circle" color={color} size={size * 1.5} />
 );
@@ -68,7 +76,14 @@ function Tabs() {
           headerTitle: 'Current water intake: 70%',
         }}
       />
-      <Tab.Screen name="Intake" component={IntakeTab} />
+      <Tab.Screen
+        name="Intake"
+        component={IntakeTab}
+        options={{
+          tabBarIcon: intakeIcon,
+          headerTitle: 'Current water intake: 70%',
+        }}
+      />
       <Tab.Screen
         name="Exercise"
         component={ExerciseTab}
