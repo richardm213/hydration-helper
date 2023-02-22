@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import {Switch, Text, StyleSheet, View, TextInput} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-const white = '#fff';
-const turquoise = '#0F5059';
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
