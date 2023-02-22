@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: white,
-    justifyContent: 'center',
+    flex: 1,
   },
   fluidLabel: {
     color: turqoise,
