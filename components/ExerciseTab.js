@@ -11,23 +11,21 @@ const styles = StyleSheet.create({
     backgroundColor: white,
     bottom: 60,
     flex: 1,
-    justifyContent: 'center',
   },
   icon: {
-    marginTop: 55,
+    marginTop: 40,
   },
   input: {
-    marginBottom: 20,
+    marginBottom: 10,
     marginLeft: 70,
     marginRight: 70,
-    marginTop: 20,
   },
   largerTextBlueBold: {
     alignItems: 'center',
     color: turquoise,
     fontSize: 22,
     fontWeight: 'bold',
-    margin: 20,
+    marginBottom: 10,
     padding: 20,
   },
   largerTextWhite: {
