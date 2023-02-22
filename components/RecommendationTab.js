@@ -27,8 +27,9 @@ const styles = StyleSheet.create({
   },
   suggestionText: {
     color: turquoise,
-    fontSize: 30,
+    fontSize: 26,
     fontWeight: 'bold',
+    marginHorizontal: 30,
     textAlign: 'center',
   },
   suggestionTextView: {
