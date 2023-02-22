@@ -7,21 +7,45 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: white,
-    flex: 1,
     justifyContent: 'center',
   },
   dropDown: {
-    width: 75,
+    flexGrow: 1,
+    textAlign: 'right',
+    width: '20%',
+  },
+  dropDownRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: 5,
+    marginBottom: 10,
+    paddingBottom: 80,
+    width: '100%',
+  },
+  fluidLabel: {
+    color: '#0F5059',
+    fontSize: 15,
+    width: '80%',
   },
   input: {
     borderWidth: 1,
     height: 40,
     margin: 12,
     padding: 10,
+    width: '50%',
+  },
+  label: {
+    color: '#0F5059',
+    fontSize: 15,
   },
   row: {
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     margin: 5,
+    paddingBottom: 10,
+    width: '100%',
   },
 });
 
@@ -49,9 +73,8 @@ export default function SettingsTab() {
       <View style={styles.row}>
         <Text style={styles.label}>Health Data Access</Text>
         <Switch
-          trackColor={{false: '#767577', true: '#81b0ff'}}
-          thumbColor={canAccessHealthData ? '#f5dd4b' : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
+          trackColor={{false: '#DEFBFF', true: '#81C6D0'}}
+          thumbColor={canAccessHealthData ? '#FFFFFF' : '#81C6D0'}
           onValueChange={toggleHealthSwitch}
           value={canAccessHealthData}
         />
@@ -59,15 +82,30 @@ export default function SettingsTab() {
       <View style={styles.row}>
         <Text style={styles.label}>Location Data</Text>
         <Switch
-          trackColor={{false: '#767577', true: '#81b0ff'}}
-          thumbColor={canAccessLocationData ? '#f5dd4b' : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
+          trackColor={{false: '#DEFBFF', true: '#81C6D0'}}
+          thumbColor={canAccessLocationData ? '#FFFFFF' : '#81C6D0'}
           onValueChange={toggleLocationSwitch}
           value={canAccessLocationData}
         />
       </View>
       <View style={styles.row}>
-        <Text style={styles.label}>Unit of Fluid Measurement</Text>
+        <Text style={styles.label}>Height</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setHeight}
+          value={height}
+        />
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Weight</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setWeight}
+          value={weight}
+        />
+      </View>
+      <View style={styles.dropDownRow}>
+        <Text style={styles.fluidLabel}>Unit of Fluid Measurement</Text>
         <DropDownPicker
           open={open}
           value={fluidMeasurement}
@@ -76,22 +114,6 @@ export default function SettingsTab() {
           setValue={setFluidMeasurement}
           setItems={setMeasurements}
           style={styles.dropDown}
-        />
-      </View>
-      <View style={styles.row}>
-        <Text>Height</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setHeight}
-          value={height}
-        />
-      </View>
-      <View style={styles.row}>
-        <Text>Weight</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setWeight}
-          value={weight}
         />
       </View>
     </View>
