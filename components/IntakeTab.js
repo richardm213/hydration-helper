@@ -31,9 +31,11 @@ const styles = StyleSheet.create({
     color: white,
     fontSize: 24,
     fontWeight: 'bold',
+    padding: 20,
   },
   submitButton: {
     backgroundColor: turquoise,
+    borderRadius: 15,
     height: 50,
   },
 });
