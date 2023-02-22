@@ -3,7 +3,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {MaterialIcons} from '@expo/vector-icons';
 import {Icon} from 'react-native-elements';
-import TrendsTab from './components/TrendsTab';
 import RecommendationTab from './components/RecommendationTab';
 import IntakeTab from './components/IntakeTab';
 import ExerciseTab from './components/ExerciseTab';
@@ -67,7 +66,6 @@ function Tabs() {
           marginTop: 20,
         },
       }}>
-      <Tab.Screen name="Trends" component={TrendsTab} />
       <Tab.Screen
         name="Recommendation"
         component={RecommendationTab}
