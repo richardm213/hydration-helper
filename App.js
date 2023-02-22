@@ -70,14 +70,14 @@ function Tabs() {
         tabBarInactiveTintColor: '#81C6D0',
 
         headerStyle: {
-          height: 80,
+          height: 110,
           backgroundColor: '#DEFBFF',
         },
         headerTitleStyle: {
           flex: 1,
           color: '#0C8292',
           fontSize: 18,
-          marginTop: 20,
+          marginTop: 15,
         },
       }}>
       <Tab.Screen
