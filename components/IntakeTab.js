@@ -1,6 +1,7 @@
 import {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Alert} from 'react-native';
 import {Button, Input, Icon} from 'react-native-elements';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import DrinkSlider from './DrinkSlider';
 
 const white = '#fff';
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
 
 export default function IntakeTab() {
   const [drinkAmount, setDrinkAmount] = useState(0);
+  const [drinkType, setDrinkType] = useState('water');
   return (
     <View style={styles.container}>
       <Icon
@@ -55,11 +57,17 @@ export default function IntakeTab() {
       <Input
         inputContainerStyle={styles.input}
         placeholder="Drink type (ie. water)"
+        onChangeText={text => setDrinkType(text)}
       />
       <Button
         buttonStyle={styles.submitButton}
         titleStyle={styles.largerTextWhite}
         title="Submit"
+        onPress={async () => {
+          Alert.alert('Your entry has been recorded.');
+          await AsyncStorage.setItem('@drink_type', drinkType);
+          await AsyncStorage.setItem('@drink_amount', drinkAmount.toString());
+        }}
       />
     </View>
   );
