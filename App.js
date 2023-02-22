@@ -1,13 +1,16 @@
-import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {MaterialIcons} from '@expo/vector-icons';
+import {StyleSheet} from 'react-native';
 import {Icon} from 'react-native-elements';
 import RecommendationTab from './components/RecommendationTab';
 import IntakeTab from './components/IntakeTab';
 import ExerciseTab from './components/ExerciseTab';
 import SettingsTab from './components/SettingsTab';
 
+const styles = StyleSheet.create({
+  navIcon: {height: 50, marginBottom: 5},
+});
 const Tab = createBottomTabNavigator();
 const intakeIcon = ({color, size}) => (
   <MaterialIcons
@@ -15,16 +18,33 @@ const intakeIcon = ({color, size}) => (
     type="ionicon"
     color={color}
     size={size * 1.5}
+    style={styles.navIcon}
   />
 );
 const exerciseIcon = ({color, size}) => (
-  <MaterialIcons name="run-circle" color={color} size={size * 1.5} />
+  <MaterialIcons
+    name="run-circle"
+    color={color}
+    size={size * 1.5}
+    style={styles.navIcon}
+  />
 );
 const waterIcon = ({color, size}) => (
-  <Icon name="water" type="ionicon" color={color} size={size * 1.5} />
+  <Icon
+    name="water"
+    type="ionicon"
+    color={color}
+    size={size * 1.5}
+    style={styles.navIcon}
+  />
 );
 const settingsIcon = ({color, size}) => (
-  <MaterialIcons name="settings" color={color} size={size * 1.5} />
+  <MaterialIcons
+    name="settings"
+    color={color}
+    size={size * 1.5}
+    style={styles.navIcon}
+  />
 );
 
 function Tabs() {
@@ -34,12 +54,8 @@ function Tabs() {
       screenOptions={{
         tabBarStyle: {
           position: 'absolute',
-          bottom: 30,
-          left: 20,
-          right: 20,
           backgroundColor: '#DEFBFF',
-          borderRadius: 20,
-          height: 90,
+          height: 60,
         },
         tabBarItemStyle: {
           borderRadius: 20,
