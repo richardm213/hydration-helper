@@ -55,12 +55,11 @@ function Tabs() {
         tabBarStyle: {
           position: 'absolute',
           backgroundColor: '#DEFBFF',
-          height: 70,
+          height: 100,
         },
         tabBarItemStyle: {
           height: 50,
-          marginTop: 15,
-          marginBottom: 5,
+          marginTop: 20,
         },
         tabBarLabelStyle: {
           fontSize: 12,
