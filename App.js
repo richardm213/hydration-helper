@@ -55,17 +55,15 @@ function Tabs() {
         tabBarStyle: {
           position: 'absolute',
           backgroundColor: '#DEFBFF',
-          height: 60,
+          height: 70,
         },
         tabBarItemStyle: {
-          borderRadius: 20,
-          margin: 2,
-          top: 15,
-          left: 5,
-          right: 15,
+          height: 50,
+          marginTop: 15,
+          marginBottom: 5,
         },
         tabBarLabelStyle: {
-          fontSize: 10,
+          fontSize: 12,
           fontWeight: 'bold',
         },
         tabBarActiveTintColor: '#0C8292',
@@ -83,7 +81,7 @@ function Tabs() {
         },
       }}>
       <Tab.Screen
-        name="Recommendation"
+        name="Home"
         component={RecommendationTab}
         options={{
           tabBarIcon: waterIcon,
