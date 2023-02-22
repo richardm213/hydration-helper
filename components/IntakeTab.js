@@ -8,7 +8,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: white,
     flex: 1,
-    justifyContent: 'center',
+  },
+  icon: {
+    marginTop: 30,
   },
   input: {
     marginLeft: 70,
