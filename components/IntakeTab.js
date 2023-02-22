@@ -1,5 +1,7 @@
+import {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Button, Input, Icon} from 'react-native-elements';
+import DrinkSlider from './DrinkSlider';
 
 const white = '#fff';
 const turquoise = '#0F5059';
@@ -36,6 +38,7 @@ const styles = StyleSheet.create({
 });
 
 export default function IntakeTab() {
+  const [drinkAmount, setDrinkAmount] = useState(0);
   return (
     <View style={styles.container}>
       <Icon
@@ -48,7 +51,7 @@ export default function IntakeTab() {
       <Text style={styles.largerTextBlue}>
         Please enter your new liquid intake below
       </Text>
-      <Input inputContainerStyle={styles.input} placeholder="Num ounces" />
+      <DrinkSlider drinkAmount={drinkAmount} setDrinkAmount={setDrinkAmount} />
       <Input
         inputContainerStyle={styles.input}
         placeholder="Drink type (ie. water)"
