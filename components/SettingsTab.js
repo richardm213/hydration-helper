@@ -103,7 +103,7 @@ export default function SettingsTab() {
           selectedValue={gender}
           onValueChange={async value => {
             setGender(value);
-            await AsyncStorage.setItem('@measurement_type', value);
+            await AsyncStorage.setItem('@gender', value);
           }}
           style={styles.picker1}>
           <Picker.Item label="male" value="male" />
