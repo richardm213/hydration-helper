@@ -11,13 +11,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: white,
     flex: 1,
-    flexDirection: 'column',
     justifyContent: 'center',
   },
-  iconView: {
-    flex: 1.5,
-    justifyContent: 'center',
-  },
+
   suggestionIntakeText: {
     color: turquoise,
     fontSize: 30,
@@ -32,12 +28,12 @@ const styles = StyleSheet.create({
     color: turquoise,
     fontSize: 26,
     fontWeight: 'bold',
-    marginHorizontal: 30,
+    marginHorizontal: 40,
+    marginTop: 10,
     textAlign: 'center',
   },
   suggestionTextView: {
-    alignItems: 'center',
-    flex: 1,
+    flex: 1.5,
     justifyContent: 'center',
   },
 });
@@ -57,10 +53,8 @@ export default function RecommendationTab() {
   });
   return (
     <View style={styles.container}>
-      <View style={styles.iconView}>
-        <Icon name="water" type="ionicon" color="#0F5059" size="200" />
-      </View>
       <View style={styles.suggestionTextView}>
+        <Icon name="water" type="ionicon" color="#0F5059" size="200" />
         <Text style={styles.suggestionText}>
           Your personalized recommendation for water intake today is:
         </Text>
