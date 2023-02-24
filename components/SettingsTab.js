@@ -19,7 +19,12 @@ const styles = StyleSheet.create({
   label: {
     color: turquoise,
   },
-  picker: {
+  picker1: {
+    height: 150,
+    marginTop: -60,
+    width: 160,
+  },
+  picker2: {
     height: 150,
     marginTop: -60,
     width: 100,
@@ -33,6 +38,9 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     width: '100%',
   },
+  smallInputView: {
+    width: 45,
+  },
 });
 
 export default function SettingsTab() {
@@ -45,6 +53,8 @@ export default function SettingsTab() {
   const toggleLocationSwitch = () =>
     setLocationAccess(previousState => !previousState);
 
+  const [age, setAge] = useState('');
+  const [gender, setGender] = useState(null);
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
 
@@ -63,6 +73,7 @@ export default function SettingsTab() {
           value={appleHealth}
         />
       </View>
+
       <View style={styles.row}>
         <Text h4 style={styles.label}>
           Location Data
@@ -74,6 +85,32 @@ export default function SettingsTab() {
           value={canAccessLocationData}
         />
       </View>
+
+      <View style={styles.row}>
+        <Text h4 style={styles.label}>
+          Age
+        </Text>
+        <View style={styles.smallInputView}>
+          <Input onChangeText={setAge} value={age} placeholder="21" />
+        </View>
+      </View>
+
+      <View style={styles.row}>
+        <Text h4 style={styles.label}>
+          Gender
+        </Text>
+        <Picker
+          selectedValue={gender}
+          onValueChange={async value => {
+            setGender(value);
+            await AsyncStorage.setItem('@measurement_type', value);
+          }}
+          style={styles.picker1}>
+          <Picker.Item label="male" value="male" />
+          <Picker.Item label="female" value="female" />
+        </Picker>
+      </View>
+
       <View style={styles.row}>
         <Text h4 style={styles.label}>
           Height
@@ -108,7 +145,7 @@ export default function SettingsTab() {
             setUnit(value);
             await AsyncStorage.setItem('@measurement_type', value);
           }}
-          style={styles.picker}>
+          style={styles.picker2}>
           <Picker.Item label="oz" value="oz" />
           <Picker.Item label="ml" value="ml" />
         </Picker>
