@@ -1,51 +1,45 @@
 import React, {useState} from 'react';
-import {Switch, StyleSheet, View, TextInput} from 'react-native';
+import {Switch, StyleSheet, View} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Picker} from '@react-native-picker/picker';
-import {Text} from '@rneui/base';
+import {Text, Input} from '@rneui/base';
 
 const white = '#fff';
-const black = '#000';
-const turqoise = '#0F5059';
+const lightGray = '#e0e0e0';
+const turquoise = '#0F5059';
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: white,
     flex: 1,
   },
-  fluidLabel: {
-    color: turqoise,
-  },
-  input: {
-    borderWidth: 1,
-    height: 40,
-    margin: 12,
-    padding: 10,
-    width: '50%',
+  inputView: {
+    width: 110,
   },
   label: {
-    color: turqoise,
-    fontSize: 15,
+    color: turquoise,
   },
-  lastRow: {
-    justifyContent: 'center',
+  picker: {
+    height: 150,
+    marginTop: -60,
+    width: 100,
   },
-  picker: {width: 200},
   row: {
-    borderBottomColor: black,
+    borderBottomColor: lightGray,
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    margin: 5,
-    paddingBottom: 10,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
     width: '100%',
   },
 });
 
 export default function SettingsTab() {
-  const [canAccessHealthData, setHealthAccess] = useState(false);
-  const toggleHealthSwitch = () =>
-    setHealthAccess(previousState => !previousState);
+  const [appleHealth, setAppleHealth] = useState(false);
+  const toggleHealthSwitch = () => {
+    setAppleHealth(previousState => !previousState);
+  };
 
   const [canAccessLocationData, setLocationAccess] = useState(false);
   const toggleLocationSwitch = () =>
@@ -54,52 +48,64 @@ export default function SettingsTab() {
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
 
-  const [fluidMeasurement, setFluidMeasurement] = useState(null);
+  const [unit, setUnit] = useState(null);
 
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <Text style={styles.label}>Health Data Access</Text>
+        <Text h4 style={styles.label}>
+          Apple Health
+        </Text>
         <Switch
-          trackColor={{false: '#DEFBFF', true: '#81C6D0'}}
-          thumbColor={canAccessHealthData ? '#FFFFFF' : '#81C6D0'}
+          trackColor={{true: turquoise}}
+          thumbColor={appleHealth ? white : turquoise}
           onValueChange={toggleHealthSwitch}
-          value={canAccessHealthData}
+          value={appleHealth}
         />
       </View>
       <View style={styles.row}>
-        <Text style={styles.label}>Location Data</Text>
+        <Text h4 style={styles.label}>
+          Location Data
+        </Text>
         <Switch
-          trackColor={{false: '#DEFBFF', true: '#81C6D0'}}
-          thumbColor={canAccessLocationData ? '#FFFFFF' : '#81C6D0'}
+          trackColor={{true: turquoise}}
+          thumbColor={canAccessLocationData ? white : turquoise}
           onValueChange={toggleLocationSwitch}
           value={canAccessLocationData}
         />
       </View>
       <View style={styles.row}>
-        <Text style={styles.label}>Height</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setHeight}
-          value={height}
-        />
+        <Text h4 style={styles.label}>
+          Height
+        </Text>
+        <View style={styles.inputView}>
+          <Input
+            onChangeText={setHeight}
+            value={height}
+            placeholder="72 inches"
+          />
+        </View>
       </View>
       <View style={styles.row}>
-        <Text style={styles.label}>Weight</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setWeight}
-          value={weight}
-        />
+        <Text h4 style={styles.label}>
+          Weight
+        </Text>
+        <View style={styles.inputView}>
+          <Input
+            onChangeText={setWeight}
+            value={weight}
+            placeholder="180 lbs"
+          />
+        </View>
       </View>
-      <View style={styles.lastRow}>
-        <Text h4 style={styles.fluidLabel}>
-          Unit of Fluid Measurement
+      <View style={styles.row}>
+        <Text h4 style={styles.label}>
+          Unit
         </Text>
         <Picker
-          selectedValue={fluidMeasurement}
+          selectedValue={unit}
           onValueChange={async value => {
-            setFluidMeasurement(value);
+            setUnit(value);
             await AsyncStorage.setItem('@measurement_type', value);
           }}
           style={styles.picker}>
