@@ -12,7 +12,7 @@ export default function Tabs() {
   const [recommendation, setRecommendation] = useState(120);
   const [intake, setIntake] = useState(0);
   const [exercise, setExercise] = useState(0);
-  const [unit, setUnit] = useState('oz');
+  const [unit, setUnit] = useState('us-system');
 
   const firstUpdate = useRef(true);
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function Tabs() {
       firstUpdate.current = false;
       return;
     }
-    if (unit === 'oz') {
+    if (unit === 'us-system') {
       setRecommendation(val => val / 30);
       setIntake(val => val / 30);
     } else {
@@ -76,9 +76,11 @@ export default function Tabs() {
         name="Intake"
         options={{
           tabBarIcon: intakeIcon,
-          headerTitle: `Current water intake: ${intake.toFixed(0)} ${unit}`,
+          headerTitle: `Current water intake: ${intake.toFixed(0)} ${
+            unit === 'us-system' ? 'oz' : 'ml'
+          }`,
         }}>
-        {() => <IntakeTab setIntake={setIntake} />}
+        {() => <IntakeTab setIntake={setIntake} unit={unit} />}
       </Tab.Screen>
       <Tab.Screen
         name="Exercise"

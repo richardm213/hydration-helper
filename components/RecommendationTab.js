@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
 });
 
 export default function RecommendationTab({recommendation, unit}) {
+  const measurementType = unit === 'us-system' ? 'oz' : 'ml';
   return (
     <View style={styles.container}>
       <View style={styles.suggestionTextView}>
@@ -46,7 +47,7 @@ export default function RecommendationTab({recommendation, unit}) {
       </View>
       <View style={styles.suggestionIntakeView}>
         <Text style={styles.suggestionIntakeText}>
-          {recommendation} {unit}
+          {recommendation} {measurementType}
         </Text>
       </View>
     </View>

@@ -1,8 +1,5 @@
 import {Slider, Icon, Text} from '@rneui/base';
 import {StyleSheet, View} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useState} from 'react';
-import {useFocusEffect} from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   iconContainerStyle: {bottom: 20, right: 20},
@@ -20,15 +17,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function DrinkSlider({drinkAmount, setDrinkAmount}) {
+export default function DrinkSlider({drinkAmount, setDrinkAmount, unit}) {
   const turquoise = '#0F5059';
-  const [measurementType, setMeasurementType] = useState('');
-  useFocusEffect(() => {
-    const fetchMeasurementType = async () =>
-      setMeasurementType(await AsyncStorage.getItem('@measurement_type'));
-    fetchMeasurementType();
-  });
-  const maxAmount = measurementType === 'ml' ? 1200 : 40;
+  const measurementType = unit === 'us-system' ? 'oz' : 'ml';
+  const maxAmount = unit === 'us-system' ? 40 : 1200;
 
   return (
     <View style={styles.viewStyle}>

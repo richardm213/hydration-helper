@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function IntakeTab({setIntake}) {
+export default function IntakeTab({setIntake, unit}) {
   const [drinkAmount, setDrinkAmount] = useState(0);
   const [drinkType, setDrinkType] = useState('water');
   return (
@@ -55,7 +55,11 @@ export default function IntakeTab({setIntake}) {
       <Text style={styles.largerTextBlue}>
         Please enter your new liquid intake below
       </Text>
-      <DrinkSlider drinkAmount={drinkAmount} setDrinkAmount={setDrinkAmount} />
+      <DrinkSlider
+        drinkAmount={drinkAmount}
+        setDrinkAmount={setDrinkAmount}
+        unit={unit}
+      />
       <Input
         inputContainerStyle={styles.input}
         placeholder="Drink type (ie. water)"

@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   picker2: {
     height: 150,
     marginTop: -60,
-    width: 100,
+    width: 180,
   },
   row: {
     borderBottomColor: lightGray,
@@ -141,11 +141,11 @@ export default function SettingsTab({unit, setUnit}) {
           selectedValue={unit}
           onValueChange={async value => {
             setUnit(value);
-            await AsyncStorage.setItem('@measurement_type', value);
+            await AsyncStorage.setItem('@unit', value);
           }}
           style={styles.picker2}>
-          <Picker.Item label="oz" value="oz" />
-          <Picker.Item label="ml" value="ml" />
+          <Picker.Item label="metric" value="metric" />
+          <Picker.Item label="US system" value="us-system" />
         </Picker>
       </View>
     </View>
