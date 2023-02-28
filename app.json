@@ -32,7 +32,8 @@
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "Please enable location services so that the app can use your local weather data in its calculations.",
         "NSRemindersUsageDescription": "Allow access to local calendar app."
-      }
+      },
+      "bundleIdentifier": "com.anonymous.hydration-helper"
     },
     "android": {
       "adaptiveIcon": {

@@ -40,7 +40,7 @@ export default function RecommendationTab({recommendation, unit}) {
   return (
     <View style={styles.container}>
       <View style={styles.suggestionTextView}>
-        <Icon name="water" type="ionicon" color="#0F5059" size="200" />
+        <Icon name="water" type="ionicon" color="#0F5059" size={200} />
         <Text style={styles.suggestionText}>
           Your personalized recommendation for water intake today is:
         </Text>

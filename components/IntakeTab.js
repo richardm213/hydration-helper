@@ -50,7 +50,7 @@ export default function IntakeTab({setIntake, unit}) {
         name="local-drink"
         type="material"
         color={turquoise}
-        size="160"
+        size={160}
       />
       <Text style={styles.largerTextBlue}>
         Please enter your new liquid intake below

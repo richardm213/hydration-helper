@@ -62,7 +62,7 @@ export default function ExerciseTab({exercise, setExercise}) {
         name="run-circle"
         type="material-icons"
         color="#0F5059"
-        size="200"
+        size={200}
       />
       <Text style={styles.largerTextBlueBold}>
         Please enter your minutes of exercise below:
