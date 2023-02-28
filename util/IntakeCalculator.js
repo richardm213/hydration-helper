@@ -8,6 +8,9 @@ async function SimpleCalculator() {
   const weightMeasurementType = await AsyncStorage.getItem(
     '@weight_measurement_type',
   );
+  const convertedWeight =
+    weightMeasurementType === 'lbs' ? weight : weight * 0.453592;
+
   return 0;
 }
 async function APICalculator() {
