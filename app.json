@@ -26,7 +26,10 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Please enable location services so that the app can use your local weather data in its calculations."
+      }
     },
     "android": {
       "adaptiveIcon": {
