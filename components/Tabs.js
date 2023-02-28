@@ -59,8 +59,13 @@ export default function Tabs() {
       firstUpdate.current = false;
       return;
     }
-    if (unit === 'oz') setRecommendation(val => val / 30);
-    else setRecommendation(val => val * 30);
+    if (unit === 'oz') {
+      setRecommendation(val => val / 30);
+      setIntake(val => val / 30);
+    } else {
+      setRecommendation(val => val * 30);
+      setIntake(val => val * 30);
+    }
   }, [unit]);
 
   return (
