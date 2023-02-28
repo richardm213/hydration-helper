@@ -21,6 +21,11 @@ async function SimpleCalculator() {
   return intakeMeasurementType === 'oz' ? result : result * 29.5735;
 }
 async function APICalculator() {
+  // retrieve intake and weight measurement types
+  const intakeMeasurementType = await AsyncStorage.getItem(
+    '@intake_measurement_type',
+  );
+
   return 0;
 }
 
