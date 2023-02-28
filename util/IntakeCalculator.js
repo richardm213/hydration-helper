@@ -15,7 +15,8 @@ async function SimpleCalculator() {
   const intakeMeasurementType = await AsyncStorage.getItem(
     '@intake_measurement_type',
   );
-  return 0;
+  // get result in oz
+  return convertedWeight * 0.5 + (exercise / 30) * 12;
 }
 async function APICalculator() {
   return 0;
