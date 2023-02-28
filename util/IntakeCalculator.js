@@ -36,6 +36,8 @@ async function APICalculator() {
   // When sodium intake during the day gets greater than 2,300mg, then add 1 cup = 8 oz = 237 ml
   const sodium_intake = AsyncStorage.getItem('@sodium_intake');
 
+  const result = SimpleCalculator();
+
   return 0;
 }
 
