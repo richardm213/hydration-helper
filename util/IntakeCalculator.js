@@ -16,7 +16,9 @@ async function SimpleCalculator() {
     '@intake_measurement_type',
   );
   // get result in oz
-  return convertedWeight * 0.5 + (exercise / 30) * 12;
+  const result = convertedWeight * 0.5 + (exercise / 30) * 12;
+  // convert to ml if necessary
+  return intakeMeasurementType === 'oz' ? result : result * 29.5735;
 }
 async function APICalculator() {
   return 0;
