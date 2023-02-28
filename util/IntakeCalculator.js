@@ -32,6 +32,9 @@ async function APICalculator() {
   // if previous day's intake is more than one third smaller or greater, decrease or increase
   // recommended water intake for next day by ten percent
   const avg_calorie_intake = 1275;
+  const calorie_intake = AsyncStorage.getItem('@calorie_intake');
+  // When sodium intake during the day gets greater than 2,300mg, then add 1 cup = 8 oz = 237 ml
+  const sodium_intake = AsyncStorage.getItem('@sodium_intake');
 
   return 0;
 }
