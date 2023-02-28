@@ -25,6 +25,9 @@ async function APICalculator() {
   const intakeMeasurementType = await AsyncStorage.getItem(
     '@intake_measurement_type',
   );
+  // for every 10 degrees that the temperature is above room temperature,
+  // add 1 cup = 8 oz = 237 ml
+  const temperature = 75; //
 
   return 0;
 }
