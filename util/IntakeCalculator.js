@@ -2,9 +2,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 async function SimpleCalculator() {
   // exercise is in minutes
-  const exercise = await AsyncStorage.getItem('@exercise');
+  const exercise = parseInt(await AsyncStorage.getItem('@exercise'), 10);
   // weight is in lbs or kgs
-  const weight = await AsyncStorage.getItem('@weight');
+  const weight = parseInt(await AsyncStorage.getItem('@weight'), 10);
   const weightMeasurementType = await AsyncStorage.getItem(
     '@weight_measurement_type',
   );
@@ -32,10 +32,16 @@ async function APICalculator() {
   // if previous day's intake is more than one third smaller or greater, decrease or increase
   // recommended water intake for next day by ten percent
   const avgCalorieIntake = 1275;
-  const calorieIntake = AsyncStorage.getItem('@calorie_intake');
+  const calorieIntake = parseInt(
+    await AsyncStorage.getItem('@calorie_intake'),
+    10,
+  );
   // When sodium intake during the day gets greater than 2,300mg, then add 1 cup = 8 oz = 237 ml
-  const sodiumIntake = AsyncStorage.getItem('@sodium_intake');
-  const startOfDay = AsyncStorage.getItem('@start_of_day');
+  const sodiumIntake = parseInt(
+    await AsyncStorage.getItem('@sodium_intake'),
+    10,
+  );
+  const startOfDay = parseInt(await AsyncStorage.getItem('@start_of_day'), 10);
 
   let result = SimpleCalculator();
 
@@ -48,7 +54,7 @@ async function APICalculator() {
       result *= 0.9;
     }
     // reset flag to false
-    AsyncStorage.setItem('@start_of_day', '0');
+    await AsyncStorage.setItem('@start_of_day', '0');
   }
 
   if (sodiumIntake > 2300) {
