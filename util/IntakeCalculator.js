@@ -27,7 +27,11 @@ async function APICalculator() {
   );
   // for every 10 degrees that the temperature is above room temperature,
   // add 1 cup = 8 oz = 237 ml
-  const temperature = 75; //
+  const temperature = 75;
+  // Take average calorie intake over last week (shortened to 3 days for experiement),
+  // if previous day's intake is more than one third smaller or greater, decrease or increase
+  // recommended water intake for next day by ten percent
+  const avg_calorie_intake = 1275;
 
   return 0;
 }
