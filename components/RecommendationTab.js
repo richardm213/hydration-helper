@@ -1,8 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
 import {Icon} from 'react-native-elements';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useFocusEffect} from '@react-navigation/native';
-import {useState} from 'react';
 
 const white = '#fff';
 const turquoise = '#0F5059';
@@ -38,18 +35,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function RecommendationTab({recommendation, setRecommendation}) {
-  const [measurementType, setMeasurementType] = useState('');
-  useFocusEffect(() => {
-    const fetchMeasurementType = async () =>
-      setMeasurementType(await AsyncStorage.getItem('@measurement_type'));
-    const updateRecommendation = async () => {
-      setRecommendation(measurementType === 'ml' ? 3000 : 120);
-      await AsyncStorage.setItem('@recommendation', recommendation.toString());
-    };
-    fetchMeasurementType();
-    updateRecommendation();
-  });
+export default function RecommendationTab({recommendation, unit}) {
   return (
     <View style={styles.container}>
       <View style={styles.suggestionTextView}>
@@ -60,7 +46,7 @@ export default function RecommendationTab({recommendation, setRecommendation}) {
       </View>
       <View style={styles.suggestionIntakeView}>
         <Text style={styles.suggestionIntakeText}>
-          {recommendation} {measurementType}
+          {recommendation} {unit}
         </Text>
       </View>
     </View>
