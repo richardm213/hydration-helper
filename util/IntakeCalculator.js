@@ -31,26 +31,27 @@ async function APICalculator() {
   // Take average calorie intake over last week (shortened to 3 days for experiement),
   // if previous day's intake is more than one third smaller or greater, decrease or increase
   // recommended water intake for next day by ten percent
-  const avg_calorie_intake = 1275;
-  const calorie_intake = AsyncStorage.getItem('@calorie_intake');
+  const avgCalorieIntake = 1275;
+  const calorieIntake = AsyncStorage.getItem('@calorie_intake');
   // When sodium intake during the day gets greater than 2,300mg, then add 1 cup = 8 oz = 237 ml
-  const sodium_intake = AsyncStorage.getItem('@sodium_intake');
+  const sodiumIntake = AsyncStorage.getItem('@sodium_intake');
+  const startOfDay = AsyncStorage.getItem('@start_of_day');
 
-  const result = SimpleCalculator();
+  let result = SimpleCalculator();
 
   // check whether start_of_day flag is set to true
   // if so, update according to calorie fluctuations
-  if (start_of_day === true) {
-    if (calorie_intake > avg_calorie_intake) {
+  if (startOfDay === 1) {
+    if (calorieIntake > avgCalorieIntake) {
       result *= 1.1;
-    } else if (calorie_intake < avg_calorie_intake) {
+    } else if (calorieIntake < avgCalorieIntake) {
       result *= 0.9;
     }
     // reset flag to false
-    start_of_day = false;
+    AsyncStorage.setItem('@start_of_day', '0');
   }
 
-  if (sodium_intake > 2300) {
+  if (sodiumIntake > 2300) {
     result += intakeMeasurementType === 'oz' ? 8 : 237;
   }
   if (temperature > 75) {
