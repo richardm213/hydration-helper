@@ -50,7 +50,14 @@ async function APICalculator() {
     start_of_day = false;
   }
 
-  return 0;
+  if (sodium_intake > 2300) {
+    result += intakeMeasurementType === 'oz' ? 8 : 237;
+  }
+  if (temperature > 75) {
+    result +=
+      ((temperature - 75) / 10) * intakeMeasurementType === 'oz' ? 8 : 237;
+  }
+  return result;
 }
 
 function IntakeCalculator(type) {
