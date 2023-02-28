@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function SettingsTab() {
+export default function SettingsTab({unit, setUnit}) {
   const [appleHealth, setAppleHealth] = useState(false);
   const toggleHealthSwitch = () => {
     setAppleHealth(previousState => !previousState);
@@ -57,8 +57,6 @@ export default function SettingsTab() {
   const [gender, setGender] = useState(null);
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
-
-  const [unit, setUnit] = useState(null);
 
   return (
     <View style={styles.container}>

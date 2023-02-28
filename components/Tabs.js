@@ -51,6 +51,7 @@ export default function Tabs() {
   const [recommendation, setRecommendation] = useState(120);
   const [intake, setIntake] = useState(0);
   const [exercise, setExercise] = useState(0);
+  const [unit, setUnit] = useState('oz');
 
   return (
     <Tab.Navigator
@@ -118,7 +119,7 @@ export default function Tabs() {
           tabBarIcon: settingsIcon,
           headerTitle: 'Settings',
         }}>
-        {() => <SettingsTab />}
+        {() => <SettingsTab unit={unit} setUnit={setUnit} />}
       </Tab.Screen>
     </Tab.Navigator>
   );
