@@ -38,6 +38,18 @@ async function APICalculator() {
 
   const result = SimpleCalculator();
 
+  // check whether start_of_day flag is set to true
+  // if so, update according to calorie fluctuations
+  if (start_of_day === true) {
+    if (calorie_intake > avg_calorie_intake) {
+      result *= 1.1;
+    } else if (calorie_intake < avg_calorie_intake) {
+      result *= 0.9;
+    }
+    // reset flag to false
+    start_of_day = false;
+  }
+
   return 0;
 }
 
