@@ -3,6 +3,7 @@ import {useState} from 'react';
 import {Text, View, StyleSheet, Alert} from 'react-native';
 import {Button, Icon, Input} from 'react-native-elements';
 import {ScreenWidth} from 'react-native-elements/dist/helpers';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const white = '#fff';
 const turquoise = '#0F5059';
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ExerciseTab({setExercise}) {
+export default function ExerciseTab({exercise, setExercise}) {
   const [input, setInput] = useState(0);
   return (
     <View style={styles.container}>
@@ -76,9 +77,10 @@ export default function ExerciseTab({setExercise}) {
         buttonStyle={styles.submitButton}
         titleStyle={styles.largerTextWhite}
         title="Submit"
-        onPress={() => {
+        onPress={async () => {
           Alert.alert('Your exercise has been recorded!');
           setExercise(prev => prev + parseInt(input, 10));
+          await AsyncStorage.setItem('@exercise_time', exercise.toString());
         }}
       />
       <StatusBar style="auto" />

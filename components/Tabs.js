@@ -88,7 +88,7 @@ export default function Tabs() {
           tabBarIcon: exerciseIcon,
           headerTitle: `You exercised for ${exercise} minutes today!`,
         }}>
-        {() => <ExerciseTab setExercise={setExercise} />}
+        {() => <ExerciseTab exercise={exercise} setExercise={setExercise} />}
       </Tab.Screen>
       <Tab.Screen
         name="Settings"
