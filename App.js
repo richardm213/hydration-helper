@@ -51,6 +51,7 @@ const settingsIcon = ({color, size}) => (
 function Tabs() {
   const [recommendation, setRecommendation] = useState(120);
   const [intake, setIntake] = useState(0);
+  const [exercise, setExercise] = useState(0);
 
   return (
     <Tab.Navigator
@@ -108,9 +109,9 @@ function Tabs() {
         name="Exercise"
         options={{
           tabBarIcon: exerciseIcon,
-          headerTitle: 'You exercised for 57 minutes today!',
+          headerTitle: `You exercised for ${exercise} minutes today!`,
         }}>
-        {() => <ExerciseTab />}
+        {() => <ExerciseTab setExercise={setExercise} />}
       </Tab.Screen>
       <Tab.Screen
         name="Settings"

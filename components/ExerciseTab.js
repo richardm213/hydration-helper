@@ -1,4 +1,5 @@
 import {StatusBar} from 'expo-status-bar';
+import {useState} from 'react';
 import {Text, View, StyleSheet, Alert} from 'react-native';
 import {Button, Icon, Input} from 'react-native-elements';
 import {ScreenWidth} from 'react-native-elements/dist/helpers';
@@ -47,7 +48,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ExerciseTab() {
+export default function ExerciseTab({setExercise}) {
+  const [input, setInput] = useState(0);
   return (
     <View style={styles.container}>
       <Text style={styles.moreDetails}>
@@ -67,12 +69,17 @@ export default function ExerciseTab() {
       <Input
         placeholder="Minutes of Exercise"
         inputContainerStyle={styles.input}
+        value={input}
+        onChangeText={val => setInput(val)}
       />
       <Button
         buttonStyle={styles.submitButton}
         titleStyle={styles.largerTextWhite}
         title="Submit"
-        onPress={() => Alert.alert('Your exercise has been recorded!')}
+        onPress={() => {
+          Alert.alert('Your exercise has been recorded!');
+          setExercise(prev => prev + parseInt(input, 10));
+        }}
       />
       <StatusBar style="auto" />
     </View>
