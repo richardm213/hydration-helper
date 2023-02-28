@@ -3,8 +3,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 async function SimpleCalculator() {
   // exercise is in minutes
   const exercise = await AsyncStorage.getItem('@exercise');
-  // weight is in lbs
+  // weight is in lbs or kgs
   const weight = await AsyncStorage.getItem('@weight');
+  const weightMeasurementType = await AsyncStorage.getItem(
+    '@weight_measurement_type',
+  );
   return 0;
 }
 async function APICalculator() {
