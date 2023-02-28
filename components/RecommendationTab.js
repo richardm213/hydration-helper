@@ -38,9 +38,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function RecommendationTab() {
+export default function RecommendationTab({recommendation, setRecommendation}) {
   const [measurementType, setMeasurementType] = useState('');
-  const [recommendation, setRecommendation] = useState(30);
   useFocusEffect(() => {
     const fetchMeasurementType = async () =>
       setMeasurementType(await AsyncStorage.getItem('@measurement_type'));

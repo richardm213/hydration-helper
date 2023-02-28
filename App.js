@@ -3,6 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {MaterialIcons} from '@expo/vector-icons';
 import {StyleSheet} from 'react-native';
 import {Icon} from 'react-native-elements';
+import {useState} from 'react';
 import RecommendationTab from './components/RecommendationTab';
 import IntakeTab from './components/IntakeTab';
 import ExerciseTab from './components/ExerciseTab';
@@ -48,6 +49,9 @@ const settingsIcon = ({color, size}) => (
 );
 
 function Tabs() {
+  const [recommendation, setRecommendation] = useState(120);
+  const [intake, setIntake] = useState(0);
+
   return (
     <Tab.Navigator
       initialRouteName="Water Intake"
@@ -81,36 +85,41 @@ function Tabs() {
       }}>
       <Tab.Screen
         name="Home"
-        component={RecommendationTab}
         options={{
           tabBarIcon: waterIcon,
-          headerTitle: 'Current water intake: 70%',
-        }}
-      />
+          headerTitle: `Progress: ${(intake * 100) / recommendation}%`,
+        }}>
+        {() => (
+          <RecommendationTab
+            recommendation={recommendation}
+            setRecommendation={setRecommendation}
+          />
+        )}
+      </Tab.Screen>
       <Tab.Screen
         name="Intake"
-        component={IntakeTab}
         options={{
           tabBarIcon: intakeIcon,
-          headerTitle: 'Current water intake: 70%',
-        }}
-      />
+          headerTitle: `Current water intake: ${intake} oz`,
+        }}>
+        {() => <IntakeTab setIntake={setIntake} />}
+      </Tab.Screen>
       <Tab.Screen
         name="Exercise"
-        component={ExerciseTab}
         options={{
           tabBarIcon: exerciseIcon,
           headerTitle: 'You exercised for 57 minutes today!',
-        }}
-      />
+        }}>
+        {() => <ExerciseTab />}
+      </Tab.Screen>
       <Tab.Screen
         name="Settings"
-        component={SettingsTab}
         options={{
           tabBarIcon: settingsIcon,
           headerTitle: 'Settings',
-        }}
-      />
+        }}>
+        {() => <SettingsTab />}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 }

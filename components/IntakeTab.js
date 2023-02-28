@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function IntakeTab() {
+export default function IntakeTab({setIntake}) {
   const [drinkAmount, setDrinkAmount] = useState(0);
   const [drinkType, setDrinkType] = useState('water');
   return (
@@ -72,6 +72,7 @@ export default function IntakeTab() {
           const oldIntake = (await AsyncStorage.getItem('@intake')) || 0;
           const newIntake = parseInt(oldIntake, 10) + drinkAmount;
           await AsyncStorage.setItem('@intake', newIntake.toString());
+          setIntake(prev => prev + drinkAmount);
         }}
       />
     </View>
