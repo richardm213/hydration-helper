@@ -1,5 +1,16 @@
-function SimpleCalculator() {}
-function APICalculator() {}
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+async function SimpleCalculator() {
+  // exercise is in minutes
+  const exercise = await AsyncStorage.getItem('@exercise');
+  // weight is in lbs
+  const weight = await AsyncStorage.getItem('@weight');
+  return 0;
+}
+async function APICalculator() {
+  return 0;
+}
+
 function IntakeCalculator(type) {
   switch (type) {
     case 'simple':
