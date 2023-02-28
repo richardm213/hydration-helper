@@ -103,7 +103,9 @@ export default function Tabs() {
         name="Home"
         options={{
           tabBarIcon: waterIcon,
-          headerTitle: `Progress: ${(intake * 100) / recommendation}%`,
+          headerTitle: `Progress: ${((intake * 100) / recommendation).toFixed(
+            1,
+          )}%`,
         }}>
         {() => (
           <RecommendationTab recommendation={recommendation} unit={unit} />
@@ -113,7 +115,7 @@ export default function Tabs() {
         name="Intake"
         options={{
           tabBarIcon: intakeIcon,
-          headerTitle: `Current water intake: ${intake} oz`,
+          headerTitle: `Current water intake: ${intake.toFixed(0)} ${unit}`,
         }}>
         {() => <IntakeTab setIntake={setIntake} />}
       </Tab.Screen>
