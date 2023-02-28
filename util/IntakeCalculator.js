@@ -11,6 +11,10 @@ async function SimpleCalculator() {
   const convertedWeight =
     weightMeasurementType === 'lbs' ? weight : weight * 0.453592;
 
+  // intake is in either oz or ml
+  const intakeMeasurementType = await AsyncStorage.getItem(
+    '@intake_measurement_type',
+  );
   return 0;
 }
 async function APICalculator() {
