@@ -3,6 +3,7 @@ import {Switch, StyleSheet, View} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Picker} from '@react-native-picker/picker';
 import {Text, Input} from '@rneui/base';
+import * as Calendar from 'expo-calendar';
 
 const white = '#fff';
 const lightGray = '#e0e0e0';
@@ -53,6 +54,21 @@ export default function SettingsTab({unit, setUnit}) {
   const toggleLocationSwitch = () =>
     setLocationAccess(previousState => !previousState);
 
+  const [canAccessCalendar, setCalendarAccess] = useState(false);
+  const toggleCalendarSwitch = async () => {
+    setCalendarAccess(previousState => !previousState);
+    if (!canAccessCalendar) {
+      const {status} = await Calendar.requestCalendarPermissionsAsync();
+      if (status === 'granted') {
+        const calendars = await Calendar.getCalendarsAsync(
+          Calendar.EntityTypes.EVENT,
+        );
+        console.log('Here are all your calendars:');
+        console.log({calendars});
+      }
+    }
+  };
+
   const [age, setAge] = useState('');
   const [gender, setGender] = useState(null);
   const [height, setHeight] = useState('');
@@ -81,6 +97,18 @@ export default function SettingsTab({unit, setUnit}) {
           thumbColor={canAccessLocationData ? white : turquoise}
           onValueChange={toggleLocationSwitch}
           value={canAccessLocationData}
+        />
+      </View>
+
+      <View style={styles.row}>
+        <Text h4 style={styles.label}>
+          Calendar
+        </Text>
+        <Switch
+          trackColor={{true: turquoise}}
+          thumbColor={canAccessCalendar ? white : turquoise}
+          onValueChange={toggleCalendarSwitch}
+          value={canAccessCalendar}
         />
       </View>
 

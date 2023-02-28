@@ -24,7 +24,8 @@
     "react-native-elements": "^3.4.3",
     "react-native-health": "^1.13.6",
     "react-native-safe-area-context": "4.4.1",
-    "react-native-screens": "~3.18.0"
+    "react-native-screens": "~3.18.0",
+    "expo-calendar": "~11.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
