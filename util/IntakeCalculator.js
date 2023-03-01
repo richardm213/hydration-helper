@@ -20,6 +20,17 @@ async function SimpleCalculator() {
   // convert to ml if necessary
   return intakeMeasurementType === 'oz' ? result : result * 29.5735;
 }
+
+function SimpleCalculator2(unit, weight, exercise) {
+  let res = 0;
+  if (unit === 'metric') {
+    res = ((weight / 0.453592) * 0.5 + (exercise / 30) * 12) * 30;
+  } else {
+    res = weight * 0.5 + (exercise / 30) * 12;
+  }
+  return res;
+}
+
 async function APICalculator() {
   // retrieve intake and weight measurement types
   const intakeMeasurementType = await AsyncStorage.getItem(
@@ -67,15 +78,4 @@ async function APICalculator() {
   return result;
 }
 
-function IntakeCalculator(type) {
-  switch (type) {
-    case 'simple':
-      return SimpleCalculator();
-    case 'api':
-      return APICalculator();
-    default:
-      return -1;
-  }
-}
-
-export default IntakeCalculator;
+export {SimpleCalculator, SimpleCalculator2, APICalculator};
