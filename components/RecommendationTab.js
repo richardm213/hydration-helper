@@ -47,7 +47,7 @@ export default function RecommendationTab({recommendation, unit}) {
       </View>
       <View style={styles.suggestionIntakeView}>
         <Text style={styles.suggestionIntakeText}>
-          {recommendation} {measurementType}
+          {recommendation.toFixed(0)} {measurementType}
         </Text>
       </View>
     </View>
