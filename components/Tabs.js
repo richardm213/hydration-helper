@@ -13,6 +13,7 @@ export default function Tabs() {
   const [intake, setIntake] = useState(0);
   const [exercise, setExercise] = useState(0);
   const [unit, setUnit] = useState('us-system');
+  const [weight, setWeight] = useState('160');
 
   const firstUpdate = useRef(true);
   useEffect(() => {
@@ -23,9 +24,17 @@ export default function Tabs() {
     if (unit === 'us-system') {
       setRecommendation(val => val / 30);
       setIntake(val => val / 30);
+      setWeight(val => {
+        const num = parseInt(val, 10) / 0.453592;
+        return Math.round(num).toString();
+      });
     } else {
       setRecommendation(val => val * 30);
       setIntake(val => val * 30);
+      setWeight(val => {
+        const num = parseInt(val, 10) * 0.453592;
+        return Math.round(num).toString();
+      });
     }
   }, [unit]);
 
@@ -96,7 +105,14 @@ export default function Tabs() {
           tabBarIcon: settingsIcon,
           headerTitle: 'Settings',
         }}>
-        {() => <SettingsTab unit={unit} setUnit={setUnit} />}
+        {() => (
+          <SettingsTab
+            unit={unit}
+            setUnit={setUnit}
+            weight={weight}
+            setWeight={setWeight}
+          />
+        )}
       </Tab.Screen>
     </Tab.Navigator>
   );

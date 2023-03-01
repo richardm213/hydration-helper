@@ -17,6 +17,12 @@ const styles = StyleSheet.create({
   inputView: {
     width: 110,
   },
+  inputView2: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginRight: 30,
+    width: 60,
+  },
   label: {
     color: turquoise,
   },
@@ -44,7 +50,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function SettingsTab({unit, setUnit}) {
+export default function SettingsTab({unit, setUnit, weight, setWeight}) {
   const [appleHealth, setAppleHealth] = useState(false);
   const toggleHealthSwitch = () => {
     setAppleHealth(previousState => !previousState);
@@ -72,7 +78,7 @@ export default function SettingsTab({unit, setUnit}) {
   const [age, setAge] = useState('');
   const [gender, setGender] = useState(null);
   const [height, setHeight] = useState('');
-  const [weight, setWeight] = useState('');
+  const weightType = unit === 'us-system' ? 'lbs' : 'kg';
 
   return (
     <View style={styles.container}>
@@ -153,12 +159,9 @@ export default function SettingsTab({unit, setUnit}) {
         <Text h4 style={styles.label}>
           Weight
         </Text>
-        <View style={styles.inputView}>
-          <Input
-            onChangeText={setWeight}
-            value={weight}
-            placeholder="180 lbs"
-          />
+        <View style={styles.inputView2}>
+          <Input onChangeText={setWeight} value={weight} />
+          <Text h4>{weightType}</Text>
         </View>
       </View>
       <View style={styles.row}>
