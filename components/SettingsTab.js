@@ -15,9 +15,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   inputView: {
-    width: 110,
-  },
-  inputView2: {
     alignItems: 'center',
     flexDirection: 'row',
     marginRight: 30,
@@ -85,6 +82,7 @@ export default function SettingsTab({
       }
     }
   };
+  const heightType = unit === 'us-system' ? 'in' : 'cm';
   const weightType = unit === 'us-system' ? 'lbs' : 'kg';
 
   return (
@@ -155,18 +153,15 @@ export default function SettingsTab({
           Height
         </Text>
         <View style={styles.inputView}>
-          <Input
-            onChangeText={setHeight}
-            value={height}
-            placeholder="72 inches"
-          />
+          <Input onChangeText={setHeight} value={height} />
+          <Text h4>{heightType}</Text>
         </View>
       </View>
       <View style={styles.row}>
         <Text h4 style={styles.label}>
           Weight
         </Text>
-        <View style={styles.inputView2}>
+        <View style={styles.inputView}>
           <Input onChangeText={setWeight} value={weight} />
           <Text h4>{weightType}</Text>
         </View>

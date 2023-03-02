@@ -32,6 +32,10 @@ export default function Tabs() {
     if (unit === 'us-system') {
       setRecommendation(val => val / 30);
       setIntake(val => val / 30);
+      setHeight(val => {
+        const num = parseInt(val, 10) / 2.54;
+        return Math.round(num).toString();
+      });
       setWeight(val => {
         const num = parseInt(val, 10) / 0.453592;
         return Math.round(num).toString();
@@ -39,6 +43,10 @@ export default function Tabs() {
     } else {
       setRecommendation(val => val * 30);
       setIntake(val => val * 30);
+      setHeight(val => {
+        const num = parseInt(val, 10) * 2.54;
+        return Math.round(num).toString();
+      });
       setWeight(val => {
         const num = parseInt(val, 10) * 0.453592;
         return Math.round(num).toString();
