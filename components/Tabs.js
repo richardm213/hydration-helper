@@ -29,7 +29,7 @@ export default function Tabs() {
       firstUpdate.current = false;
       return;
     }
-    if (unit === 'us-system') {
+    if (unit === 'us-system' && recommendation > 300) {
       setRecommendation(val => val / 30);
       setIntake(val => val / 30);
       setHeight(val => {
@@ -40,7 +40,7 @@ export default function Tabs() {
         const num = parseInt(val, 10) / 0.453592;
         return Math.round(num).toString();
       });
-    } else {
+    } else if (unit === 'metric' && recommendation < 300) {
       setRecommendation(val => val * 30);
       setIntake(val => val * 30);
       setHeight(val => {
