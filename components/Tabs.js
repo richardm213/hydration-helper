@@ -1,5 +1,6 @@
 import {useEffect, useRef, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import RecommendationTab from './RecommendationTab';
 import IntakeTab from './IntakeTab';
 import ExerciseTab from './ExerciseTab';
@@ -13,11 +14,38 @@ export default function Tabs() {
   const [recommendation, setRecommendation] = useState(120);
   const [intake, setIntake] = useState(0);
   const [exercise, setExercise] = useState(0);
-  const [unit, setUnit] = useState('us-system');
   const [age, setAge] = useState('21');
   const [gender, setGender] = useState('male');
   const [height, setHeight] = useState('72');
   const [weight, setWeight] = useState('160');
+  const [unit, setUnit] = useState('us-system');
+
+  useEffect(() => {
+    const fetchStorageValues = () => {
+      AsyncStorage.getItem('@intake').then(val => {
+        if (val) setIntake(parseInt(val, 10));
+      });
+      AsyncStorage.getItem('@exercise').then(val => {
+        if (val) setExercise(parseInt(val, 10));
+      });
+      AsyncStorage.getItem('@age').then(val => {
+        if (val) setAge(val);
+      });
+      AsyncStorage.getItem('@gender').then(val => {
+        if (val) setGender(val);
+      });
+      AsyncStorage.getItem('@height').then(val => {
+        if (val) setHeight(val);
+      });
+      AsyncStorage.getItem('@weight').then(val => {
+        if (val) setWeight(val);
+      });
+      AsyncStorage.getItem('@unit').then(val => {
+        if (val) setUnit(val);
+      });
+    };
+    fetchStorageValues();
+  }, []);
 
   useEffect(() => {
     const calculator = new SimpleCalculator(
@@ -113,7 +141,7 @@ export default function Tabs() {
             unit === 'us-system' ? 'oz' : 'ml'
           }`,
         }}>
-        {() => <IntakeTab setIntake={setIntake} unit={unit} />}
+        {() => <IntakeTab intake={intake} setIntake={setIntake} unit={unit} />}
       </Tab.Screen>
       <Tab.Screen
         name="Exercise"

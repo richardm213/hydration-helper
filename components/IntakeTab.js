@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function IntakeTab({setIntake, unit}) {
+export default function IntakeTab({intake, setIntake, unit}) {
   const [drinkAmount, setDrinkAmount] = useState(0);
   const [drinkType, setDrinkType] = useState('water');
   return (
@@ -73,8 +73,7 @@ export default function IntakeTab({setIntake, unit}) {
           Alert.alert('Your entry has been recorded.');
           await AsyncStorage.setItem('@drink_type', drinkType);
           await AsyncStorage.setItem('@drink_amount', drinkAmount.toString());
-          const oldIntake = (await AsyncStorage.getItem('@intake')) || 0;
-          const newIntake = parseInt(oldIntake, 10) + drinkAmount;
+          const newIntake = intake + drinkAmount;
           await AsyncStorage.setItem('@intake', newIntake.toString());
           setIntake(prev => prev + drinkAmount);
         }}
