@@ -20,8 +20,10 @@ export default function Tabs() {
   const [weight, setWeight] = useState('160');
 
   useEffect(() => {
-    setRecommendation(SimpleCalculator2(unit, weight, exercise));
-  }, [exercise, weight]);
+    setRecommendation(
+      SimpleCalculator2(unit, age, gender, height, weight, exercise),
+    );
+  }, [age, gender, height, weight, exercise]);
 
   const firstUpdate = useRef(true);
   useEffect(() => {

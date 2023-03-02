@@ -21,13 +21,16 @@ async function SimpleCalculator() {
   return intakeMeasurementType === 'oz' ? result : result * 29.5735;
 }
 
-function SimpleCalculator2(unit, weight, exercise) {
+function SimpleCalculator2(unit, age, gender, height, weight, exercise) {
   let res = 0;
   if (unit === 'metric') {
     res = ((weight / 0.453592) * 0.5 + (exercise / 30) * 12) * 30;
   } else {
     res = weight * 0.5 + (exercise / 30) * 12;
   }
+  if (gender === 'male') res *= 1.05;
+  if (age > 65) res *= 0.9;
+  if (age <= 12) res *= 1.05;
   return res;
 }
 
