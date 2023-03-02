@@ -81,6 +81,7 @@ export default function ExerciseTab({exercise, setExercise}) {
           Alert.alert('Your exercise has been recorded!');
           setExercise(prev => prev + parseInt(input, 10));
           await AsyncStorage.setItem('@exercise_time', exercise.toString());
+          setInput('');
         }}
       />
       <StatusBar style="auto" />
