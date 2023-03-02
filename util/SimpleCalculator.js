@@ -10,12 +10,27 @@ export default class SimpleCalculator {
   }
 
   calculate() {
+    this.heightFactor();
     this.weightFactor();
     this.exerciseFactor();
     this.waterUnitFactor();
     this.genderFactor();
     this.ageFactor();
     return this.recommendation;
+  }
+
+  /* Height factor: take user's weight and find their height
+  if they had an average BMI (26). Take this height in inches
+  and compare it to their actual height. For every inch taller
+  they are compared to this average height, add an ounce of water
+  to their total. */
+  heightFactor() {
+    const avgHeight = Math.sqrt((703 * this.weight) / 26);
+    let diff = this.height - avgHeight;
+    if (diff > 0) {
+      if (this.unit === 'metric') diff /= 2.54;
+      this.recommendation += diff;
+    }
   }
 
   /* Weight factor: generally, it is recommended that people drink
