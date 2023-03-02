@@ -82,6 +82,26 @@ export default function SettingsTab({
       }
     }
   };
+  const updateAge = async val => {
+    setAge(val);
+    await AsyncStorage.setItem('@age', val);
+  };
+  const updateGender = async val => {
+    setGender(val);
+    await AsyncStorage.setItem('@gender', val);
+  };
+  const updateHeight = async val => {
+    setHeight(val);
+    await AsyncStorage.setItem('@height', val);
+  };
+  const updateWeight = async val => {
+    setWeight(val);
+    await AsyncStorage.setItem('@weight', val);
+  };
+  const updateUnit = async val => {
+    setUnit(val);
+    await AsyncStorage.setItem('@unit', val);
+  };
   const heightType = unit === 'us-system' ? 'in' : 'cm';
   const weightType = unit === 'us-system' ? 'lbs' : 'kg';
 
@@ -128,7 +148,7 @@ export default function SettingsTab({
           Age
         </Text>
         <View style={styles.smallInputView}>
-          <Input onChangeText={setAge} value={age} placeholder="21" />
+          <Input onChangeText={updateAge} value={age} placeholder="21" />
         </View>
       </View>
 
@@ -138,10 +158,7 @@ export default function SettingsTab({
         </Text>
         <Picker
           selectedValue={gender}
-          onValueChange={async value => {
-            setGender(value);
-            await AsyncStorage.setItem('@gender', value);
-          }}
+          onValueChange={updateGender}
           style={styles.picker1}>
           <Picker.Item label="male" value="male" />
           <Picker.Item label="female" value="female" />
@@ -153,7 +170,7 @@ export default function SettingsTab({
           Height
         </Text>
         <View style={styles.inputView}>
-          <Input onChangeText={setHeight} value={height} />
+          <Input onChangeText={updateHeight} value={height} />
           <Text h4>{heightType}</Text>
         </View>
       </View>
@@ -162,7 +179,7 @@ export default function SettingsTab({
           Weight
         </Text>
         <View style={styles.inputView}>
-          <Input onChangeText={setWeight} value={weight} />
+          <Input onChangeText={updateWeight} value={weight} />
           <Text h4>{weightType}</Text>
         </View>
       </View>
@@ -172,10 +189,7 @@ export default function SettingsTab({
         </Text>
         <Picker
           selectedValue={unit}
-          onValueChange={async value => {
-            setUnit(value);
-            await AsyncStorage.setItem('@unit', value);
-          }}
+          onValueChange={updateUnit}
           style={styles.picker2}>
           <Picker.Item label="metric" value="metric" />
           <Picker.Item label="US system" value="us-system" />
