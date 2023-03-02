@@ -14,6 +14,9 @@ export default function Tabs() {
   const [intake, setIntake] = useState(0);
   const [exercise, setExercise] = useState(0);
   const [unit, setUnit] = useState('us-system');
+  const [age, setAge] = useState('21');
+  const [gender, setGender] = useState('male');
+  const [height, setHeight] = useState('72');
   const [weight, setWeight] = useState('160');
 
   useEffect(() => {
@@ -114,6 +117,12 @@ export default function Tabs() {
           <SettingsTab
             unit={unit}
             setUnit={setUnit}
+            age={age}
+            setAge={setAge}
+            gender={gender}
+            setGender={setGender}
+            height={height}
+            setHeight={setHeight}
             weight={weight}
             setWeight={setWeight}
           />

@@ -50,7 +50,18 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function SettingsTab({unit, setUnit, weight, setWeight}) {
+export default function SettingsTab({
+  unit,
+  setUnit,
+  age,
+  setAge,
+  gender,
+  setGender,
+  height,
+  setHeight,
+  weight,
+  setWeight,
+}) {
   const [appleHealth, setAppleHealth] = useState(false);
   const toggleHealthSwitch = () => {
     setAppleHealth(previousState => !previousState);
@@ -74,10 +85,6 @@ export default function SettingsTab({unit, setUnit, weight, setWeight}) {
       }
     }
   };
-
-  const [age, setAge] = useState('');
-  const [gender, setGender] = useState(null);
-  const [height, setHeight] = useState('');
   const weightType = unit === 'us-system' ? 'lbs' : 'kg';
 
   return (
