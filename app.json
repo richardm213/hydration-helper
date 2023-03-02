@@ -31,7 +31,8 @@
       "supportsTablet": true,
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "Please enable location services so that the app can use your local weather data in its calculations.",
-        "NSRemindersUsageDescription": "Allow access to local calendar app."
+        "NSRemindersUsageDescription": "Allow access to local calendar app.",
+        "UIBackgroundModes": ["location", "fetch"]
       },
       "bundleIdentifier": "com.anonymous.hydration-helper"
     },

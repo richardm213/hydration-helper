@@ -1,26 +1,24 @@
 PODS:
   - boost (1.76.0)
   - DoubleConversion (1.1.6)
-  - EXApplication (5.0.1):
+  - EXApplication (5.1.1):
     - ExpoModulesCore
-  - EXBackgroundFetch (11.1.1):
+  - EXBackgroundFetch (11.0.1):
     - ExpoModulesCore
   - EXCalendar (11.0.1):
     - ExpoModulesCore
-  - EXConstants (14.0.2):
+  - EXConstants (14.2.1):
     - ExpoModulesCore
-  - EXErrorRecovery (4.0.1):
+  - EXFileSystem (15.2.2):
     - ExpoModulesCore
-  - EXFileSystem (15.1.1):
-    - ExpoModulesCore
-  - EXFont (11.0.1):
+  - EXFont (11.1.1):
     - ExpoModulesCore
   - EXJSONUtils (0.5.1)
   - EXManifests (0.5.2):
     - EXJSONUtils
   - EXNotifications (0.18.1):
     - ExpoModulesCore
-  - Expo (47.0.13):
+  - Expo (48.0.4):
     - ExpoModulesCore
   - expo-dev-client (2.1.4):
     - EXManifests
@@ -96,15 +94,15 @@ PODS:
     - expo-dev-menu/SafeAreaView
   - ExpoDevice (5.2.1):
     - ExpoModulesCore
-  - ExpoKeepAwake (11.0.1):
+  - ExpoKeepAwake (12.0.1):
     - ExpoModulesCore
-  - ExpoModulesCore (1.1.1):
+  - ExpoModulesCore (1.2.3):
     - React-Core
     - ReactCommon/turbomodule/core
   - EXSplashScreen (0.18.1):
     - ExpoModulesCore
     - React-Core
-  - EXTaskManager (11.1.1):
+  - EXTaskManager (11.0.1):
     - ExpoModulesCore
     - UMAppLoader
   - EXUpdatesInterface (0.9.1)
@@ -410,7 +408,7 @@ PODS:
   - RNScreens (3.18.2):
     - React-Core
     - React-RCTImage
-  - UMAppLoader (4.1.1)
+  - UMAppLoader (4.0.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -420,7 +418,6 @@ DEPENDENCIES:
   - EXBackgroundFetch (from `../node_modules/expo-background-fetch/ios`)
   - EXCalendar (from `../node_modules/expo-calendar/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
-  - EXErrorRecovery (from `../node_modules/expo-error-recovery/ios`)
   - EXFileSystem (from `../node_modules/expo-file-system/ios`)
   - EXFont (from `../node_modules/expo-font/ios`)
   - EXJSONUtils (from `../node_modules/expo-json-utils/ios`)
@@ -493,8 +490,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-calendar/ios"
   EXConstants:
     :path: "../node_modules/expo-constants/ios"
-  EXErrorRecovery:
-    :path: "../node_modules/expo-error-recovery/ios"
   EXFileSystem:
     :path: "../node_modules/expo-file-system/ios"
   EXFont:
@@ -605,26 +600,25 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
-  EXApplication: 034b1c40a8e9fe1bff76a1e511ee90dff64ad834
-  EXBackgroundFetch: afa9f178aa29338eac33228e9d5d3239f5c61df9
+  EXApplication: d8f53a7eee90a870a75656280e8d4b85726ea903
+  EXBackgroundFetch: 186248a00a38fc4d22d60ec30e4e751449e785ee
   EXCalendar: 1234457cffa88adfbfbe7f8937e21963f7b0f5b6
-  EXConstants: 3c86653c422dd77e40d10cbbabb3025003977415
-  EXErrorRecovery: ae43433feb0608a64dc5b1c8363b3e7769a9ea24
-  EXFileSystem: 60602b6eefa6873f97172c684b7537c9760b50d6
-  EXFont: 319606bfe48c33b5b5063fb0994afdc496befe80
+  EXConstants: f348da07e21b23d2b085e270d7b74f282df1a7d9
+  EXFileSystem: 844e86ca9b5375486ecc4ef06d3838d5597d895d
+  EXFont: 6ea3800df746be7233208d80fe379b8ed74f4272
   EXJSONUtils: 48b1e764ac35160e6f54d21ab60d7d9501f3e473
   EXManifests: 500666d48e8dd7ca5a482c9e729e4a7a6c34081b
   EXNotifications: dd628737af60fc8cc62dccebacd326b0fbbc0dcb
-  Expo: b9fa98bf260992312ee3c424400819fb9beadafe
+  Expo: aae5eb5ed076ff163eb909a003b2be1b85f832dd
   expo-dev-client: 71c7a10806a324e4312c1cac34d4a439670d2c3b
   expo-dev-launcher: 53556b0670fe41380948d5010a3bf7dd5274c946
   expo-dev-menu: 7d62aa294658575fa55e096e142b8b9db1db1d32
   expo-dev-menu-interface: 6c82ae323c4b8724dead4763ce3ff24a2108bdb1
   ExpoDevice: e0bebf68f978b3d353377ce42e73c20c0a070215
-  ExpoKeepAwake: 69b59d0a8d2b24de9f82759c39b3821fec030318
-  ExpoModulesCore: 485dff3a59b036a33b6050c0a5aea3cf1037fdd1
+  ExpoKeepAwake: 69f5f627670d62318410392d03e0b5db0f85759a
+  ExpoModulesCore: d22811126412b647f03dc508e83748ed08a0468a
   EXSplashScreen: cd7fb052dff5ba8311d5c2455ecbebffe1b7a8ca
-  EXTaskManager: f8257faa4c20acfc3f31e21ab82a62544d70db85
+  EXTaskManager: 0afcc6fd813dec5dee98aa5ec4f22c2a840dd4a7
   EXUpdatesInterface: dd699d1930e28639dcbd70a402caea98e86364ca
   FBLazyVector: affa4ba1bfdaac110a789192f4d452b053a86624
   FBReactNativeSpec: fe8b5f1429cfe83a8d72dc8ed61dc7704cac8745
@@ -662,7 +656,7 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 8616bd5a58af409453ea4e1b246521bb76578d60
   RNCPicker: 0bf8ef8f7800524f32d2bb2a8bcadd53eda0ecd1
   RNScreens: 34cc502acf1b916c582c60003dc3089fa01dc66d
-  UMAppLoader: 71aae6c6782cf2aef2356bb97f84321600b4b25c
+  UMAppLoader: 354d71d2d2ce8d6c19fb13d72b9c8209b18a8c56
   Yoga: eca980a5771bf114c41a754098cd85e6e0d90ed7
 
 PODFILE CHECKSUM: 6cc82e4f3902126174771e9f052c58e949ee2a8b
