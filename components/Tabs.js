@@ -5,7 +5,7 @@ import IntakeTab from './IntakeTab';
 import ExerciseTab from './ExerciseTab';
 import SettingsTab from './SettingsTab';
 import {intakeIcon, exerciseIcon, waterIcon, settingsIcon} from './TabIcons';
-import {SimpleCalculator2} from '../util/IntakeCalculator';
+import SimpleCalculator from '../util/SimpleCalculator';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,9 +20,15 @@ export default function Tabs() {
   const [weight, setWeight] = useState('160');
 
   useEffect(() => {
-    setRecommendation(
-      SimpleCalculator2(unit, age, gender, height, weight, exercise),
+    const calculator = new SimpleCalculator(
+      unit,
+      age,
+      gender,
+      height,
+      weight,
+      exercise,
     );
+    setRecommendation(calculator.calculate());
   }, [age, gender, height, weight, exercise]);
 
   const firstUpdate = useRef(true);
