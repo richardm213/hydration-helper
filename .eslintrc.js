@@ -26,6 +26,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'react/prop-types': 0,
     'import/no-extraneous-dependencies': 0,
+    'no-console': 0,
   },
   settings: {'import/core-modules': ['@expo/vector-icons']},
 };
