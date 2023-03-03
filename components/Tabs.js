@@ -7,8 +7,10 @@ import ExerciseTab from './ExerciseTab';
 import SettingsTab from './SettingsTab';
 import {intakeIcon, exerciseIcon, waterIcon, settingsIcon} from './TabIcons';
 import SimpleCalculator from '../util/SimpleCalculator';
+import WeatherAPI from '../services/WeatherAPI';
 
 const Tab = createBottomTabNavigator();
+const w = new WeatherAPI();
 
 export default function Tabs() {
   const [recommendation, setRecommendation] = useState(120);
@@ -19,6 +21,7 @@ export default function Tabs() {
   const [height, setHeight] = useState('72');
   const [weight, setWeight] = useState('160');
   const [unit, setUnit] = useState('us-system');
+  const [temperature, setTemperature] = useState(0);
 
   useEffect(() => {
     const fetchStorageValues = () => {
@@ -44,7 +47,12 @@ export default function Tabs() {
         if (val) setUnit(val);
       });
     };
+    const fetchTemperature = async () => {
+      await w.getTemperature(setTemperature);
+    };
+
     fetchStorageValues();
+    fetchTemperature();
   }, []);
 
   useEffect(() => {
