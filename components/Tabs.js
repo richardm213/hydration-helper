@@ -138,7 +138,11 @@ export default function Tabs() {
           )}%`,
         }}>
         {() => (
-          <RecommendationTab recommendation={recommendation} unit={unit} />
+          <RecommendationTab
+            recommendation={recommendation}
+            unit={unit}
+            temperature={temperature}
+          />
         )}
       </Tab.Screen>
       <Tab.Screen

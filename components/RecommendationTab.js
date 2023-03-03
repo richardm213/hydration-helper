@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View} from 'react-native';
-import {Icon} from 'react-native-elements';
+import {StyleSheet, View} from 'react-native';
+import {Icon, Text} from '@rneui/base';
 
 const white = '#fff';
 const turquoise = '#0F5059';
@@ -33,12 +33,18 @@ const styles = StyleSheet.create({
     flex: 1.5,
     justifyContent: 'center',
   },
+  temperatureView: {
+    marginTop: 20,
+  },
 });
 
-export default function RecommendationTab({recommendation, unit}) {
+export default function RecommendationTab({recommendation, unit, temperature}) {
   const measurementType = unit === 'us-system' ? 'oz' : 'ml';
   return (
     <View style={styles.container}>
+      <View style={styles.temperatureView}>
+        <Text h4>Weather: {temperature.toFixed(1)}&#8457;</Text>
+      </View>
       <View style={styles.suggestionTextView}>
         <Icon name="water" type="ionicon" color="#0F5059" size={200} />
         <Text style={styles.suggestionText}>
