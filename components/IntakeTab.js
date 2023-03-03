@@ -4,13 +4,12 @@ import {Button, Input, Icon} from '@rneui/base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import DrinkSlider from './DrinkSlider';
+import COLORS from './Colors';
 
-const white = '#fff';
-const turquoise = '#0F5059';
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: white,
+    backgroundColor: COLORS.white,
     flex: 1,
   },
   icon: {
@@ -22,20 +21,20 @@ const styles = StyleSheet.create({
   },
   largerTextBlue: {
     alignItems: 'center',
-    color: turquoise,
+    color: COLORS.primary,
     fontSize: 24,
     fontWeight: 'bold',
     margin: 20,
   },
   largerTextWhite: {
     alignItems: 'center',
-    color: white,
+    color: COLORS.white,
     fontSize: 24,
     fontWeight: 'bold',
     padding: 20,
   },
   submitButton: {
-    backgroundColor: turquoise,
+    backgroundColor: COLORS.primary,
     borderRadius: 15,
     height: 50,
   },
@@ -63,7 +62,7 @@ export default function IntakeTab({intake, setIntake, unit}) {
         style={styles.icon}
         name="local-drink"
         type="material"
-        color={turquoise}
+        color={COLORS.primary}
         size={160}
       />
       <Text style={styles.largerTextBlue}>

@@ -1,18 +1,17 @@
 import {StyleSheet, View} from 'react-native';
 import {Icon, Text} from '@rneui/base';
+import COLORS from './Colors';
 
-const white = '#fff';
-const turquoise = '#0F5059';
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: white,
+    backgroundColor: COLORS.white,
     flex: 1,
     justifyContent: 'center',
   },
 
   suggestionIntakeText: {
-    color: turquoise,
+    color: COLORS.primary,
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -22,7 +21,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   suggestionText: {
-    color: turquoise,
+    color: COLORS.primary,
     fontSize: 26,
     fontWeight: 'bold',
     marginHorizontal: 40,
@@ -46,7 +45,7 @@ export default function HomeTab({recommendation, unit, temperature}) {
         <Text h4>Weather: {temperature.toFixed(1)}&#8457;</Text>
       </View>
       <View style={styles.suggestionTextView}>
-        <Icon name="water" type="ionicon" color="#0F5059" size={200} />
+        <Icon name="water" type="ionicon" color={COLORS.primary} size={200} />
         <Text style={styles.suggestionText}>
           Your personalized recommendation for water intake today is:
         </Text>

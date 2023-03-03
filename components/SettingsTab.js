@@ -5,13 +5,11 @@ import {Picker} from '@react-native-picker/picker';
 import {Text, Input} from '@rneui/base';
 import * as Calendar from 'expo-calendar';
 import {requestPermissionsAsync} from 'expo-notifications';
+import COLORS from './Colors';
 
-const white = '#fff';
-const lightGray = '#e0e0e0';
-const turquoise = '#0F5059';
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: white,
+    backgroundColor: COLORS.white,
     flex: 1,
   },
   inputView: {
@@ -21,7 +19,7 @@ const styles = StyleSheet.create({
     width: 60,
   },
   label: {
-    color: turquoise,
+    color: COLORS.primary,
   },
   picker1: {
     height: 150,
@@ -34,7 +32,7 @@ const styles = StyleSheet.create({
     width: 180,
   },
   row: {
-    borderBottomColor: lightGray,
+    borderBottomColor: COLORS.lightGray,
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -124,8 +122,8 @@ export default function SettingsTab({
             Apple Health
           </Text>
           <Switch
-            trackColor={{true: turquoise}}
-            thumbColor={appleHealth ? white : turquoise}
+            trackColor={{true: COLORS.primary}}
+            thumbColor={appleHealth ? COLORS.white : COLORS.primary}
             onValueChange={toggleHealthSwitch}
             value={appleHealth}
           />
@@ -136,8 +134,8 @@ export default function SettingsTab({
             Location Data
           </Text>
           <Switch
-            trackColor={{true: turquoise}}
-            thumbColor={canAccessLocationData ? white : turquoise}
+            trackColor={{true: COLORS.primary}}
+            thumbColor={canAccessLocationData ? COLORS.white : COLORS.primary}
             onValueChange={toggleLocationSwitch}
             value={canAccessLocationData}
           />
@@ -148,8 +146,8 @@ export default function SettingsTab({
             Calendar
           </Text>
           <Switch
-            trackColor={{true: turquoise}}
-            thumbColor={canAccessCalendar ? white : turquoise}
+            trackColor={{true: COLORS.primary}}
+            thumbColor={canAccessCalendar ? COLORS.white : COLORS.primary}
             onValueChange={toggleCalendarSwitch}
             value={canAccessCalendar}
           />
@@ -160,8 +158,8 @@ export default function SettingsTab({
             Allow Notifications
           </Text>
           <Switch
-            trackColor={{true: turquoise}}
-            thumbColor={canSendNotifications ? white : turquoise}
+            trackColor={{true: COLORS.primary}}
+            thumbColor={canSendNotifications ? COLORS.white : COLORS.primary}
             onValueChange={toggleNotificationsSwitch}
             value={canSendNotifications}
           />

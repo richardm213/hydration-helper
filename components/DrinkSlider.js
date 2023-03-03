@@ -1,5 +1,6 @@
 import {Slider, Icon, Text} from '@rneui/base';
 import {StyleSheet, View} from 'react-native';
+import COLORS from './Colors';
 
 const styles = StyleSheet.create({
   iconContainerStyle: {bottom: 20, right: 20},
@@ -18,7 +19,6 @@ const styles = StyleSheet.create({
 });
 
 export default function DrinkSlider({drinkAmount, setDrinkAmount, unit}) {
-  const turquoise = '#0F5059';
   const measurementType = unit === 'us-system' ? 'oz' : 'ml';
   const maxAmount = unit === 'us-system' ? 40 : 1200;
 
@@ -42,7 +42,7 @@ export default function DrinkSlider({drinkAmount, setDrinkAmount, unit}) {
               size={20}
               reverse
               containerStyle={styles.iconContainerStyle}
-              color={turquoise}
+              color={COLORS.primary}
             />
           ),
         }}

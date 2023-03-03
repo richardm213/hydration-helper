@@ -3,13 +3,12 @@ import {useState} from 'react';
 import {Text, View, StyleSheet, Alert} from 'react-native';
 import {Button, Icon, Input} from '@rneui/base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import COLORS from './Colors';
 
-const white = '#fff';
-const turquoise = '#0F5059';
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: white,
+    backgroundColor: COLORS.white,
     bottom: 60,
     flex: 1,
   },
@@ -23,7 +22,7 @@ const styles = StyleSheet.create({
   },
   largerTextBlueBold: {
     alignItems: 'center',
-    color: turquoise,
+    color: COLORS.primary,
     fontSize: 22,
     fontWeight: 'bold',
     marginBottom: 10,
@@ -31,18 +30,18 @@ const styles = StyleSheet.create({
   },
   largerTextWhite: {
     alignItems: 'center',
-    color: white,
+    color: COLORS.white,
     fontSize: 22,
     fontWeight: 'bold',
     padding: 20,
   },
   moreDetails: {
-    color: turquoise,
+    color: COLORS.primary,
     marginHorizontal: 50,
     textAlign: 'center',
   },
   submitButton: {
-    backgroundColor: turquoise,
+    backgroundColor: COLORS.primary,
     borderRadius: 15,
     height: 50,
   },
@@ -60,7 +59,7 @@ export default function ExerciseTab({exercise, setExercise}) {
         style={styles.icon}
         name="run-circle"
         type="material-icons"
-        color="#0F5059"
+        color={COLORS.primary}
         size={200}
       />
       <Text style={styles.largerTextBlueBold}>
