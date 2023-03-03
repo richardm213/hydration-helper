@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Switch, StyleSheet, View} from 'react-native';
+import {Switch, StyleSheet, View, ScrollView, SafeAreaView} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Picker} from '@react-native-picker/picker';
 import {Text, Input} from '@rneui/base';
@@ -11,7 +11,6 @@ const lightGray = '#e0e0e0';
 const turquoise = '#0F5059';
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
     backgroundColor: white,
     flex: 1,
   },
@@ -42,6 +41,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     width: '100%',
+  },
+  scrollView: {
+    marginBottom: 65,
   },
   smallInputView: {
     width: 45,
@@ -115,107 +117,109 @@ export default function SettingsTab({
   const weightType = unit === 'us-system' ? 'lbs' : 'kg';
 
   return (
-    <View style={styles.container}>
-      <View style={styles.row}>
-        <Text h4 style={styles.label}>
-          Apple Health
-        </Text>
-        <Switch
-          trackColor={{true: turquoise}}
-          thumbColor={appleHealth ? white : turquoise}
-          onValueChange={toggleHealthSwitch}
-          value={appleHealth}
-        />
-      </View>
-
-      <View style={styles.row}>
-        <Text h4 style={styles.label}>
-          Location Data
-        </Text>
-        <Switch
-          trackColor={{true: turquoise}}
-          thumbColor={canAccessLocationData ? white : turquoise}
-          onValueChange={toggleLocationSwitch}
-          value={canAccessLocationData}
-        />
-      </View>
-
-      <View style={styles.row}>
-        <Text h4 style={styles.label}>
-          Calendar
-        </Text>
-        <Switch
-          trackColor={{true: turquoise}}
-          thumbColor={canAccessCalendar ? white : turquoise}
-          onValueChange={toggleCalendarSwitch}
-          value={canAccessCalendar}
-        />
-      </View>
-
-      <View style={styles.row}>
-        <Text h4 style={styles.label}>
-          Allow Notifications
-        </Text>
-        <Switch
-          trackColor={{true: turquoise}}
-          thumbColor={canSendNotifications ? white : turquoise}
-          onValueChange={toggleNotificationsSwitch}
-          value={canSendNotifications}
-        />
-      </View>
-
-      <View style={styles.row}>
-        <Text h4 style={styles.label}>
-          Age
-        </Text>
-        <View style={styles.smallInputView}>
-          <Input onChangeText={updateAge} value={age} placeholder="21" />
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.row}>
+          <Text h4 style={styles.label}>
+            Apple Health
+          </Text>
+          <Switch
+            trackColor={{true: turquoise}}
+            thumbColor={appleHealth ? white : turquoise}
+            onValueChange={toggleHealthSwitch}
+            value={appleHealth}
+          />
         </View>
-      </View>
 
-      <View style={styles.row}>
-        <Text h4 style={styles.label}>
-          Gender
-        </Text>
-        <Picker
-          selectedValue={gender}
-          onValueChange={updateGender}
-          style={styles.picker1}>
-          <Picker.Item label="male" value="male" />
-          <Picker.Item label="female" value="female" />
-        </Picker>
-      </View>
+        <View style={styles.row}>
+          <Text h4 style={styles.label}>
+            Location Data
+          </Text>
+          <Switch
+            trackColor={{true: turquoise}}
+            thumbColor={canAccessLocationData ? white : turquoise}
+            onValueChange={toggleLocationSwitch}
+            value={canAccessLocationData}
+          />
+        </View>
 
-      <View style={styles.row}>
-        <Text h4 style={styles.label}>
-          Height
-        </Text>
-        <View style={styles.inputView}>
-          <Input onChangeText={updateHeight} value={height} />
-          <Text h4>{heightType}</Text>
+        <View style={styles.row}>
+          <Text h4 style={styles.label}>
+            Calendar
+          </Text>
+          <Switch
+            trackColor={{true: turquoise}}
+            thumbColor={canAccessCalendar ? white : turquoise}
+            onValueChange={toggleCalendarSwitch}
+            value={canAccessCalendar}
+          />
         </View>
-      </View>
-      <View style={styles.row}>
-        <Text h4 style={styles.label}>
-          Weight
-        </Text>
-        <View style={styles.inputView}>
-          <Input onChangeText={updateWeight} value={weight} />
-          <Text h4>{weightType}</Text>
+
+        <View style={styles.row}>
+          <Text h4 style={styles.label}>
+            Allow Notifications
+          </Text>
+          <Switch
+            trackColor={{true: turquoise}}
+            thumbColor={canSendNotifications ? white : turquoise}
+            onValueChange={toggleNotificationsSwitch}
+            value={canSendNotifications}
+          />
         </View>
-      </View>
-      <View style={styles.row}>
-        <Text h4 style={styles.label}>
-          Unit
-        </Text>
-        <Picker
-          selectedValue={unit}
-          onValueChange={updateUnit}
-          style={styles.picker2}>
-          <Picker.Item label="metric" value="metric" />
-          <Picker.Item label="US system" value="us-system" />
-        </Picker>
-      </View>
-    </View>
+
+        <View style={styles.row}>
+          <Text h4 style={styles.label}>
+            Age
+          </Text>
+          <View style={styles.smallInputView}>
+            <Input onChangeText={updateAge} value={age} placeholder="21" />
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <Text h4 style={styles.label}>
+            Gender
+          </Text>
+          <Picker
+            selectedValue={gender}
+            onValueChange={updateGender}
+            style={styles.picker1}>
+            <Picker.Item label="male" value="male" />
+            <Picker.Item label="female" value="female" />
+          </Picker>
+        </View>
+
+        <View style={styles.row}>
+          <Text h4 style={styles.label}>
+            Height
+          </Text>
+          <View style={styles.inputView}>
+            <Input onChangeText={updateHeight} value={height} />
+            <Text h4>{heightType}</Text>
+          </View>
+        </View>
+        <View style={styles.row}>
+          <Text h4 style={styles.label}>
+            Weight
+          </Text>
+          <View style={styles.inputView}>
+            <Input onChangeText={updateWeight} value={weight} />
+            <Text h4>{weightType}</Text>
+          </View>
+        </View>
+        <View style={styles.row}>
+          <Text h4 style={styles.label}>
+            Unit
+          </Text>
+          <Picker
+            selectedValue={unit}
+            onValueChange={updateUnit}
+            style={styles.picker2}>
+            <Picker.Item label="metric" value="metric" />
+            <Picker.Item label="US system" value="us-system" />
+          </Picker>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
