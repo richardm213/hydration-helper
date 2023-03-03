@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Picker} from '@react-native-picker/picker';
 import {Text, Input} from '@rneui/base';
 import * as Calendar from 'expo-calendar';
+import {requestPermissionsAsync} from 'expo-notifications';
 
 const white = '#fff';
 const lightGray = '#e0e0e0';
@@ -82,6 +83,14 @@ export default function SettingsTab({
       }
     }
   };
+  const [canSendNotifications, setNotificationsAccess] = useState(false);
+  const toggleNotificationsSwitch = async () => {
+    setNotificationsAccess(previousState => !previousState);
+    if (!canSendNotifications) {
+      const {status} = await requestPermissionsAsync();
+      console.log(`Notification status: ${status}`);
+    }
+  };
   const updateAge = async val => {
     setAge(val);
     await AsyncStorage.setItem('@age', val);
@@ -140,6 +149,18 @@ export default function SettingsTab({
           thumbColor={canAccessCalendar ? white : turquoise}
           onValueChange={toggleCalendarSwitch}
           value={canAccessCalendar}
+        />
+      </View>
+
+      <View style={styles.row}>
+        <Text h4 style={styles.label}>
+          Allow Notifications
+        </Text>
+        <Switch
+          trackColor={{true: turquoise}}
+          thumbColor={canSendNotifications ? white : turquoise}
+          onValueChange={toggleNotificationsSwitch}
+          value={canSendNotifications}
         />
       </View>
 
