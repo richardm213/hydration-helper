@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 });
 
 export default function ExerciseTab({exercise, setExercise}) {
-  const [input, setInput] = useState(0);
+  const [input, setInput] = useState('');
   return (
     <View style={styles.container}>
       <Text style={styles.moreDetails}>
