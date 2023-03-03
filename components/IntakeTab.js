@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {StyleSheet, Text, View, Alert} from 'react-native';
-import {Button, Input, Icon} from 'react-native-elements';
+import {Button, Input, Icon} from '@rneui/base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import DrinkSlider from './DrinkSlider';

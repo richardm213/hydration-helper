@@ -1,8 +1,7 @@
 import {StatusBar} from 'expo-status-bar';
 import {useState} from 'react';
 import {Text, View, StyleSheet, Alert} from 'react-native';
-import {Button, Icon, Input} from 'react-native-elements';
-import {ScreenWidth} from 'react-native-elements/dist/helpers';
+import {Button, Icon, Input} from '@rneui/base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const white = '#fff';
@@ -39,8 +38,8 @@ const styles = StyleSheet.create({
   },
   moreDetails: {
     color: turquoise,
+    marginHorizontal: 50,
     textAlign: 'center',
-    width: 0.85 * ScreenWidth,
   },
   submitButton: {
     backgroundColor: turquoise,
