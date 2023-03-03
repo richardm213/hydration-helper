@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import RecommendationTab from './RecommendationTab';
+import HomeTab from './HomeTab';
 import IntakeTab from './IntakeTab';
 import ExerciseTab from './ExerciseTab';
 import SettingsTab from './SettingsTab';
@@ -138,7 +138,7 @@ export default function Tabs() {
           )}%`,
         }}>
         {() => (
-          <RecommendationTab
+          <HomeTab
             recommendation={recommendation}
             unit={unit}
             temperature={temperature}

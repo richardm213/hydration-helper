@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function RecommendationTab({recommendation, unit, temperature}) {
+export default function HomeTab({recommendation, unit, temperature}) {
   const measurementType = unit === 'us-system' ? 'oz' : 'ml';
   return (
     <View style={styles.container}>
