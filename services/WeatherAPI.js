@@ -1,18 +1,24 @@
-import {dailyForecast, getLocation} from 'react-native-weather-api';
+import axios from 'axios';
+import Geolocation from '@react-native-community/geolocation';
+// eslint-disable-next-line import/no-unresolved
+import {WEATHER_API_KEY} from '@env';
 
-async function getTemperature() {
-  getLocation().then(location => {
-    dailyForecast({
-      key: '528778267c4021a81e2fb0d873c69b16',
-      unit: 'metric',
-      lat: location.coords.latitude,
-      lon: location.coords.longitude,
-    }).then(data => data.daily[0].temp.max);
-  });
+export default class WeatherAPI {
+  constructor() {
+    this.temperature = 0;
+  }
+
+  getTemperature(f) {
+    return Geolocation.getCurrentPosition(async val => {
+      const {longitude, latitude} = val.coords;
+      const exclude = 'current,minutely,hourly,alerts';
+      const units = 'imperial';
+      const apiKey = WEATHER_API_KEY;
+      const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&exclude=${exclude}&units=${units}&appid=${apiKey}`;
+      const obj = JSON.parse((await axios.get(url)).request._response);
+      const todaysWeather = obj.daily[0];
+      this.temperature = todaysWeather.temp.max;
+      f(this.temperature);
+    });
+  }
 }
-// NOTE: added under app.json:
-// "infoPlist": {
-//    "NSLocationWhenInUseUsageDescription": "Please enable location services so that the app can use your local weather data in its calculations."
-// }
-// may need to change permissiosn to be for when app is in background as well
-export default getTemperature;

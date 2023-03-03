@@ -27,6 +27,7 @@ module.exports = {
     'react/prop-types': 0,
     'import/no-extraneous-dependencies': 0,
     'no-console': 0,
+    'no-underscore-dangle': 0,
   },
   settings: {'import/core-modules': ['@expo/vector-icons']},
 };
