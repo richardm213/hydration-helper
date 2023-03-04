@@ -28,6 +28,12 @@
           <string>com.anonymous.hydration-helper</string>
         </array>
       </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>exp+hydration-helper</string>
+        </array>
+      </dict>
     </array>
     <key>CFBundleVersion</key>
     <string>1</string>
@@ -56,6 +62,11 @@
     <string>Please enable location services so that the app can use your local weather data in its calculations.</string>
     <key>NSRemindersUsageDescription</key>
     <string>Allow access to local calendar app.</string>
+    <key>UIBackgroundModes</key>
+    <array>
+      <string>location</string>
+      <string>fetch</string>
+    </array>
     <key>UILaunchStoryboardName</key>
     <string>SplashScreen</string>
     <key>UIRequiredDeviceCapabilities</key>
