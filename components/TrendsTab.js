@@ -37,6 +37,10 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
     height: 25,
   },
+  xAxisLegendStyle: {
+    fontSize: 12,
+    marginBottom: -25,
+  },
 });
 
 const data = [
@@ -133,6 +137,7 @@ const dataBars = [
     frontColor: COLORS.primary,
   },
   {value: 77, frontColor: COLORS.lighterBlue},
+  {value: 0},
 ];
 
 function listTitle(props) {
@@ -170,22 +175,24 @@ export default function TrendsTab() {
           </View>
         </View>
       </View>
-      <View styles={{marginBottom: 93}}>
+      <View>
         <BarChart
           data={dataBars}
           spacing={27}
           barWidth={7}
           xAxisThickness={1}
-          labelsExtraHeight={-2}
-          rotateLabel={5}
+          labelsExtraHeight={15}
+          rotateLabel={1}
           yAxisThickness={1}
           yAxisTextStyle={{color: COLORS.primary}}
           noOfSections={7}
-          maxValue={120}
-          labelWidth={55}
+          maxValue={125}
+          labelWidth={85}
+          xAxisLabelTextStyle={styles.xAxisLegendStyle}
         />
       </View>
       <AccordionList
+        marginTop={55}
         data={data}
         customTitle={item => listTitle(item)}
         customBody={item => listAttribute(item)}
