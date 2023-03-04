@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     width: 180,
   },
   row: {
-    borderBottomColor: COLORS.lightGray,
+    borderBottomColor: COLORS.lightGray2,
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',

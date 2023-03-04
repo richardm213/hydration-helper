@@ -25,9 +25,9 @@ export default function DrinkSlider({drinkAmount, setDrinkAmount, unit}) {
   return (
     <View style={styles.viewStyle}>
       <Slider
-        maximumTrackTintColor="#ccc"
+        maximumTrackTintColor={COLORS.lightGray1}
         maximumValue={maxAmount}
-        minimumTrackTintColor="#222"
+        minimumTrackTintColor={COLORS.fadedBlack}
         minimumValue={0}
         onValueChange={value => setDrinkAmount(value)}
         orientation="horizontal"

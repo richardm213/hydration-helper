@@ -15,6 +15,7 @@ import {
 } from './TabIcons';
 import SimpleCalculator from '../util/SimpleCalculator';
 import WeatherAPI from '../services/WeatherAPI';
+import COLORS from './Colors';
 
 const Tab = createBottomTabNavigator();
 const w = new WeatherAPI();
@@ -111,7 +112,7 @@ export default function Tabs() {
       screenOptions={{
         tabBarStyle: {
           position: 'absolute',
-          backgroundColor: '#DEFBFF',
+          backgroundColor: COLORS.iceBlue,
           height: 100,
         },
         tabBarItemStyle: {
@@ -122,16 +123,16 @@ export default function Tabs() {
           fontSize: 12,
           fontWeight: 'bold',
         },
-        tabBarActiveTintColor: '#0C8292',
-        tabBarInactiveTintColor: '#81C6D0',
+        tabBarActiveTintColor: COLORS.primarySelected,
+        tabBarInactiveTintColor: COLORS.primaryFaded,
 
         headerStyle: {
           height: 110,
-          backgroundColor: '#DEFBFF',
+          backgroundColor: COLORS.iceBlue,
         },
         headerTitleStyle: {
           flex: 1,
-          color: '#0C8292',
+          color: COLORS.primarySelected,
           fontSize: 18,
           marginTop: 15,
         },
