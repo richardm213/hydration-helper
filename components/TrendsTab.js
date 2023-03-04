@@ -54,6 +54,51 @@ const data = [
   },
 ];
 
+const dataBars = [
+  {
+    label: '3-2-2023',
+    value: 57,
+    spacing: 2,
+    frontColor: COLORS.primary,
+  },
+  {value: 37, frontColor: COLORS.lighterBlue},
+  {
+    label: '3-3-2023',
+    value: 69,
+    spacing: 2,
+    frontColor: COLORS.primary,
+  },
+  {value: 57, frontColor: COLORS.lighterBlue},
+  {
+    label: '3-4-2023',
+    value: 85,
+    spacing: 2,
+    frontColor: COLORS.primary,
+  },
+  {value: 59, frontColor: COLORS.lighterBlue},
+  {
+    label: '3-5-2023',
+    value: 73,
+    spacing: 2,
+    frontColor: COLORS.primary,
+  },
+  {value: 37, frontColor: COLORS.lighterBlue},
+  {
+    label: '3-6-2023',
+    value: 111,
+    spacing: 2,
+    frontColor: COLORS.primary,
+  },
+  {value: 67, frontColor: COLORS.lighterBlue},
+  {
+    label: '3-7-2023',
+    value: 97,
+    spacing: 2,
+    frontColor: COLORS.primary,
+  },
+  {value: 77, frontColor: COLORS.lighterBlue},
+];
+
 function listTitle(props) {
   return <Text>{props.date}</Text>;
 }
