@@ -3,7 +3,41 @@ import {AccordionList} from 'react-native-accordion-list-view';
 import {BarChart} from 'react-native-gifted-charts';
 import COLORS from './Colors';
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  align: {
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  container: {
+    backgroundColor: COLORS.white,
+    flex: 1,
+  },
+  leftDot: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 6,
+    height: 7,
+    marginRight: 8,
+    width: 7,
+  },
+  legend: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginBottom: 25,
+    marginTop: 25,
+  },
+  rightDot: {
+    backgroundColor: COLORS.lighterBlue,
+    borderRadius: 6,
+    height: 7,
+    marginRight: 8,
+    width: 7,
+  },
+  textLegend: {
+    color: COLORS.primary,
+    height: 25,
+  },
+});
 
 const data = [
   {
