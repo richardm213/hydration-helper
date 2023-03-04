@@ -1,5 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import {AccordionList} from 'react-native-accordion-list-view';
+import {BarChart} from 'react-native-gifted-charts';
+import COLORS from './Colors';
 
 const styles = StyleSheet.create({});
 
@@ -122,6 +124,33 @@ function listAttribute(props) {
 export default function TrendsTab() {
   return (
     <View style={styles.container}>
+      <View>
+        <View style={styles.legend}>
+          <View style={styles.align}>
+            <View style={styles.leftDot} />
+            <Text style={styles.textLegend}>Recommended Intake</Text>
+          </View>
+          <View style={styles.align}>
+            <View style={styles.rightDot} />
+            <Text style={styles.textLegend}>Recorded Intake</Text>
+          </View>
+        </View>
+      </View>
+      <View styles={{marginBottom: 93}}>
+        <BarChart
+          data={dataBars}
+          spacing={27}
+          barWidth={7}
+          xAxisThickness={1}
+          labelsExtraHeight={-2}
+          rotateLabel={5}
+          yAxisThickness={1}
+          yAxisTextStyle={{color: COLORS.primary}}
+          noOfSections={7}
+          maxValue={120}
+          labelWidth={55}
+        />
+      </View>
       <AccordionList
         data={data}
         customTitle={item => listTitle(item)}
