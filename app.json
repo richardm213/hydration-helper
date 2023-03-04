@@ -32,7 +32,10 @@
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "Please enable location services so that the app can use your local weather data in its calculations.",
         "NSRemindersUsageDescription": "Allow access to local calendar app.",
-        "UIBackgroundModes": ["location", "fetch"]
+        "UIBackgroundModes": [
+          "location",
+          "fetch"
+        ]
       },
       "bundleIdentifier": "com.anonymous.hydration-helper"
     },
@@ -40,7 +43,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.anonymous.hydrationhelper",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
