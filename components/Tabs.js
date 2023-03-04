@@ -5,7 +5,14 @@ import HomeTab from './HomeTab';
 import IntakeTab from './IntakeTab';
 import ExerciseTab from './ExerciseTab';
 import SettingsTab from './SettingsTab';
-import {intakeIcon, exerciseIcon, waterIcon, settingsIcon} from './TabIcons';
+import TrendsTab from './TrendsTab';
+import {
+  intakeIcon,
+  exerciseIcon,
+  waterIcon,
+  settingsIcon,
+  trendsIcon,
+} from './TabIcons';
 import SimpleCalculator from '../util/SimpleCalculator';
 import WeatherAPI from '../services/WeatherAPI';
 
@@ -162,6 +169,14 @@ export default function Tabs() {
           headerTitle: `You exercised for ${exercise} minutes today!`,
         }}>
         {() => <ExerciseTab exercise={exercise} setExercise={setExercise} />}
+      </Tab.Screen>
+      <Tab.Screen
+        name="Trends"
+        options={{
+          tabBarIcon: trendsIcon,
+          headerTitle: `Remember: Progress isn't linear`,
+        }}>
+        {() => <TrendsTab />}
       </Tab.Screen>
       <Tab.Screen
         name="Settings"

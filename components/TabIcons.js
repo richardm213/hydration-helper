@@ -31,6 +31,15 @@ const waterIcon = ({color, size}) => (
     style={styles.navIcon}
   />
 );
+const trendsIcon = ({color, size}) => (
+  <MaterialIcons
+    name="insert-chart"
+    type="ionicon"
+    color={color}
+    size={size * 1.6}
+    style={styles.navIcon}
+  />
+);
 const settingsIcon = ({color, size}) => (
   <MaterialIcons
     name="settings"
@@ -40,4 +49,4 @@ const settingsIcon = ({color, size}) => (
   />
 );
 
-export {intakeIcon, exerciseIcon, waterIcon, settingsIcon};
+export {intakeIcon, exerciseIcon, waterIcon, trendsIcon, settingsIcon};
