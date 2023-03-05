@@ -7,6 +7,7 @@ import * as Calendar from 'expo-calendar';
 import {requestPermissionsAsync} from 'expo-notifications';
 import COLORS from './Colors';
 import {getFoodItemDataWater} from '../services/foodDataAPI';
+import GetEventTimes from '../services/CalendarAPI';
 
 const styles = StyleSheet.create({
   container: {
@@ -82,11 +83,8 @@ export default function SettingsTab({
     if (!canAccessCalendar) {
       const {status} = await Calendar.requestCalendarPermissionsAsync();
       if (status === 'granted') {
-        const calendars = await Calendar.getCalendarsAsync(
-          Calendar.EntityTypes.EVENT,
-        );
-        console.log('Here are all your calendars:');
-        console.log({calendars});
+        const times = await GetEventTimes();
+        console.log(times);
       }
     }
   };
