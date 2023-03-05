@@ -14,11 +14,11 @@ import {
   trendsIcon,
 } from './TabIcons';
 import SimpleCalculator from '../util/SimpleCalculator';
-import WeatherAPI from '../services/WeatherAPI';
+// import WeatherAPI from '../services/WeatherAPI';
 import COLORS from './Colors';
 
 const Tab = createBottomTabNavigator();
-const w = new WeatherAPI();
+// const w = new WeatherAPI();
 
 export default function Tabs() {
   const [recommendation, setRecommendation] = useState(120);
@@ -56,7 +56,8 @@ export default function Tabs() {
       });
     };
     const fetchTemperature = async () => {
-      await w.getTemperature(setTemperature);
+      // await w.getTemperature(setTemperature);
+      setTemperature(Math.random() * (110 - 40) + 40);
     };
 
     fetchStorageValues();
