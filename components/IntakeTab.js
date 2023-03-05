@@ -42,18 +42,20 @@ const styles = StyleSheet.create({
 
 /* TODO: Modify to include percent water intake achieved
 and only be sent when some amount was recorded etc */
-async function intakeRecordNotification() {
+async function intakeRecordNotification(intake, recommendation) {
   await Notifications.scheduleNotificationAsync({
     content: {
-      title: 'Well done! Every intake record counts.',
-      body: 'Keep up the good work.',
+      title: `You have reached ${((intake * 100) / recommendation).toFixed(
+        1,
+      )}% of today's water goal!`,
+      body: 'Keep up the good work; Every intake record counts.',
       data: {data: 'goes here'},
     },
     trigger: {seconds: 5},
   });
 }
 
-export default function IntakeTab({intake, setIntake, unit}) {
+export default function IntakeTab({intake, setIntake, recommendation, unit}) {
   const [drinkAmount, setDrinkAmount] = useState(0);
   const [drinkType, setDrinkType] = useState('water');
   return (
@@ -89,7 +91,7 @@ export default function IntakeTab({intake, setIntake, unit}) {
           const newIntake = intake + drinkAmount;
           await AsyncStorage.setItem('@intake', newIntake.toString());
           setIntake(prev => prev + drinkAmount);
-          await intakeRecordNotification();
+          await intakeRecordNotification(intake + drinkAmount, recommendation);
         }}
       />
     </View>

@@ -161,7 +161,14 @@ export default function Tabs() {
             unit === 'us-system' ? 'oz' : 'ml'
           }`,
         }}>
-        {() => <IntakeTab intake={intake} setIntake={setIntake} unit={unit} />}
+        {() => (
+          <IntakeTab
+            intake={intake}
+            setIntake={setIntake}
+            recommendation={recommendation}
+            unit={unit}
+          />
+        )}
       </Tab.Screen>
       <Tab.Screen
         name="Exercise"
