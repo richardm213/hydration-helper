@@ -69,6 +69,17 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
     if (camalize(text) in DRINKS) setSubmitDisabled(false);
     else setSubmitDisabled(true);
   };
+  const submitIntakeEntry = async () => {
+    Alert.alert('Your entry has been recorded.');
+    await AsyncStorage.setItem('@drink_type', drinkType);
+    await AsyncStorage.setItem('@drink_amount', drinkAmount.toString());
+    const waterAmount = (drinkAmount * DRINKS[camalize(drinkType)]) / 100;
+    const newIntake = intake + waterAmount;
+    setIntake(newIntake);
+    await AsyncStorage.setItem('@intake', newIntake.toString());
+    await intakeRecordNotification();
+  };
+
   return (
     <View style={styles.container}>
       <Icon
@@ -96,15 +107,7 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
         buttonStyle={styles.submitButton}
         titleStyle={styles.largerTextWhite}
         title="Submit"
-        onPress={async () => {
-          Alert.alert('Your entry has been recorded.');
-          await AsyncStorage.setItem('@drink_type', drinkType);
-          await AsyncStorage.setItem('@drink_amount', drinkAmount.toString());
-          const newIntake = intake + drinkAmount;
-          await AsyncStorage.setItem('@intake', newIntake.toString());
-          setIntake(prev => prev + drinkAmount);
-          await intakeRecordNotification(intake + drinkAmount, recommendation);
-        }}
+        onPress={submitIntakeEntry}
       />
     </View>
   );
