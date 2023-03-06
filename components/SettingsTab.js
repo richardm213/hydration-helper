@@ -69,8 +69,10 @@ export default function SettingsTab({
   };
 
   const [canAccessLocationData, setLocationAccess] = useState(false);
+  const [water, setWater] = useState(0);
   const toggleLocationSwitch = () => {
-    getFoodItemDataWater(173664);
+    getFoodItemDataWater(173664, water, setWater);
+    console.log(water);
     setLocationAccess(previousState => !previousState);
   };
 
