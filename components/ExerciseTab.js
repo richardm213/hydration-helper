@@ -49,6 +49,17 @@ const styles = StyleSheet.create({
 
 export default function ExerciseTab({exercise, setExercise}) {
   const [input, setInput] = useState('');
+  const [submitDisabled, setSubmitDisabled] = useState(true);
+  const updateExerciseAmount = val => {
+    setInput(val);
+    setSubmitDisabled(isNaN(val));
+  };
+  const submitExerciseEntry = async () => {
+    Alert.alert('Your exercise has been recorded!');
+    setExercise(prev => prev + parseInt(input, 10));
+    await AsyncStorage.setItem('@exercise', exercise.toString());
+    setInput('');
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.moreDetails}>
@@ -69,18 +80,14 @@ export default function ExerciseTab({exercise, setExercise}) {
         placeholder="Minutes of Exercise"
         inputContainerStyle={styles.input}
         value={input}
-        onChangeText={val => setInput(val)}
+        onChangeText={updateExerciseAmount}
       />
       <Button
+        disabled={submitDisabled}
         buttonStyle={styles.submitButton}
         titleStyle={styles.largerTextWhite}
         title="Submit"
-        onPress={async () => {
-          Alert.alert('Your exercise has been recorded!');
-          setExercise(prev => prev + parseInt(input, 10));
-          await AsyncStorage.setItem('@exercise', exercise.toString());
-          setInput('');
-        }}
+        onPress={submitExerciseEntry}
       />
       <StatusBar style="auto" />
     </View>
