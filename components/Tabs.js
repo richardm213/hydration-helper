@@ -67,15 +67,23 @@ export default function Tabs() {
   }, []);
 
   useEffect(() => {
-    const calculator = new SimpleCalculator(
-      unit,
-      age,
-      gender,
-      height,
-      weight,
-      exercise,
-    );
-    setRecommendation(calculator.calculate());
+    const updateRecommendation = async () => {
+      const calculator = new SimpleCalculator(
+        unit,
+        age,
+        gender,
+        height,
+        weight,
+        exercise,
+      );
+      const newRecommendation = calculator.calculate();
+      setRecommendation(newRecommendation);
+      await AsyncStorage.setItem(
+        '@recommendation',
+        newRecommendation.toFixed(1).toString(),
+      );
+    };
+    updateRecommendation();
   }, [age, gender, height, weight, exercise]);
 
   const firstUpdate = useRef(true);
