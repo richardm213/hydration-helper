@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import DrinkSlider from './DrinkSlider';
 import COLORS from './Colors';
+import DRINKS from './Drinks';
 
 const styles = StyleSheet.create({
   container: {
@@ -58,6 +59,16 @@ async function intakeRecordNotification(intake, recommendation) {
 export default function IntakeTab({intake, setIntake, recommendation, unit}) {
   const [drinkAmount, setDrinkAmount] = useState(0);
   const [drinkType, setDrinkType] = useState('water');
+  const [submitDisabled, setSubmitDisabled] = useState(true);
+  const camalize = str =>
+    str
+      .toLowerCase()
+      .replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
+  const updateDrinkType = text => {
+    setDrinkType(text);
+    if (camalize(text) in DRINKS) setSubmitDisabled(false);
+    else setSubmitDisabled(true);
+  };
   return (
     <View style={styles.container}>
       <Icon
@@ -78,9 +89,10 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
       <Input
         inputContainerStyle={styles.input}
         placeholder="Drink type (ie. water)"
-        onChangeText={text => setDrinkType(text)}
+        onChangeText={updateDrinkType}
       />
       <Button
+        disabled={submitDisabled}
         buttonStyle={styles.submitButton}
         titleStyle={styles.largerTextWhite}
         title="Submit"
