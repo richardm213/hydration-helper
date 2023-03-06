@@ -6,6 +6,7 @@ import * as Notifications from 'expo-notifications';
 import DrinkSlider from './DrinkSlider';
 import COLORS from './Colors';
 import DRINKS from './Drinks';
+import DrinkEntry from './DrinkEntry';
 
 const styles = StyleSheet.create({
   container: {
@@ -69,14 +70,29 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
     if (camalize(text) in DRINKS) setSubmitDisabled(false);
     else setSubmitDisabled(true);
   };
+  const getTime = () => {
+    const date = new Date();
+    const hour = date.getHours();
+    const minutes = date.getMinutes();
+    return `${hour.toString()}:${minutes.toString()}`;
+  };
+  const storeEntry = async e => {
+    let entries = await AsyncStorage.getItem('@entries');
+    if (entries) entries = JSON.parse(entries);
+    else entries = [];
+    entries.push(e);
+    await AsyncStorage.setItem('@entries', JSON.stringify(entries));
+  };
   const submitIntakeEntry = async () => {
     Alert.alert('Your entry has been recorded.');
-    await AsyncStorage.setItem('@drink_type', drinkType);
-    await AsyncStorage.setItem('@drink_amount', drinkAmount.toString());
-    const waterAmount = (drinkAmount * DRINKS[camalize(drinkType)]) / 100;
+    const drinkTypeKey = camalize(drinkType);
+    const waterAmount = (drinkAmount * DRINKS[drinkTypeKey]) / 100;
     const newIntake = intake + waterAmount;
     setIntake(newIntake);
     await AsyncStorage.setItem('@intake', newIntake.toString());
+    const drinkTime = getTime();
+    const e = new DrinkEntry(drinkTypeKey, drinkAmount, drinkTime);
+    storeEntry(e);
     await intakeRecordNotification();
   };
 
