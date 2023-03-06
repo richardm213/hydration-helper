@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const fileHeaders = {
-  'X-Api-Key': 'YOUR_API_KEY',
+  'X-Api-Key': '66ANpnWvTZ80i7fmab4ZCIBtHtd1gDceAauJws23',
   'Content-Type': 'application/json',
 };
 
