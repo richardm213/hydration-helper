@@ -1,6 +1,6 @@
 import AppleHealthKit from 'react-native-health';
 
-class HealthData {
+class HealthAPI {
   options = {
     permissions: {
       read: [
@@ -13,7 +13,7 @@ class HealthData {
     startDate: new Date(2020, 1, 1).toISOString(),
   };
 
-  constructor() {
+  init() {
     AppleHealthKit.initHealthKit(this.options, error => {
       if (error) console.log('[ERROR] Cannot grant permissions!');
     });
@@ -62,4 +62,4 @@ class HealthData {
   }
 }
 
-export default HealthData;
+export default HealthAPI;
