@@ -6,6 +6,7 @@ import {Text, Input} from '@rneui/base';
 import * as Calendar from 'expo-calendar';
 import {requestPermissionsAsync} from 'expo-notifications';
 import COLORS from './Colors';
+import {getFoodItemDataWater} from '../services/foodDataAPI';
 
 const styles = StyleSheet.create({
   container: {
@@ -66,8 +67,10 @@ export default function SettingsTab({
   };
 
   const [canAccessLocationData, setLocationAccess] = useState(false);
-  const toggleLocationSwitch = () =>
+  const toggleLocationSwitch = () => {
+    getFoodItemDataWater(173664);
     setLocationAccess(previousState => !previousState);
+  };
 
   const [canAccessCalendar, setCalendarAccess] = useState(false);
   const toggleCalendarSwitch = async () => {
