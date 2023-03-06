@@ -19,6 +19,20 @@ export const getFoodItemData = async foodName => {
   }
 };
 
+export const getFoodItemDataWater = async fdcId => {
+  try {
+    const response = await axios.get(
+      `https://api.nal.usda.gov/fdc/v1/food/${fdcId}?nutrients=255`,
+      {
+        headers: fileHeaders,
+      },
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const getFoodsList = async () => {
   try {
     const response = await axios.get('https://api.example.com/foods/list', {
