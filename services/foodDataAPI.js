@@ -27,6 +27,7 @@ export const getFoodItemDataWater = async fdcId => {
         headers: fileHeaders,
       },
     );
+    console.log(response.data.foodNutrients[0].amount);
     return response.data;
   } catch (error) {
     console.error(error);
