@@ -16,11 +16,11 @@ import {
 import SimpleCalculator from '../util/SimpleCalculator';
 // import WeatherAPI from '../services/WeatherAPI';
 import COLORS from './Colors';
-import HealthAPI from '../services/healthKitAPI';
+// import HealthAPI from '../services/healthKitAPI';
 
 const Tab = createBottomTabNavigator();
 // const w = new WeatherAPI();
-const healthAPI = new HealthAPI();
+// const healthAPI = new HealthAPI();
 
 export default function Tabs() {
   const [recommendation, setRecommendation] = useState(120);
@@ -197,7 +197,7 @@ export default function Tabs() {
         }}>
         {() => (
           <SettingsTab
-            healthAPI={healthAPI}
+            // healthAPI={healthAPI}
             age={age}
             setAge={setAge}
             gender={gender}

@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 });
 
 export default function SettingsTab({
-  healthAPI,
+  // healthAPI,
   age,
   setAge,
   gender,
@@ -65,7 +65,7 @@ export default function SettingsTab({
   const [appleHealth, setAppleHealth] = useState(false);
   const toggleHealthSwitch = () => {
     setAppleHealth(previousState => !previousState);
-    healthAPI.init();
+    // healthAPI.init();
   };
 
   const [canAccessLocationData, setLocationAccess] = useState(false);
