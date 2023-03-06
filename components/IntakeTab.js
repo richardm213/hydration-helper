@@ -93,7 +93,7 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
     const drinkTime = getTime();
     const e = new DrinkEntry(drinkTypeKey, drinkAmount, drinkTime);
     storeEntry(e);
-    await intakeRecordNotification();
+    await intakeRecordNotification(intake + drinkAmount, recommendation);
   };
 
   return (
