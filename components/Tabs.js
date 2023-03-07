@@ -18,7 +18,7 @@ import SimpleCalculator from '../util/SimpleCalculator';
 import COLORS from './Colors';
 // import HealthAPI from '../services/healthKitAPI';
 import DailyEntry from './DailyEntry';
-import getCurrentDate from '../util/getCurrentDate';
+import {getCurrentDate} from '../util/getCurrentDate';
 
 const Tab = createBottomTabNavigator();
 // const w = new WeatherAPI();

@@ -7,4 +7,11 @@ function getCurrentDate(daysBeforeToday) {
   return `${month}-${date}-${year}`;
 }
 
-export default getCurrentDate;
+const weekday = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+function getDayOfWeek(daysBeforeToday) {
+  const date = new Date();
+  date.setDate(date.getDate() - daysBeforeToday);
+  return weekday[date.getDay()];
+}
+
+export {getCurrentDate, getDayOfWeek};
