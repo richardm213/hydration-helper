@@ -1,10 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Text} from '@rneui/base';
+import {Tab, Text} from '@rneui/base';
 import {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {AccordionList} from 'react-native-accordion-list-view';
 import {BarChart} from 'react-native-gifted-charts';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {getCurrentDate, getDayOfWeek} from '../util/getCurrentDate';
 import COLORS from './Colors';
 
@@ -40,11 +39,19 @@ const styles = StyleSheet.create({
     marginRight: 8,
     width: 15,
   },
-  scrollView: {marginBottom: 65},
   textLegend: {
     color: COLORS.primary,
     fontSize: 15,
     height: 25,
+  },
+  viewModeTab: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginBottom: 120,
+    alignSelf: 'center',
+  },
+  viewModeTitle: {
+    color: COLORS.primary,
   },
   xAxisLegendStyle: {
     fontSize: 15,
@@ -157,20 +164,22 @@ export default function TrendsTab() {
     };
     fetchData();
   }, []);
+  const [viewMode, setViewMode] = useState(0);
+
   return (
-    <SafeAreaView edges={['bottom', 'left', 'right']} style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.legend}>
-          <View style={styles.align}>
-            <View style={styles.leftDot} />
-            <Text style={styles.textLegend}>Recommended Intake</Text>
-          </View>
-          <View style={styles.align}>
-            <View style={styles.rightDot} />
-            <Text style={styles.textLegend}>Recorded Intake</Text>
-          </View>
-        </View>
+    <View style={styles.container}>
+      {viewMode == 0 && (
         <View style={styles.barChart}>
+          <View style={styles.legend}>
+            <View style={styles.align}>
+              <View style={styles.leftDot} />
+              <Text style={styles.textLegend}>Recommended Intake</Text>
+            </View>
+            <View style={styles.align}>
+              <View style={styles.rightDot} />
+              <Text style={styles.textLegend}>Recorded Intake</Text>
+            </View>
+          </View>
           <BarChart
             data={dataBars}
             spacing={27}
@@ -186,14 +195,39 @@ export default function TrendsTab() {
             xAxisLabelTextStyle={styles.xAxisLegendStyle}
           />
         </View>
+      )}
 
-        <AccordionList
-          marginTop={55}
-          data={data}
-          customTitle={item => listTitle(item)}
-          customBody={item => listAttribute(item)}
-        />
-      </ScrollView>
-    </SafeAreaView>
+      {viewMode == 1 && (
+        <View>
+          <AccordionList
+            marginTop={55}
+            data={data}
+            customTitle={item => listTitle(item)}
+            customBody={item => listAttribute(item)}
+          />
+        </View>
+      )}
+
+      <View style={styles.viewModeTab}>
+        <Tab
+          value={viewMode}
+          onChange={setViewMode}
+          titleStyle={styles.viewModeTitle}
+          scrollable>
+          <Tab.Item
+            containerStyle={active => ({
+              backgroundColor: active ? COLORS.iceBlue : undefined,
+            })}>
+            Graph
+          </Tab.Item>
+          <Tab.Item
+            buttonStyle={active => ({
+              backgroundColor: active ? COLORS.iceBlue : undefined,
+            })}>
+            Drinks
+          </Tab.Item>
+        </Tab>
+      </View>
+    </View>
   );
 }
