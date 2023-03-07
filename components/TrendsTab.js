@@ -1,6 +1,9 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {AccordionList} from 'react-native-accordion-list-view';
 import {BarChart} from 'react-native-gifted-charts';
+import getCurrentDate from '../util/getCurrentDate';
 import COLORS from './Colors';
 
 const styles = StyleSheet.create({
@@ -94,52 +97,6 @@ const data = [
   },
 ];
 
-const dataBars = [
-  {
-    label: '3-2-2023',
-    value: 57,
-    spacing: 2,
-    frontColor: COLORS.primary,
-  },
-  {value: 37, frontColor: COLORS.lighterBlue},
-  {
-    label: '3-3-2023',
-    value: 69,
-    spacing: 2,
-    frontColor: COLORS.primary,
-  },
-  {value: 57, frontColor: COLORS.lighterBlue},
-  {
-    label: '3-4-2023',
-    value: 85,
-    spacing: 2,
-    frontColor: COLORS.primary,
-  },
-  {value: 59, frontColor: COLORS.lighterBlue},
-  {
-    label: '3-5-2023',
-    value: 73,
-    spacing: 2,
-    frontColor: COLORS.primary,
-  },
-  {value: 37, frontColor: COLORS.lighterBlue},
-  {
-    label: '3-6-2023',
-    value: 111,
-    spacing: 2,
-    frontColor: COLORS.primary,
-  },
-  {value: 67, frontColor: COLORS.lighterBlue},
-  {
-    label: '3-7-2023',
-    value: 97,
-    spacing: 2,
-    frontColor: COLORS.primary,
-  },
-  {value: 77, frontColor: COLORS.lighterBlue},
-  {value: 0},
-];
-
 function listTitle(props) {
   return <Text>{props.date}</Text>;
 }
@@ -161,6 +118,37 @@ function listAttribute(props) {
 }
 
 export default function TrendsTab() {
+  const [dataBars, setDataBars] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      setDataBars([]);
+      let days = [];
+      for (let i = 1; i <= 7; i += 1) {
+        days.push(AsyncStorage.getItem(`@${getCurrentDate(7 - i)}`));
+      }
+      days = await Promise.all(days);
+      for (let i = 0; i < 7; i += 1) {
+        const d = getCurrentDate(6 - i);
+        const day = days[i];
+        if (day) {
+          const dailyEntry = JSON.parse(day);
+          const recommendationBar = {
+            label: d,
+            value: dailyEntry.recommendation,
+            spacing: 2,
+            frontColor: COLORS.primary,
+          };
+          const intakeBar = {
+            value: dailyEntry.intake,
+            frontColor: COLORS.lighterBlue,
+          };
+          setDataBars(prev => [...prev, recommendationBar, intakeBar]);
+        }
+      }
+      setDataBars(prev => [...prev, {value: 0}]);
+    };
+    fetchData();
+  }, []);
   return (
     <View style={styles.container}>
       <View>
