@@ -1,8 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Text} from '@rneui/base';
 import {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {AccordionList} from 'react-native-accordion-list-view';
 import {BarChart} from 'react-native-gifted-charts';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import getCurrentDate from '../util/getCurrentDate';
 import COLORS from './Colors';
 
@@ -11,19 +13,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
+  barChart: {paddingHorizontal: 20},
   container: {
     backgroundColor: COLORS.white,
     flex: 1,
   },
   leftDot: {
     backgroundColor: COLORS.primary,
-    borderRadius: 6,
-    height: 7,
+    borderRadius: 15,
+    height: 15,
+    marginBottom: 6,
     marginRight: 8,
-    width: 7,
+    width: 15,
   },
   legend: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     marginBottom: 25,
@@ -31,18 +34,24 @@ const styles = StyleSheet.create({
   },
   rightDot: {
     backgroundColor: COLORS.lighterBlue,
-    borderRadius: 6,
-    height: 7,
+    borderRadius: 15,
+    height: 15,
+    marginBottom: 6,
     marginRight: 8,
-    width: 7,
+    width: 15,
   },
+  scrollView: {marginBottom: 65},
   textLegend: {
     color: COLORS.primary,
+    fontSize: 15,
     height: 25,
   },
   xAxisLegendStyle: {
-    fontSize: 12,
+    fontSize: 15,
     marginBottom: -25,
+  },
+  yAxisTextStyle: {
+    fontSize: 15,
   },
 });
 
@@ -150,8 +159,8 @@ export default function TrendsTab() {
     fetchData();
   }, []);
   return (
-    <View style={styles.container}>
-      <View>
+    <SafeAreaView edges={['bottom', 'left', 'right']} style={styles.container}>
+      <ScrollView style={styles.scrollView}>
         <View style={styles.legend}>
           <View style={styles.align}>
             <View style={styles.leftDot} />
@@ -162,29 +171,31 @@ export default function TrendsTab() {
             <Text style={styles.textLegend}>Recorded Intake</Text>
           </View>
         </View>
-      </View>
-      <View>
-        <BarChart
-          data={dataBars}
-          spacing={27}
-          barWidth={7}
-          xAxisThickness={1}
-          labelsExtraHeight={15}
-          rotateLabel={1}
-          yAxisThickness={1}
-          yAxisTextStyle={{color: COLORS.primary}}
-          noOfSections={7}
-          maxValue={125}
-          labelWidth={85}
-          xAxisLabelTextStyle={styles.xAxisLegendStyle}
+        <View style={styles.barChart}>
+          <BarChart
+            data={dataBars}
+            spacing={27}
+            barWidth={20}
+            xAxisThickness={1}
+            labelsExtraHeight={15}
+            rotateLabel={1}
+            yAxisThickness={1}
+            yAxisTextStyle={styles.yAxisTextStyle}
+            noOfSections={7}
+            maxValue={125}
+            labelWidth={85}
+            height={400}
+            xAxisLabelTextStyle={styles.xAxisLegendStyle}
+          />
+        </View>
+
+        <AccordionList
+          marginTop={55}
+          data={data}
+          customTitle={item => listTitle(item)}
+          customBody={item => listAttribute(item)}
         />
-      </View>
-      <AccordionList
-        marginTop={55}
-        data={data}
-        customTitle={item => listTitle(item)}
-        customBody={item => listAttribute(item)}
-      />
-    </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
