@@ -17,6 +17,8 @@ import SimpleCalculator from '../util/SimpleCalculator';
 // import WeatherAPI from '../services/WeatherAPI';
 import COLORS from './Colors';
 // import HealthAPI from '../services/healthKitAPI';
+import DailyEntry from './DailyEntry';
+import getCurrentDate from '../util/getCurrentDate';
 
 const Tab = createBottomTabNavigator();
 // const w = new WeatherAPI();
@@ -32,6 +34,33 @@ export default function Tabs() {
   const [weight, setWeight] = useState('160');
   const [unit, setUnit] = useState('us-system');
   const [temperature, setTemperature] = useState(0);
+
+  useEffect(() => {
+    const resetDay = newDate => {
+      AsyncStorage.setItem('@intake', '0');
+      AsyncStorage.removeItem('@entries');
+      AsyncStorage.setItem('@exercise', '0');
+      setIntake(0);
+      setExercise(0);
+      AsyncStorage.setItem('@current_day', newDate);
+    };
+    const checkCurrentDay = async () => {
+      const d1 = await AsyncStorage.getItem('@current_day');
+      const d2 = getCurrentDate(0);
+      if (d1 !== d2) {
+        const drinkEntries = await AsyncStorage.getItem('@entries');
+        const dailyEntry = new DailyEntry(
+          recommendation,
+          intake,
+          drinkEntries,
+          exercise,
+        );
+        resetDay(d2);
+        AsyncStorage.setItem(`@${d2}`, JSON.stringify(dailyEntry));
+      }
+    };
+    checkCurrentDay();
+  }, []);
 
   useEffect(() => {
     const fetchStorageValues = () => {
