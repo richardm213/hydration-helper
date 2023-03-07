@@ -5,7 +5,7 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import {AccordionList} from 'react-native-accordion-list-view';
 import {BarChart} from 'react-native-gifted-charts';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import getCurrentDate from '../util/getCurrentDate';
+import {getCurrentDate, getDayOfWeek} from '../util/getCurrentDate';
 import COLORS from './Colors';
 
 const styles = StyleSheet.create({
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   xAxisLegendStyle: {
     fontSize: 15,
-    marginBottom: -25,
+    marginBottom: -5,
   },
   yAxisTextStyle: {
     fontSize: 15,
@@ -137,12 +137,11 @@ export default function TrendsTab() {
       }
       days = await Promise.all(days);
       for (let i = 0; i < 7; i += 1) {
-        const d = getCurrentDate(6 - i);
         const day = days[i];
         if (day) {
           const dailyEntry = JSON.parse(day);
           const recommendationBar = {
-            label: d,
+            label: getDayOfWeek(6 - i),
             value: dailyEntry.recommendation,
             spacing: 2,
             frontColor: COLORS.primary,
@@ -178,7 +177,6 @@ export default function TrendsTab() {
             barWidth={20}
             xAxisThickness={1}
             labelsExtraHeight={15}
-            rotateLabel={1}
             yAxisThickness={1}
             yAxisTextStyle={styles.yAxisTextStyle}
             noOfSections={7}
