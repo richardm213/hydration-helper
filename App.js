@@ -48,7 +48,7 @@ TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
           times[i].endDate.getHours() * 60 + times[i].endDate.getMinutes();
       }
       const interval = 2; // TODO: change to 1 if did not reach goal yesterday
-      const minutes = 0;
+      let minutes = 0;
       while (minutes < 24 * 60) {
         let isBusy = false;
         for (let j = 0; j < length(starts); j += 1) {
@@ -56,6 +56,16 @@ TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
             isBusy = true;
             break;
           }
+        }
+        if (isBusy === false) {
+          // send notification at nonbusy time
+          // eslint-disable-next-line no-await-in-loop
+          await calendarNotification(minutes);
+          minutes += interval * 60;
+        } else {
+          // check availability a bit earlier than interval
+          // to find better availability
+          minutes += (interval / 2) * 60;
         }
       }
     }
