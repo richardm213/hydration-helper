@@ -35,6 +35,13 @@ TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
   console.log(`Got background fetch call at date: ${checkDate}`);
   if (checkDate !== currentDate) {
     currentDate = checkDate;
+    const {status} = await Calendar.requestCalendarPermissionsAsync();
+    if (status === 'granted') {
+      const starts = [];
+      const ends = [];
+      const times = await GetEventTimes();
+      console.log(times);
+    }
   }
 
   return BackgroundFetch.BackgroundFetchResult.NewData;
