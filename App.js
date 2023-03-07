@@ -41,6 +41,12 @@ TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
       const ends = [];
       const times = await GetEventTimes();
       console.log(times);
+      for (let i = 0; i < length(times); i += 1) {
+        starts[i] =
+          times[i].startDate.getHours() * 60 + times[i].startDate.getMinutes();
+        ends[i] =
+          times[i].endDate.getHours() * 60 + times[i].endDate.getMinutes();
+      }
     }
   }
 
