@@ -47,6 +47,17 @@ TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
         ends[i] =
           times[i].endDate.getHours() * 60 + times[i].endDate.getMinutes();
       }
+      const interval = 2; // TODO: change to 1 if did not reach goal yesterday
+      const minutes = 0;
+      while (minutes < 24 * 60) {
+        let isBusy = false;
+        for (let j = 0; j < length(starts); j += 1) {
+          if (starts[j] < minutes < ends[j]) {
+            isBusy = true;
+            break;
+          }
+        }
+      }
     }
   }
 
