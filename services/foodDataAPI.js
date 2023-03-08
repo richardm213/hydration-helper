@@ -1,34 +1,31 @@
 import axios from 'axios';
 
+const fdcIds = {
+  Water: 174158,
+  'Apple Juice': 2003590,
+  'Orange Juice': 2003591,
+  Coffee: 171891,
+  Tea: 171917,
+  Soda: 174852,
+  Lemonade: 171878,
+  Milk: 746782,
+};
+
 const fileHeaders = {
-  'X-Api-Key': '66ANpnWvTZ80i7fmab4ZCIBtHtd1gDceAauJws23',
+  'X-Api-Key': 'YOUR_API_KEY',
   'Content-Type': 'application/json',
 };
 
 export const getFoodItemData = async foodName => {
   try {
+    const foodID = fdcIds[foodName];
     const response = await axios.get(
-      `https://api.nal.usda.gov/fdc/v1/food/${foodName}`,
+      `https://api.nal.usda.gov/fdc/v1/food/${foodID}`,
       {
         headers: fileHeaders,
       },
     );
     return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const getFoodItemDataWater = async (fdcId, water, setWater) => {
-  try {
-    const response = await axios.get(
-      `https://api.nal.usda.gov/fdc/v1/food/${fdcId}?nutrients=255`,
-      {
-        headers: fileHeaders,
-      },
-    );
-    // console.log(response.data.foodNutrients[0].amount);
-    setWater(response.data.foodNutrients[0].amount);
   } catch (error) {
     console.error(error);
   }
