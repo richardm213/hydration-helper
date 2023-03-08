@@ -256,7 +256,7 @@ export default function Tabs() {
           tabBarIcon: trendsIcon,
           headerTitle: `Remember: Progress isn't linear`,
         }}>
-        {() => <TrendsTab />}
+        {() => <TrendsTab unit={unit} />}
       </Tab.Screen>
       <Tab.Screen
         name="Settings"

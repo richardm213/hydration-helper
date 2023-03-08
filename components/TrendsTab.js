@@ -113,27 +113,27 @@ const data = [
   },
 ];
 
-function listTitle(props) {
-  return <Text>{props.date}</Text>;
-}
-function listAttribute(props) {
+const listTitle = item => {
+  return <Text>{item.date}</Text>;
+};
+
+const listAttribute = (item, unit) => {
   return (
     <View>
       <Text>
-        Recommended water intake: {props.intake}
-        {props.unit === 'us-system' ? 'oz' : 'ml'}
+        Recommendation: {item.intake} {unit === 'us-system' ? 'oz' : 'ml'}
       </Text>
-      <Text>Recommended drink: {props.rec_drink}</Text>
+      <Text>Recommended drink: {item.rec_drink}</Text>
       <Text>
-        Water intake: {props.intake} {props.unit === 'us-system' ? 'oz' : 'ml'}
+        Water intake: {item.intake} {unit === 'us-system' ? 'oz' : 'ml'}
       </Text>
-      <Text>Exercise: {props.exercise} minutes</Text>
-      <Text>Calorie intake: {props.calorie_intake} cals</Text>
+      <Text>Exercise: {item.exercise} minutes</Text>
+      <Text>Calorie intake: {item.calorie_intake} cals</Text>
     </View>
   );
-}
+};
 
-export default function TrendsTab() {
+export default function TrendsTab({unit}) {
   const [dataBars, setDataBars] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -203,7 +203,7 @@ export default function TrendsTab() {
             marginTop={55}
             data={data}
             customTitle={item => listTitle(item)}
-            customBody={item => listAttribute(item)}
+            customBody={item => listAttribute(item, unit)}
           />
         </View>
       )}
