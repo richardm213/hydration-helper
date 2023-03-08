@@ -52,9 +52,9 @@ export default function ExerciseTab({exercise, setExercise}) {
   };
   const submitExerciseEntry = async () => {
     Alert.alert('Your exercise has been recorded!');
-    setExercise(prev => prev + input);
-    await AsyncStorage.setItem('@exercise', exercise.toString());
-    setInput(0);
+    const newExercise = exercise + input;
+    setExercise(newExercise);
+    await AsyncStorage.setItem('@exercise', newExercise.toString());
   };
   return (
     <View style={styles.container}>
