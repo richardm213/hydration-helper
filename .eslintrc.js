@@ -29,6 +29,8 @@ module.exports = {
     'no-console': 0,
     'no-underscore-dangle': 0,
     'no-restricted-globals': 0,
+    'no-prototype-builtins': 0,
+    'no-continue': 0,
   },
   settings: {'import/core-modules': ['@expo/vector-icons']},
 };

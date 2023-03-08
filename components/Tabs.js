@@ -35,8 +35,40 @@ export default function Tabs() {
   const [unit, setUnit] = useState('us-system');
   const [temperature, setTemperature] = useState(0);
 
+  const getTimeCategory = time => {
+    const hours = time.split(':')[0];
+    if (hours <= 12) return 'morning';
+    if (hours <= 18) return 'afternoon';
+    return 'evening';
+  };
+
+  const updateDrinkScores = async () => {
+    let drinkScores = await AsyncStorage.getItem('@drinkScores');
+    if (drinkScores) drinkScores = JSON.parse(drinkScores);
+    else drinkScores = {};
+    const keyList = [];
+    const entriesList = JSON.parse(await AsyncStorage.getItem('@entries'));
+    if (!entriesList) return;
+    for (let i = 0; i < entriesList.length; i += 1) {
+      if (entriesList[i].drinkType === 'water') continue;
+      const timeCategory = getTimeCategory(entriesList[i].drinkTime);
+      const key = `${entriesList[i].drinkType}-${timeCategory}`;
+      if (keyList.includes(key)) continue;
+      if (!drinkScores.hasOwnProperty(key)) {
+        drinkScores[key] = 50;
+      } else if (drinkScores[key] < 100)
+        drinkScores[key] = Math.min(drinkScores[key] + 10, 100);
+      keyList.push(key);
+    }
+    Object.keys(drinkScores).forEach(key => {
+      if (!keyList.includes(key)) drinkScores[key] -= 5;
+    });
+    await AsyncStorage.setItem('@drinkScores', JSON.stringify(drinkScores));
+  };
+
   useEffect(() => {
     const resetDay = newDate => {
+      updateDrinkScores();
       AsyncStorage.setItem('@intake', '0');
       AsyncStorage.removeItem('@entries');
       AsyncStorage.setItem('@exercise', '0');
