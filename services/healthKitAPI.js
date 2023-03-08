@@ -19,7 +19,7 @@ class HealthAPI {
     });
   }
 
-  calorieIntake() {
+  calorieExpended() {
     const activeCalories = AppleHealthKit.getActiveEnergyBurned(
       this.options,
       (err, results) => {
@@ -41,6 +41,20 @@ class HealthAPI {
     );
 
     return activeCalories + basalCalories;
+  }
+
+  calorieIntake(){
+   const calorieIntake = AppleHealthKit.getEnergyConsumedSamples(
+      (this.options),
+      (err, results) => {
+        if (err) {
+          return 0
+        }
+        return results
+      },
+    )
+
+    return calorieIntake;
   }
 
   exerciseTime() {
