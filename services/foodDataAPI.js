@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {FOOD_DATA_API_KEY} from '@env';
 
 const fdcIds = {
   Water: 174158,
@@ -12,7 +13,7 @@ const fdcIds = {
 };
 
 const fileHeaders = {
-  'X-Api-Key': 'YOUR_API_KEY',
+  'X-Api-Key': FOOD_DATA_API_KEY,
   'Content-Type': 'application/json',
 };
 
