@@ -1,9 +1,10 @@
 import {StatusBar} from 'expo-status-bar';
 import {useState} from 'react';
 import {Text, View, StyleSheet, Alert} from 'react-native';
-import {Button, Icon, Input} from '@rneui/base';
+import {Button, Icon} from '@rneui/base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import COLORS from './Colors';
+import ExerciseSlider from './ExerciseSlider';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,11 +15,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginTop: 40,
-  },
-  input: {
-    marginBottom: 10,
-    marginLeft: 70,
-    marginRight: 70,
   },
   largerTextBlueBold: {
     alignItems: 'center',
@@ -48,7 +44,7 @@ const styles = StyleSheet.create({
 });
 
 export default function ExerciseTab({exercise, setExercise}) {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(0);
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const updateExerciseAmount = val => {
     setInput(val);
@@ -56,9 +52,9 @@ export default function ExerciseTab({exercise, setExercise}) {
   };
   const submitExerciseEntry = async () => {
     Alert.alert('Your exercise has been recorded!');
-    setExercise(prev => prev + parseInt(input, 10));
+    setExercise(prev => prev + input);
     await AsyncStorage.setItem('@exercise', exercise.toString());
-    setInput('');
+    setInput(0);
   };
   return (
     <View style={styles.container}>
@@ -76,11 +72,9 @@ export default function ExerciseTab({exercise, setExercise}) {
       <Text style={styles.largerTextBlueBold}>
         Please enter your minutes of exercise below:
       </Text>
-      <Input
-        placeholder="Minutes of Exercise"
-        inputContainerStyle={styles.input}
-        value={input}
-        onChangeText={updateExerciseAmount}
+      <ExerciseSlider
+        exerciseAmount={input}
+        setExerciseAmount={updateExerciseAmount}
       />
       <Button
         disabled={submitDisabled}
