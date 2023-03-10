@@ -34,6 +34,7 @@ export default function Tabs() {
   const [weight, setWeight] = useState('160');
   const [unit, setUnit] = useState('us-system');
   const [temperature, setTemperature] = useState(0);
+  const [dataFetched, setDataFetched] = useState(false);
 
   const getTimeCategory = time => {
     const hours = time.split(':')[0];
@@ -67,6 +68,7 @@ export default function Tabs() {
   };
 
   useEffect(() => {
+    if (!dataFetched) return;
     const resetDay = newDate => {
       updateDrinkScores();
       AsyncStorage.setItem('@intake', '0');
@@ -87,36 +89,53 @@ export default function Tabs() {
           drinkEntries,
           exercise,
         );
+        await AsyncStorage.setItem(`@${d1}`, JSON.stringify(dailyEntry));
         resetDay(d2);
-        AsyncStorage.setItem(`@${d2}`, JSON.stringify(dailyEntry));
       }
     };
     checkCurrentDay();
-  }, []);
+  }, [dataFetched]);
 
   useEffect(() => {
-    const fetchStorageValues = () => {
-      AsyncStorage.getItem('@intake').then(val => {
-        if (val) setIntake(parseInt(val, 10));
-      });
-      AsyncStorage.getItem('@exercise').then(val => {
-        if (val) setExercise(parseInt(val, 10));
-      });
-      AsyncStorage.getItem('@age').then(val => {
-        if (val) setAge(val);
-      });
-      AsyncStorage.getItem('@gender').then(val => {
-        if (val) setGender(val);
-      });
-      AsyncStorage.getItem('@height').then(val => {
-        if (val) setHeight(val);
-      });
-      AsyncStorage.getItem('@weight').then(val => {
-        if (val) setWeight(val);
-      });
-      AsyncStorage.getItem('@unit').then(val => {
-        if (val) setUnit(val);
-      });
+    const fetchStorageValues = async () => {
+      const i = [];
+      i.push(
+        AsyncStorage.getItem('@intake').then(val => {
+          if (val) setIntake(parseInt(val, 10));
+        }),
+      );
+      i.push(
+        AsyncStorage.getItem('@exercise').then(val => {
+          if (val) setExercise(parseInt(val, 10));
+        }),
+      );
+      i.push(
+        AsyncStorage.getItem('@age').then(val => {
+          if (val) setAge(val);
+        }),
+      );
+      i.push(
+        AsyncStorage.getItem('@gender').then(val => {
+          if (val) setGender(val);
+        }),
+      );
+      i.push(
+        AsyncStorage.getItem('@height').then(val => {
+          if (val) setHeight(val);
+        }),
+      );
+      i.push(
+        AsyncStorage.getItem('@weight').then(val => {
+          if (val) setWeight(val);
+        }),
+      );
+      i.push(
+        AsyncStorage.getItem('@unit').then(val => {
+          if (val) setUnit(val);
+        }),
+      );
+      await Promise.all(i);
+      setDataFetched(true);
     };
     const fetchTemperature = async () => {
       // await w.getTemperature(setTemperature);
