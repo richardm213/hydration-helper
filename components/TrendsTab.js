@@ -133,7 +133,7 @@ const listAttribute = (item, unit) => {
   );
 };
 
-export default function TrendsTab({unit}) {
+export default function TrendsTab({recommendation, intake, unit, newDay}) {
   const [dataBars, setDataBars] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -143,7 +143,7 @@ export default function TrendsTab({unit}) {
         days.push(AsyncStorage.getItem(`@${getCurrentDate(7 - i)}`));
       }
       days = await Promise.all(days);
-      for (let i = 0; i < 7; i += 1) {
+      for (let i = 0; i < 6; i += 1) {
         const day = days[i];
         if (day) {
           const dailyEntry = JSON.parse(day);
@@ -160,10 +160,20 @@ export default function TrendsTab({unit}) {
           setDataBars(prev => [...prev, recommendationBar, intakeBar]);
         }
       }
-      setDataBars(prev => [...prev, {value: 0}]);
+      const todayRecommendationBar = {
+        label: getDayOfWeek(0),
+        value: recommendation,
+        spacing: 2,
+        frontColor: COLORS.primary,
+      };
+      const todayIntakeBar = {
+        value: intake,
+        frontColor: COLORS.lighterBlue,
+      };
+      setDataBars(prev => [...prev, todayRecommendationBar, todayIntakeBar]);
     };
     fetchData();
-  }, []);
+  }, [intake, newDay]);
   const [viewMode, setViewMode] = useState(0);
 
   return (

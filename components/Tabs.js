@@ -35,6 +35,7 @@ export default function Tabs() {
   const [unit, setUnit] = useState('us-system');
   const [temperature, setTemperature] = useState(0);
   const [dataFetched, setDataFetched] = useState(false);
+  const [newDay, setNewDay] = useState(false);
 
   const getTimeCategory = time => {
     const hours = time.split(':')[0];
@@ -91,6 +92,7 @@ export default function Tabs() {
         );
         await AsyncStorage.setItem(`@${d1}`, JSON.stringify(dailyEntry));
         resetDay(d2);
+        setNewDay(true);
       }
     };
     checkCurrentDay();
@@ -275,7 +277,14 @@ export default function Tabs() {
           tabBarIcon: trendsIcon,
           headerTitle: `Remember: Progress isn't linear`,
         }}>
-        {() => <TrendsTab unit={unit} />}
+        {() => (
+          <TrendsTab
+            recommendation={recommendation}
+            intake={intake}
+            unit={unit}
+            newDay={newDay}
+          />
+        )}
       </Tab.Screen>
       <Tab.Screen
         name="Settings"
