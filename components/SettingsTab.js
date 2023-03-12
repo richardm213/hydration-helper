@@ -2,22 +2,17 @@ import React, {useState} from 'react';
 import {Switch, StyleSheet, View, ScrollView, SafeAreaView} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Picker} from '@react-native-picker/picker';
-import {Text, Input} from '@rneui/base';
+import {Text} from '@rneui/base';
 import * as Calendar from 'expo-calendar';
 import {requestPermissionsAsync} from 'expo-notifications';
 import COLORS from './Colors';
 import GetEventTimes from '../services/CalendarAPI';
+import AGES from './InputValues';
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.white,
     flex: 1,
-  },
-  inputView: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    marginRight: 30,
-    width: 60,
   },
   label: {
     color: COLORS.primary,
@@ -32,6 +27,9 @@ const styles = StyleSheet.create({
     marginTop: -60,
     width: 180,
   },
+  pickerView: {
+    overflow: 'hidden',
+  },
   row: {
     borderBottomColor: COLORS.lightGray2,
     borderBottomWidth: 1,
@@ -43,9 +41,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     marginBottom: 65,
-  },
-  smallInputView: {
-    width: 45,
   },
   switch: {
     paddingRight: 60,
@@ -177,8 +172,15 @@ export default function SettingsTab({
           <Text h4 style={styles.label}>
             Age
           </Text>
-          <View style={styles.smallInputView}>
-            <Input onChangeText={updateAge} value={age} placeholder="21" />
+          <View style={styles.pickerView}>
+            <Picker
+              style={styles.picker1}
+              selectedValue={age}
+              onValueChange={updateAge}>
+              {AGES.ages.map(item => (
+                <Picker.Item key={item} label={item} value={item} />
+              ))}
+            </Picker>
           </View>
         </View>
 
@@ -199,18 +201,30 @@ export default function SettingsTab({
           <Text h4 style={styles.label}>
             Height
           </Text>
-          <View style={styles.inputView}>
-            <Input onChangeText={updateHeight} value={height} />
-            <Text h4>{heightType}</Text>
+          <View style={styles.pickerView}>
+            <Picker
+              style={styles.picker1}
+              selectedValue={height}
+              onValueChange={updateHeight}>
+              {AGES.heights.map(item => (
+                <Picker.Item key={item} label={item} value={item} />
+              ))}
+            </Picker>
           </View>
         </View>
         <View style={styles.row}>
           <Text h4 style={styles.label}>
             Weight
           </Text>
-          <View style={styles.inputView}>
-            <Input onChangeText={updateWeight} value={weight} />
-            <Text h4>{weightType}</Text>
+          <View style={styles.pickerView}>
+            <Picker
+              style={styles.picker1}
+              selectedValue={weight}
+              onValueChange={updateWeight}>
+              {AGES.weights.map(item => (
+                <Picker.Item key={item} label={item} value={item} />
+              ))}
+            </Picker>
           </View>
         </View>
         <View style={styles.row}>
