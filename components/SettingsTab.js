@@ -174,7 +174,10 @@ export default function SettingsTab({
           <Text h4 style={styles.label}>
             Age
           </Text>
-          <Picker style={styles.picker1}>
+          <Picker
+            style={styles.picker1}
+            selectedValue={age}
+            onValueChange={updateAge}>
             {AGES.ages.map(item => (
               <Picker.Item key={item} label={item} value={item} />
             ))}
