@@ -175,8 +175,9 @@ export default function SettingsTab({
             Age
           </Text>
           <Picker style={styles.picker1}>
-            <Picker.Item label="1" value="1" />
-            <Picker.Item label="2" value="2" />
+            {['20', '21', '22', '23', '24'].map(item => (
+              <Picker.Item id={item} label={item} value={item} />
+            ))}
           </Picker>
         </View>
 
