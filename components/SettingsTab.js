@@ -174,9 +174,10 @@ export default function SettingsTab({
           <Text h4 style={styles.label}>
             Age
           </Text>
-          <View style={styles.smallInputView}>
-            <Input onChangeText={updateAge} value={age} placeholder="21" />
-          </View>
+          <Picker style={styles.picker1}>
+            <Picker.Item label="1" value="1" />
+            <Picker.Item label="2" value="2" />
+          </Picker>
         </View>
 
         <View style={styles.row}>
