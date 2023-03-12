@@ -176,7 +176,7 @@ export default function SettingsTab({
           </Text>
           <Picker style={styles.picker1}>
             {['20', '21', '22', '23', '24'].map(item => (
-              <Picker.Item id={item} label={item} value={item} />
+              <Picker.Item key={item} label={item} value={item} />
             ))}
           </Picker>
         </View>
