@@ -1,8 +1,15 @@
 const ageList = [];
-for (let i = 1; i < 100; i += 1) {
+for (let i = 5; i <= 100; i += 1) {
   ageList.push(`${i}`);
 }
+
+const heightList = [];
+for (let i = 36; i <= 96; i += 1) {
+  heightList.push(`${i}`);
+}
+
 const AGES = {
   ages: ageList,
+  heights: heightList,
 };
 export default AGES;
