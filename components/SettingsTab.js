@@ -194,6 +194,7 @@ export default function SettingsTab({
           <Text h4 style={styles.label}>
             Gender
           </Text>
+          <View style={styles.pickerView}>
           <Picker
             selectedValue={gender}
             onValueChange={updateGender}
@@ -201,6 +202,7 @@ export default function SettingsTab({
             <Picker.Item label="male" value="male" />
             <Picker.Item label="female" value="female" />
           </Picker>
+          </View>
         </View>
 
         <View style={styles.row}>
