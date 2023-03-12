@@ -222,9 +222,15 @@ export default function SettingsTab({
           <Text h4 style={styles.label}>
             Weight
           </Text>
-          <View style={styles.inputView}>
-            <Input onChangeText={updateWeight} value={weight} />
-            <Text h4>{weightType}</Text>
+          <View style={styles.pickerView}>
+            <Picker
+              style={styles.picker1}
+              selectedValue={weight}
+              onValueChange={updateWeight}>
+              {AGES.weights.map(item => (
+                <Picker.Item key={item} label={item} value={item} />
+              ))}
+            </Picker>
           </View>
         </View>
         <View style={styles.row}>
