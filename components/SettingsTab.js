@@ -179,15 +179,15 @@ export default function SettingsTab({
             Age
           </Text>
           <View style={styles.pickerView}>
-          <Picker
-            style={styles.picker1}
-            selectedValue={age}
-            onValueChange={updateAge}>
-            {AGES.ages.map(item => (
-              <Picker.Item key={item} label={item} value={item} />
-            ))}
-          </Picker>
-        </View>
+            <Picker
+              style={styles.picker1}
+              selectedValue={age}
+              onValueChange={updateAge}>
+              {AGES.ages.map(item => (
+                <Picker.Item key={item} label={item} value={item} />
+              ))}
+            </Picker>
+          </View>
         </View>
 
         <View style={styles.row}>
@@ -207,9 +207,15 @@ export default function SettingsTab({
           <Text h4 style={styles.label}>
             Height
           </Text>
-          <View style={styles.inputView}>
-            <Input onChangeText={updateHeight} value={height} />
-            <Text h4>{heightType}</Text>
+          <View style={styles.pickerView}>
+            <Picker
+              style={styles.picker1}
+              selectedValue={height}
+              onValueChange={updateHeight}>
+              {AGES.heights.map(item => (
+                <Picker.Item key={item} label={item} value={item} />
+              ))}
+            </Picker>
           </View>
         </View>
         <View style={styles.row}>
