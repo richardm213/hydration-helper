@@ -175,7 +175,7 @@ export default function SettingsTab({
             Age
           </Text>
           <Picker style={styles.picker1}>
-            {['20', '21', '22', '23', '24'].map(item => (
+            {AGES.ages.map(item => (
               <Picker.Item key={item} label={item} value={item} />
             ))}
           </Picker>
