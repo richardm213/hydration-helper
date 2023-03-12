@@ -18,13 +18,13 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
   },
   picker1: {
-    height: 150,
-    marginTop: -60,
-    width: 160,
+    height: 140,
+    marginTop: -70,
+    width: 120,
   },
   picker2: {
-    height: 150,
-    marginTop: -60,
+    height: 130,
+    marginTop: -90,
     width: 180,
   },
   pickerView: {
@@ -188,13 +188,15 @@ export default function SettingsTab({
           <Text h4 style={styles.label}>
             Gender
           </Text>
-          <Picker
-            selectedValue={gender}
-            onValueChange={updateGender}
-            style={styles.picker1}>
-            <Picker.Item label="male" value="male" />
-            <Picker.Item label="female" value="female" />
-          </Picker>
+          <View style={styles.pickerView}>
+            <Picker
+              selectedValue={gender}
+              onValueChange={updateGender}
+              style={styles.picker1}>
+              <Picker.Item label="male" value="male" />
+              <Picker.Item label="female" value="female" />
+            </Picker>
+          </View>
         </View>
 
         <View style={styles.row}>
@@ -231,13 +233,15 @@ export default function SettingsTab({
           <Text h4 style={styles.label}>
             Unit
           </Text>
-          <Picker
-            selectedValue={unit}
-            onValueChange={updateUnit}
-            style={styles.picker2}>
-            <Picker.Item label="metric" value="metric" />
-            <Picker.Item label="US system" value="us-system" />
-          </Picker>
+          <View style={styles.pickerView}>
+            <Picker
+              selectedValue={unit}
+              onValueChange={updateUnit}
+              style={styles.picker2}>
+              <Picker.Item label="metric" value="metric" />
+              <Picker.Item label="US system" value="us-system" />
+            </Picker>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
