@@ -8,6 +8,7 @@ import {requestPermissionsAsync} from 'expo-notifications';
 import COLORS from './Colors';
 import {getFoodItemDataWater} from '../services/foodDataAPI';
 import GetEventTimes from '../services/CalendarAPI';
+import AGES from './InputValues';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,6 +33,9 @@ const styles = StyleSheet.create({
     height: 150,
     marginTop: -60,
     width: 180,
+  },
+  pickerView: {
+    overflow: 'hidden',
   },
   row: {
     borderBottomColor: COLORS.lightGray2,
@@ -174,6 +178,7 @@ export default function SettingsTab({
           <Text h4 style={styles.label}>
             Age
           </Text>
+          <View style={styles.pickerView}>
           <Picker
             style={styles.picker1}
             selectedValue={age}
@@ -182,6 +187,7 @@ export default function SettingsTab({
               <Picker.Item key={item} label={item} value={item} />
             ))}
           </Picker>
+        </View>
         </View>
 
         <View style={styles.row}>
