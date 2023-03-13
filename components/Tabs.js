@@ -73,7 +73,7 @@ export default function Tabs() {
     const resetDay = newDate => {
       updateDrinkScores();
       AsyncStorage.setItem('@intake', '0');
-      AsyncStorage.removeItem('@entries');
+      AsyncStorage.setItem('@entries', JSON.stringify([]));
       AsyncStorage.setItem('@exercise', '0');
       setIntake(0);
       setExercise(0);
