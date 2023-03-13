@@ -4,7 +4,7 @@ import COLORS from './Colors';
 
 const styles = StyleSheet.create({
   iconContainerStyle: {bottom: 20, right: 20},
-  sliderStyle: {marginBottom: 10},
+  sliderStyle: {marginBottom: 5},
   textStyle: {
     textAlign: 'center',
   },

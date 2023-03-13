@@ -1,5 +1,13 @@
 import {useState} from 'react';
-import {StyleSheet, Text, Alert, ScrollView, SafeAreaView} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  Alert,
+  ScrollView,
+  SafeAreaView,
+  Modal,
+  FlatList,
+} from 'react-native';
 import {Button, Icon} from '@rneui/base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
@@ -9,22 +17,30 @@ import COLORS from './Colors';
 import DRINKS from './Drinks';
 import DrinkEntry from './DrinkEntry';
 import {getWaterRank} from '../services/foodDataAPI';
+import DrinkLogEntry from './DrinkLogEntry';
 
 const styles = StyleSheet.create({
-  boxStyles: {marginHorizontal: 50, marginTop: 25},
+  boxStyles: {marginHorizontal: 50, marginTop: 10},
   container: {
     backgroundColor: COLORS.white,
     flex: 1,
   },
+  drinkLogButton: {
+    backgroundColor: COLORS.primaryFaded,
+    borderRadius: 15,
+    height: 35,
+    marginBottom: 60,
+    marginHorizontal: 135,
+  },
   dropDownStyles: {alignSelf: 'center', width: 200},
   icon: {
-    marginTop: 30,
+    marginTop: 20,
   },
   largerTextBlue: {
     color: COLORS.primary,
     fontSize: 24,
     fontWeight: 'bold',
-    margin: 20,
+    margin: 15,
     textAlign: 'center',
   },
   largerTextWhite: {
@@ -37,11 +53,17 @@ const styles = StyleSheet.create({
   scrollView: {
     marginBottom: 60,
   },
+  smallerTextWhite: {
+    color: COLORS.white,
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
   submitButton: {
     backgroundColor: COLORS.primary,
     borderRadius: 15,
     height: 50,
-    marginBottom: 60,
+    marginBottom: 10,
     marginHorizontal: 125,
   },
 });
@@ -73,6 +95,25 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
   const [drinkAmount, setDrinkAmount] = useState(0);
   const [drinkType, setDrinkType] = useState('water');
   const [submitDisabled, setSubmitDisabled] = useState(true);
+  const [visible, setVisible] = useState(false);
+  const [drinkLog, setDrinkLog] = useState(async () => {
+    let data = await AsyncStorage.getItem('@entries');
+    if (data) data = JSON.parse(data);
+    else data = [];
+    setDrinkLog(data);
+  });
+  const updateDrinkLog = async () => {
+    let data = await AsyncStorage.getItem('@entries');
+    if (data) data = JSON.parse(data);
+    else data = [];
+    setDrinkLog(data);
+  };
+  const showDrinkLog = async () => {
+    updateDrinkLog();
+    console.log(drinkLog);
+    setVisible(true);
+  };
+  const hideDrinkLog = () => setVisible(false);
   const camalize = str =>
     str
       .toLowerCase()
@@ -84,8 +125,8 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
   };
   const getTime = () => {
     const date = new Date();
-    const hour = date.getHours();
-    const minutes = date.getMinutes();
+    const hour = `0${date.getHours()}`.slice(-2);
+    const minutes = `0${date.getMinutes()}`.slice(-2);
     return `${hour.toString()}:${minutes.toString()}`;
   };
   const storeEntry = async e => {
@@ -142,6 +183,24 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
           title="Submit"
           onPress={submitIntakeEntry}
         />
+        <Button
+          title="Today's drinks"
+          onPress={showDrinkLog}
+          buttonStyle={styles.drinkLogButton}
+          titleStyle={styles.smallerTextWhite}
+        />
+        <Modal visible={visible} animationType="slide">
+          <SafeAreaView style={styles.scrollView}>
+            <Button title="Close" onPress={hideDrinkLog} />
+            <FlatList
+              data={drinkLog}
+              extraData={drinkLog}
+              renderItem={({item}) => (
+                <DrinkLogEntry drinkEntry={item} unit={unit} />
+              )}
+            />
+          </SafeAreaView>
+        </Modal>
       </ScrollView>
     </SafeAreaView>
   );
