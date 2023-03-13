@@ -134,10 +134,13 @@ function listAttribute(props) {
 }
 
 export default function TrendsTab() {
-  const [dataBars, setDataBars] = useState([]);
+  const [dataBarsWeek, setDataBarsWeek] = useState([]);
+  const [dataBarsMonth, setDataBarsMonth] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
-      setDataBars([]);
+      // fetch data for week chart
+      setDataBarsWeek([]);
       let days = [];
       for (let i = 1; i <= 7; i += 1) {
         days.push(AsyncStorage.getItem(`@${getCurrentDate(7 - i)}`));
@@ -157,10 +160,36 @@ export default function TrendsTab() {
             value: dailyEntry.intake,
             frontColor: COLORS.lighterBlue,
           };
-          setDataBars(prev => [...prev, recommendationBar, intakeBar]);
+          setDataBarsWeek(prev => [...prev, recommendationBar, intakeBar]);
         }
       }
-      setDataBars(prev => [...prev, {value: 0}]);
+      setDataBarsWeek(prev => [...prev, {value: 0}]);
+
+      // fetch data for month chart
+      setDataBarsMonth([]);
+      let daysMonth = [];
+      for (let i = 1; i <= 30; i += 1) {
+        daysMonth.push(AsyncStorage.getItem(`@${getCurrentDate(30 - i)}`));
+      }
+      daysMonth = await Promise.all(daysMonth);
+      for (let i = 0; i < 30; i += 1) {
+        const day = daysMonth[i];
+        if (day) {
+          const dailyEntry = JSON.parse(day);
+          const recommendationBar = {
+            label: getDayOfWeek(29 - i),
+            value: dailyEntry.recommendation,
+            spacing: 2,
+            frontColor: COLORS.primary,
+          };
+          const intakeBar = {
+            value: dailyEntry.intake,
+            frontColor: COLORS.lighterBlue,
+          };
+          setDataBarsMonth(prev => [...prev, recommendationBar, intakeBar]);
+        }
+      }
+      setDataBarsMonth(prev => [...prev, {value: 0}]);
     };
     fetchData();
   }, []);
@@ -181,7 +210,7 @@ export default function TrendsTab() {
             </View>
           </View>
           <BarChart
-            data={dataBars}
+            data={dataBarsWeek}
             spacing={27}
             barWidth={20}
             xAxisThickness={1}
@@ -198,6 +227,35 @@ export default function TrendsTab() {
       )}
 
       {viewMode == 1 && (
+        <View style={styles.barChart}>
+          <View style={styles.legend}>
+            <View style={styles.align}>
+              <View style={styles.leftDot} />
+              <Text style={styles.textLegend}>Recommended Intake</Text>
+            </View>
+            <View style={styles.align}>
+              <View style={styles.rightDot} />
+              <Text style={styles.textLegend}>Recorded Intake</Text>
+            </View>
+          </View>
+          <BarChart
+            data={dataBarsMonth}
+            spacing={27}
+            barWidth={20}
+            xAxisThickness={1}
+            labelsExtraHeight={15}
+            yAxisThickness={1}
+            yAxisTextStyle={styles.yAxisTextStyle}
+            noOfSections={7}
+            maxValue={125}
+            labelWidth={85}
+            height={400}
+            xAxisLabelTextStyle={styles.xAxisLegendStyle}
+          />
+        </View>
+      )}
+
+      {viewMode == 2 && (
         <View>
           <AccordionList
             marginTop={55}
@@ -218,7 +276,13 @@ export default function TrendsTab() {
             containerStyle={active => ({
               backgroundColor: active ? COLORS.iceBlue : undefined,
             })}>
-            Graph
+            Weekly Graph
+          </Tab.Item>
+          <Tab.Item
+            containerStyle={active => ({
+              backgroundColor: active ? COLORS.iceBlue : undefined,
+            })}>
+            Monthly Graph
           </Tab.Item>
           <Tab.Item
             buttonStyle={active => ({
