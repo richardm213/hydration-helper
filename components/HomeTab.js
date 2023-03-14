@@ -1,8 +1,10 @@
-import {StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {Button, Card, Icon, Text} from '@rneui/base';
 import Modal from 'react-native-modal';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import COLORS from './Colors';
+import DRINKS from './Drinks';
 
 const styles = StyleSheet.create({
   cardStyle: {flexDirection: 'row', justifyContent: 'space-between'},
@@ -61,31 +63,57 @@ const styles = StyleSheet.create({
 export default function HomeTab({recommendation, unit, temperature}) {
   const [isVisible, setIsVisible] = useState(false);
   const measurementType = unit === 'us-system' ? 'oz' : 'ml';
+  const [cardData, setCardData] = useState([]);
+  useEffect(() => {
+    const getDetailedRecommendation = async () => {
+      const drinkScores = JSON.parse(
+        await AsyncStorage.getItem('@drinkScores'),
+      );
+      const tempCardData = [];
+      ['morning', 'afternoon', 'evening'].forEach(time => {
+        const drinkType = Object.entries(drinkScores)
+          .filter(entry => entry[0].includes(time))
+          .sort((a, b) => b[1] - a[1])[0][0]
+          .split('-')[0];
+        const cardObj = {
+          drinkType,
+          drinkAmount: Math.ceil(
+            recommendation / ((6 * DRINKS[drinkType]) / 100),
+          ),
+          drinkTime: time,
+        };
+        const cardObj2 = {
+          drinkType: 'water',
+          drinkAmount: Math.ceil(recommendation / 6),
+          drinkTime: time,
+        };
+        tempCardData.push(cardObj);
+        tempCardData.push(cardObj2);
+      });
+      setCardData(tempCardData);
+    };
+    getDetailedRecommendation();
+  }, []);
+
+  const renderDrinkCard = ({item}) => (
+    <Card wrapperStyle={styles.cardStyle}>
+      <Text>{item.drinkType}</Text>
+      <Text>
+        {item.drinkAmount} {measurementType}
+      </Text>
+      <Text>{item.drinkTime}</Text>
+    </Card>
+  );
   return (
     <View style={styles.container}>
       <Modal isVisible={isVisible}>
         <View style={styles.modalContainer}>
           <Button title="close" onPress={() => setIsVisible(false)} />
-          <Card wrapperStyle={styles.cardStyle}>
-            <Text>water</Text>
-            <Text>10 oz</Text>
-            <Text>10 am</Text>
-          </Card>
-          <Card wrapperStyle={styles.cardStyle}>
-            <Text>tea</Text>
-            <Text>14 oz</Text>
-            <Text>12 pm</Text>
-          </Card>
-          <Card wrapperStyle={styles.cardStyle}>
-            <Text>soda</Text>
-            <Text>23 oz</Text>
-            <Text>5 pm</Text>
-          </Card>
-          <Card wrapperStyle={styles.cardStyle}>
-            <Text>coffee</Text>
-            <Text>12 oz</Text>
-            <Text>8 pm</Text>
-          </Card>
+          <FlatList
+            data={cardData}
+            renderItem={renderDrinkCard}
+            keyExtractor={item => `${item.drinkType}-${item.drinkTime}`}
+          />
         </View>
       </Modal>
       <View style={styles.temperatureView}>
