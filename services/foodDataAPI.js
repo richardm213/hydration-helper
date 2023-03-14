@@ -17,18 +17,23 @@ const fileHeaders = {
   'Content-Type': 'application/json',
 };
 
-export const getFoodItemData = async foodName => {
+export const getWaterRank = async foodName => {
   try {
-    const foodID = fdcIds[foodName];
-    const response = await axios.get(
-      `https://api.nal.usda.gov/fdc/v1/food/${foodID}`,
-      {
-        headers: fileHeaders,
-      },
+    const fdcId = fdcIds[foodName];
+    const url = `https://api.nal.usda.gov/fdc/v1/food/${fdcId}`;
+    const params = {nutrients: '255'}; // Include nutrient ID for water only
+    const response = await axios.get(url, {
+      headers: fileHeaders,
+      params,
+    });
+    const waterNutrient = response.data.foodNutrients.find(
+      nutrient => nutrient.nutrient.number === '255',
     );
-    return response.data;
+    const waterRank = waterNutrient ? waterNutrient.nutrient.rank : null;
+    return waterRank;
   } catch (error) {
     console.error(error);
+    return null;
   }
 };
 

@@ -8,6 +8,7 @@ import DrinkSlider from './DrinkSlider';
 import COLORS from './Colors';
 import DRINKS from './Drinks';
 import DrinkEntry from './DrinkEntry';
+import {getWaterRank} from '../services/foodDataAPI';
 
 const styles = StyleSheet.create({
   boxStyles: {marginHorizontal: 50, marginTop: 25},
@@ -97,7 +98,7 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
   const submitIntakeEntry = async () => {
     Alert.alert('Your entry has been recorded.');
     const drinkTypeKey = camalize(drinkType);
-    const waterAmount = (drinkAmount * DRINKS[drinkTypeKey]) / 100;
+    const waterAmount = await getWaterRank(drinkTypeKey);
     const newIntake = intake + waterAmount;
     setIntake(newIntake);
     await AsyncStorage.setItem('@intake', newIntake.toString());
