@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Tab, Text} from '@rneui/base';
+import {Card, Tab, Text} from '@rneui/base';
 import {useEffect, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {AccordionList} from 'react-native-accordion-list-view';
 import {BarChart} from 'react-native-gifted-charts';
 import {getCurrentDate, getDayOfWeek} from '../util/getCurrentDate';
@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   barChart: {paddingHorizontal: 20},
+  cardStyle: {flexDirection: 'row', justifyContent: 'space-between'},
   container: {
     backgroundColor: COLORS.white,
     flex: 1,
@@ -49,6 +50,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     marginBottom: 120,
     alignSelf: 'center',
+  },
+  viewModeIndicator: {
+    backgroundColor: COLORS.primary,
   },
   viewModeTitle: {
     color: COLORS.primary,
@@ -174,6 +178,31 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
     };
     fetchData();
   }, [intake, newDay]);
+
+  const [dataScores, setDataScores] = useState([]);
+  useEffect(() => {
+    const fetchDrinkScores = async () => {
+      drinkScores = JSON.parse(await AsyncStorage.getItem('@drinkScores'));
+      let temp = [];
+      Object.entries(drinkScores).forEach(entry =>
+        temp.push({
+          name: entry[0],
+          score: entry[1],
+        }),
+      );
+      temp.sort((a, b) => b.score - a.score);
+      setDataScores(temp);
+    };
+    fetchDrinkScores();
+  }, [newDay]);
+
+  const renderScores = ({item}) => (
+    <Card wrapperStyle={styles.cardStyle}>
+      <Text>{item.name}</Text>
+      <Text>{item.score}</Text>
+    </Card>
+  );
+
   const [viewMode, setViewMode] = useState(0);
 
   return (
@@ -218,23 +247,40 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
         </View>
       )}
 
+      {viewMode == 2 && (
+        <View>
+          <FlatList
+            data={dataScores}
+            renderItem={renderScores}
+            keyExtractor={item => item.name}
+          />
+        </View>
+      )}
+
       <View style={styles.viewModeTab}>
         <Tab
           value={viewMode}
           onChange={setViewMode}
           titleStyle={styles.viewModeTitle}
+          indicatorStyle={styles.viewModeIndicator}
           scrollable>
           <Tab.Item
             containerStyle={active => ({
-              backgroundColor: active ? COLORS.iceBlue : undefined,
+              backgroundColor: active ? COLORS.iceBlue : COLORS.white,
             })}>
             Graph
           </Tab.Item>
           <Tab.Item
             buttonStyle={active => ({
-              backgroundColor: active ? COLORS.iceBlue : undefined,
+              backgroundColor: active ? COLORS.iceBlue : COLORS.white,
             })}>
             Drinks
+          </Tab.Item>
+          <Tab.Item
+            buttonStyle={active => ({
+              backgroundColor: active ? COLORS.iceBlue : COLORS.white,
+            })}>
+            Scores
           </Tab.Item>
         </Tab>
       </View>
