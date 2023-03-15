@@ -48,11 +48,10 @@ export default class APICalculator extends SimpleCalculator {
   /* Temperature factor: for every 10 degrees that the temperature 
   is above room temperature, add 1 cup = 8 oz = 237 ml. */
   temperatureFactor() {
-    if (this.weather.temperature > 75) {
-      this.recommendation +=
-        ((this.weather.temperature - 75) / 10) * this.unit === 'us-system'
-          ? 8
-          : 237;
+    if (this.weather.temperature > 80) {
+      let amount = 8 * Math.floor((this.weather.temperature - 80) / 10);
+      if (this.unit === 'metric') amount *= 30;
+      this.recommendation += amount;
     }
   }
 }
