@@ -68,10 +68,21 @@ export default function Tabs() {
     await AsyncStorage.setItem('@drinkScores', JSON.stringify(drinkScores));
   };
 
+  const updatePerformanceScore = async () => {
+    let performanceScore = parseInt(
+      await AsyncStorage.getItem('@performanceScore'),
+      10,
+    );
+    if (intake > recommendation) performanceScore += 5;
+    else performanceScore -= 5;
+    await AsyncStorage.setItem('@performanceScore', performanceScore);
+  };
+
   useEffect(() => {
     if (!dataFetched) return;
     const resetDay = newDate => {
       updateDrinkScores();
+      updatePerformanceScore();
       AsyncStorage.setItem('@intake', '0');
       AsyncStorage.setItem('@entries', JSON.stringify([]));
       AsyncStorage.setItem('@exercise', '0');

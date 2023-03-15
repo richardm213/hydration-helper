@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     height: 25,
   },
+  scoresHeader: {textAlign: 'center', color: COLORS.primary, marginTop: 15},
   viewModeTab: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -180,6 +181,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
   }, [intake, newDay]);
 
   const [dataScores, setDataScores] = useState([]);
+  const [performanceScore, setPerformanceScore] = useState(75);
   useEffect(() => {
     const fetchDrinkScores = async () => {
       drinkScores = JSON.parse(await AsyncStorage.getItem('@drinkScores'));
@@ -193,7 +195,16 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
       temp.sort((a, b) => b.score - a.score);
       setDataScores(temp);
     };
+    const fetchPerformanceScore = async () => {
+      let score = await AsyncStorage.getItem('@performanceScore');
+      if (!score) {
+        score = 75;
+        await AsyncStorage.setItem('@performanceScore', score.toString());
+      }
+      setPerformanceScore(score);
+    };
     fetchDrinkScores();
+    fetchPerformanceScore();
   }, [newDay]);
 
   const renderScores = ({item}) => (
@@ -249,6 +260,16 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
 
       {viewMode == 2 && (
         <View>
+          <Text style={styles.scoresHeader} h4>
+            User Performance Score
+          </Text>
+          <Card wrapperStyle={styles.cardStyle}>
+            <Text>Performance score</Text>
+            <Text>{performanceScore}</Text>
+          </Card>
+          <Text style={styles.scoresHeader} h4>
+            Drink Tendency Scores
+          </Text>
           <FlatList
             data={dataScores}
             renderItem={renderScores}
