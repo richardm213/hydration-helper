@@ -1,28 +1,19 @@
 import SimpleCalculator from './SimpleCalculator';
 
 export default class APICalculator extends SimpleCalculator {
-  constructor(
-    unit,
-    age,
-    gender,
-    height,
-    weight,
-    exercise,
-    isNewDay,
-    weather,
-    food,
-  ) {
+  constructor(unit, age, gender, height, weight, exercise, weather, food) {
     super(unit, age, gender, height, weight, exercise);
-    this.isNewDay = isNewDay;
     this.weather = weather;
     this.food = food;
   }
 
   calculate() {
     this.recommendation = super.calculate();
-    if (this.isNewDay) this.calorieFactor();
-    this.sodiumFactor();
-    this.temperatureFactor();
+    if (this.food) {
+      this.calorieFactor();
+      this.sodiumFactor();
+    }
+    if (this.weather) this.temperatureFactor();
     return this.recommendation;
   }
 

@@ -19,6 +19,7 @@ import COLORS from './Colors';
 // import HealthAPI from '../services/healthKitAPI';
 import DailyEntry from './DailyEntry';
 import {getCurrentDate} from '../util/getCurrentDate';
+import APICalculator from '../util/APICalculator';
 
 const Tab = createBottomTabNavigator();
 // const w = new WeatherAPI();
@@ -161,14 +162,29 @@ export default function Tabs() {
 
   useEffect(() => {
     const updateRecommendation = async () => {
-      const calculator = new SimpleCalculator(
-        unit,
-        age,
-        gender,
-        height,
-        weight,
-        exercise,
-      );
+      if (!dataFetched) return;
+      let calculator = null;
+      if (temperature !== 0) {
+        calculator = new APICalculator(
+          unit,
+          age,
+          gender,
+          height,
+          weight,
+          exercise,
+          {temperature},
+          null,
+        );
+      } else {
+        calculator = new SimpleCalculator(
+          unit,
+          age,
+          gender,
+          height,
+          weight,
+          exercise,
+        );
+      }
       const newRecommendation = calculator.calculate();
       setRecommendation(newRecommendation);
       await AsyncStorage.setItem(
@@ -177,7 +193,7 @@ export default function Tabs() {
       );
     };
     updateRecommendation();
-  }, [age, gender, height, weight, exercise]);
+  }, [dataFetched, age, gender, height, weight, exercise]);
 
   const firstUpdate = useRef(true);
   useEffect(() => {
