@@ -19,9 +19,11 @@ const styles = StyleSheet.create({
 export default function DrinkLogEntry({drinkEntry, unit}) {
   const formatTime = time => {
     const hour = parseInt(time.slice(0, time.indexOf(':')), 10);
+    if (hour === 0) return `12${time.slice(time.indexOf(':'))} AM`;
+    if (hour === 12) return `${time} PM`;
     return hour > 12
       ? `${(hour - 12).toString() + time.slice(time.indexOf(':'))} PM`
-      : `${time}AM`;
+      : `${time} AM`;
   };
 
   return (

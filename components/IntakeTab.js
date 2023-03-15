@@ -124,7 +124,7 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
   };
   const getTime = () => {
     const date = new Date();
-    const hour = `0${date.getHours()}`.slice(-2);
+    const hour = `${date.getHours()}`;
     const minutes = `0${date.getMinutes()}`.slice(-2);
     return `${hour.toString()}:${minutes.toString()}`;
   };
