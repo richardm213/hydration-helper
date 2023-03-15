@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
     fontSize: 26,
     fontWeight: 'bold',
-    marginHorizontal: 40,
+    marginHorizontal: 20,
     marginTop: 10,
     textAlign: 'center',
   },
@@ -122,13 +122,13 @@ export default function HomeTab({recommendation, unit, temperature}) {
       <View style={styles.suggestionTextView}>
         <Icon name="water" type="ionicon" color={COLORS.primary} size={200} />
         <Text style={styles.suggestionText}>
-          Your personalized recommendation for water intake today is:
+          Today&apos;s recommendation:{'\n'}
         </Text>
-      </View>
-      <View style={styles.suggestionIntakeView}>
         <Text style={styles.suggestionIntakeText}>
           {recommendation.toFixed(0)} {measurementType}
         </Text>
+      </View>
+      <View style={styles.suggestionIntakeView}>
         <Button
           title="View Details"
           buttonStyle={styles.submitButton}
