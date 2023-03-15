@@ -1,15 +1,16 @@
 import axios from 'axios';
+// eslint-disable-next-line import/no-unresolved
 import {FOOD_DATA_API_KEY} from '@env';
 
 const fdcIds = {
-  Water: 174158,
-  'Apple Juice': 2003590,
-  'Orange Juice': 2003591,
-  Coffee: 171891,
-  Tea: 171917,
-  Soda: 174852,
-  Lemonade: 171878,
-  Milk: 746782,
+  water: 174158,
+  appleJuice: 2003590,
+  orangeJuice: 2003591,
+  coffee: 171891,
+  tea: 171917,
+  soda: 174852,
+  lemonade: 171878,
+  milk: 746782,
 };
 
 const fileHeaders = {
@@ -45,5 +46,6 @@ export const getFoodsList = async () => {
     return response.data;
   } catch (error) {
     console.error(error);
+    return null;
   }
 };

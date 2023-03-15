@@ -98,7 +98,8 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
   const submitIntakeEntry = async () => {
     Alert.alert('Your entry has been recorded.');
     const drinkTypeKey = camalize(drinkType);
-    const waterAmount = await getWaterRank(drinkTypeKey);
+    const waterAmount =
+      drinkAmount * ((await getWaterRank(drinkTypeKey)) / 100);
     const newIntake = intake + waterAmount;
     setIntake(newIntake);
     await AsyncStorage.setItem('@intake', newIntake.toString());
