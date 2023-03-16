@@ -14,15 +14,14 @@ import {
   trendsIcon,
 } from './TabIcons';
 import SimpleCalculator from '../util/SimpleCalculator';
-// import WeatherAPI from '../services/WeatherAPI';
 import COLORS from './Colors';
 // import HealthAPI from '../services/healthKitAPI';
 import DailyEntry from './DailyEntry';
 import {getCurrentDate} from '../util/getCurrentDate';
 import APICalculator from '../util/APICalculator';
+import useStorageData from '../hooks/useStorageData';
 
 const Tab = createBottomTabNavigator();
-// const w = new WeatherAPI();
 // const healthAPI = new HealthAPI();
 
 export default function Tabs() {
@@ -35,8 +34,17 @@ export default function Tabs() {
   const [weight, setWeight] = useState('160');
   const [unit, setUnit] = useState('us-system');
   const [temperature, setTemperature] = useState(0);
-  const [dataFetched, setDataFetched] = useState(false);
   const [newDay, setNewDay] = useState(false);
+  const dataFetched = useStorageData(
+    setIntake,
+    setExercise,
+    setAge,
+    setGender,
+    setHeight,
+    setWeight,
+    setUnit,
+    setTemperature,
+  );
 
   const getTimeCategory = time => {
     const hours = time.split(':')[0];
@@ -112,56 +120,6 @@ export default function Tabs() {
     };
     checkCurrentDay();
   }, [dataFetched]);
-
-  useEffect(() => {
-    const fetchStorageValues = async () => {
-      const i = [];
-      i.push(
-        AsyncStorage.getItem('@intake').then(val => {
-          if (val) setIntake(parseInt(val, 10));
-        }),
-      );
-      i.push(
-        AsyncStorage.getItem('@exercise').then(val => {
-          if (val) setExercise(parseInt(val, 10));
-        }),
-      );
-      i.push(
-        AsyncStorage.getItem('@age').then(val => {
-          if (val) setAge(val);
-        }),
-      );
-      i.push(
-        AsyncStorage.getItem('@gender').then(val => {
-          if (val) setGender(val);
-        }),
-      );
-      i.push(
-        AsyncStorage.getItem('@height').then(val => {
-          if (val) setHeight(val);
-        }),
-      );
-      i.push(
-        AsyncStorage.getItem('@weight').then(val => {
-          if (val) setWeight(val);
-        }),
-      );
-      i.push(
-        AsyncStorage.getItem('@unit').then(val => {
-          if (val) setUnit(val);
-        }),
-      );
-      await Promise.all(i);
-      setDataFetched(true);
-    };
-    const fetchTemperature = async () => {
-      // await w.getTemperature(setTemperature);
-      setTemperature(Math.random() * (110 - 40) + 40);
-    };
-
-    fetchStorageValues();
-    fetchTemperature();
-  }, []);
 
   useEffect(() => {
     const updateRecommendation = async () => {
