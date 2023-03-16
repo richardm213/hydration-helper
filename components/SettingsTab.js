@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
   },
   picker1: {
-    height: 140,
-    marginTop: -70,
+    height: 130,
+    marginTop: -90,
     width: 120,
   },
   picker2: {
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingVertical: 20.5,
     width: '100%',
   },
   scrollView: {
