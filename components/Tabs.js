@@ -76,7 +76,10 @@ export default function Tabs() {
     );
     if (intake > recommendation) performanceScore += 5;
     else performanceScore -= 5;
-    await AsyncStorage.setItem('@performanceScore', performanceScore);
+    await AsyncStorage.setItem(
+      '@performanceScore',
+      performanceScore.toString(),
+    );
   };
 
   useEffect(() => {
