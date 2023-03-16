@@ -1,15 +1,41 @@
 import React, {useState} from 'react';
-import {Switch, StyleSheet, View, ScrollView, SafeAreaView} from 'react-native';
+import {
+  Switch,
+  StyleSheet,
+  View,
+  ScrollView,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Picker} from '@react-native-picker/picker';
-import {Text} from '@rneui/base';
+import {Button, Text} from '@rneui/base';
 import * as Calendar from 'expo-calendar';
 import {requestPermissionsAsync} from 'expo-notifications';
+import Modal from 'react-native-modal';
 import COLORS from './Colors';
 import GetEventTimes from '../services/CalendarAPI';
-import AGES from './InputValues';
+import {
+  agePicker,
+  genderPicker,
+  heightPicker,
+  unitPicker,
+  weightPicker,
+} from './SettingsPickers';
 
 const styles = StyleSheet.create({
+  button: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 10,
+  },
+  buttonContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
   container: {
     backgroundColor: COLORS.white,
     flex: 1,
@@ -17,28 +43,15 @@ const styles = StyleSheet.create({
   label: {
     color: COLORS.primary,
   },
-  /* 
-  Margins for the pickers
-  aligns picker border and
-  removes wheel view 
-   */
-  picker1: {
-    height: 130,
-    marginTop: -90,
-    width: 120,
+  modalContainer: {
+    backgroundColor: COLORS.white,
+    borderRadius: 15,
+    flex: 0.9,
+    marginHorizontal: 50,
+    marginVertical: 250,
+    paddingHorizontal: 10,
   },
-  picker2: {
-    height: 130,
-    marginTop: -90,
-    width: 180,
-  },
-  /* 
-  Overflow attribute permits only one
-  picker value to be visible
-  */
-  pickerView: {
-    overflow: 'hidden',
-  },
+  rightText: {paddingRight: 15},
   row: {
     borderBottomColor: COLORS.lightGray2,
     borderBottomWidth: 1,
@@ -133,6 +146,10 @@ export default function SettingsTab({
   };
   const heightType = unit === 'us-system' ? 'in' : 'cm';
   const weightType = unit === 'us-system' ? 'lbs' : 'kg';
+  const [isVisible, setIsVisible] = useState(false);
+  const [picker, setPicker] = useState(null);
+  const cancelChange = () => setIsVisible(false);
+  const saveChange = () => setIsVisible(false);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -189,81 +206,103 @@ export default function SettingsTab({
           />
         </View>
 
-        <View style={styles.row}>
+        <TouchableOpacity
+          style={styles.row}
+          onPress={() => {
+            setPicker('age');
+            setIsVisible(true);
+          }}>
           <Text h4 style={styles.label}>
             Age
           </Text>
-          <View style={styles.pickerView}>
-            <Picker
-              style={styles.picker1}
-              selectedValue={age}
-              onValueChange={updateAge}>
-              {AGES.ages.map(item => (
-                <Picker.Item key={item} label={item} value={item} />
-              ))}
-            </Picker>
-          </View>
-        </View>
+          <Text h4 style={styles.rightText}>
+            {age}
+          </Text>
+        </TouchableOpacity>
 
-        <View style={styles.row}>
+        <TouchableOpacity
+          style={styles.row}
+          onPress={() => {
+            setPicker('gender');
+            setIsVisible(true);
+          }}>
           <Text h4 style={styles.label}>
             Gender
           </Text>
-          <View style={styles.pickerView}>
-            <Picker
-              selectedValue={gender}
-              onValueChange={updateGender}
-              style={styles.picker1}>
-              <Picker.Item label="male" value="male" />
-              <Picker.Item label="female" value="female" />
-            </Picker>
-          </View>
-        </View>
+          <Text h4 style={styles.rightText}>
+            {gender}
+          </Text>
+        </TouchableOpacity>
 
-        <View style={styles.row}>
+        <TouchableOpacity
+          style={styles.row}
+          onPress={() => {
+            setPicker('height');
+            setIsVisible(true);
+          }}>
           <Text h4 style={styles.label}>
-            Height ({heightType})
+            Height
           </Text>
-          <View style={styles.pickerView}>
-            <Picker
-              style={styles.picker1}
-              selectedValue={height}
-              onValueChange={updateHeight}>
-              {AGES.heights.map(item => (
-                <Picker.Item key={item} label={item} value={item} />
-              ))}
-            </Picker>
-          </View>
-        </View>
-        <View style={styles.row}>
+          <Text h4 style={styles.rightText}>
+            {height} {heightType}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.row}
+          onPress={() => {
+            setPicker('weight');
+            setIsVisible(true);
+          }}>
           <Text h4 style={styles.label}>
-            Weight ({weightType})
+            Weight
           </Text>
-          <View style={styles.pickerView}>
-            <Picker
-              style={styles.picker1}
-              selectedValue={weight}
-              onValueChange={updateWeight}>
-              {AGES.weights.map(item => (
-                <Picker.Item key={item} label={item} value={item} />
-              ))}
-            </Picker>
-          </View>
-        </View>
-        <View style={styles.row}>
+          <Text h4 style={styles.rightText}>
+            {weight} {weightType}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.row}
+          onPress={() => {
+            setPicker('unit');
+            setIsVisible(true);
+          }}>
           <Text h4 style={styles.label}>
             Unit
           </Text>
-          <View style={styles.pickerView}>
-            <Picker
-              selectedValue={unit}
-              onValueChange={updateUnit}
-              style={styles.picker2}>
-              <Picker.Item label="metric" value="metric" />
-              <Picker.Item label="US system" value="us-system" />
-            </Picker>
+          <Text h4 style={styles.rightText}>
+            {unit}
+          </Text>
+        </TouchableOpacity>
+
+        <Modal isVisible={isVisible}>
+          <View style={styles.modalContainer}>
+            {
+              {
+                age: agePicker(age, updateAge),
+                gender: genderPicker(gender, updateGender),
+                height: heightPicker(height, updateHeight),
+                weight: weightPicker(weight, updateWeight),
+                unit: unitPicker(unit, updateUnit),
+              }[picker]
+            }
+            <View style={styles.buttonContainer}>
+              <View style={styles.buttonRow}>
+                <Button
+                  title="Cancel"
+                  onPress={cancelChange}
+                  buttonStyle={styles.button}
+                />
+                <Button
+                  title="Save"
+                  onPress={saveChange}
+                  buttonStyle={styles.button}
+                />
+              </View>
+            </View>
           </View>
-        </View>
+        </Modal>
       </ScrollView>
     </SafeAreaView>
   );
