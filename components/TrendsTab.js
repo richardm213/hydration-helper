@@ -4,7 +4,11 @@ import {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {AccordionList} from 'react-native-accordion-list-view';
 import {BarChart} from 'react-native-gifted-charts';
-import {getCurrentDate, getDayOfWeek} from '../util/getCurrentDate';
+import {
+  getCurrentDate,
+  getDayOfMonth,
+  getDayOfWeek,
+} from '../util/getCurrentDate';
 import COLORS from './Colors';
 
 const styles = StyleSheet.create({
@@ -67,7 +71,11 @@ const styles = StyleSheet.create({
   },
   xAxisLegendStyle: {
     fontSize: 15,
+    marginLeft: 12.5,
     marginBottom: -5,
+  },
+  xAxisLegendStyle2: {
+    marginLeft: 10,
   },
   yAxisTextStyle: {
     fontSize: 15,
@@ -203,7 +211,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
         if (day) {
           const dailyEntry = JSON.parse(day);
           const recommendationBar = {
-            label: getDayOfWeek(29 - i),
+            label: getDayOfMonth(29 - i),
             value: dailyEntry.recommendation,
             spacing: 2,
             frontColor: COLORS.primary,
@@ -215,7 +223,17 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
           setDataBarsMonth(prev => [...prev, recommendationBar, intakeBar]);
         }
       }
-      setDataBarsMonth(prev => [...prev, {value: 0}]);
+      const todayRecommendationBar2 = {
+        label: getDayOfMonth(0),
+        value: recommendation,
+        spacing: 2,
+        frontColor: COLORS.primary,
+      };
+      setDataBarsMonth(prev => [
+        ...prev,
+        todayRecommendationBar2,
+        todayIntakeBar,
+      ]);
     };
     fetchData();
   }, [intake, newDay]);
@@ -326,17 +344,18 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
           </View>
           <BarChart
             data={dataBarsMonth}
-            spacing={27}
-            barWidth={20}
+            initialSpacing={25}
+            spacing={13}
+            barWidth={15}
             xAxisThickness={1}
-            labelsExtraHeight={15}
             yAxisThickness={1}
             yAxisTextStyle={styles.yAxisTextStyle}
             noOfSections={7}
             maxValue={125}
             labelWidth={85}
             height={380}
-            xAxisLabelTextStyle={styles.xAxisLegendStyle}
+            autoShiftLabels
+            xAxisLabelTextStyle={styles.xAxisLegendStyle2}
           />
         </View>
       )}

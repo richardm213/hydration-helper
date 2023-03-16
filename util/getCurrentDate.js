@@ -14,4 +14,10 @@ function getDayOfWeek(daysBeforeToday) {
   return weekday[date.getDay()];
 }
 
-export {getCurrentDate, getDayOfWeek};
+function getDayOfMonth(daysBeforeToday) {
+  const date = new Date();
+  date.setDate(date.getDate() - daysBeforeToday);
+  return date.getDate();
+}
+
+export {getCurrentDate, getDayOfWeek, getDayOfMonth};
