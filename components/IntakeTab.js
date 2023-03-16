@@ -147,7 +147,36 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
     const drinkTime = getTime();
     const e = new DrinkEntry(drinkTypeKey, drinkAmount, drinkTime);
     storeEntry(e);
-    await intakeRecordNotification(intake + waterAmount, recommendation);
+
+    /*
+    In order to have the notifications 
+    congratulating the user for their intake
+    submission and progress be sent at interval moments
+    (e.g. every 10 percent increase towards goal),
+    calculate the previous and current percent intake
+
+    Calculate it as a multiple of 5 and remove the remainder,
+    since the user will likely not have increased their intake 
+    by precisely 10 percent (e.g. 11.1 percent, etc.)
+    */
+    const prevTotal = Math.floor((intake * 100) / recommendation / 10);
+    const curTotal = Math.floor(
+      ((intake + waterAmount) * 100) / recommendation / 10,
+    );
+
+    console.log(
+      Math.floor(((intake + waterAmount) * 100) / recommendation / 10),
+    );
+    console.log(Math.floor((intake * 100) / recommendation / 10));
+
+    /*
+    If the percent intake changes by at least ten percent,
+    send a notification congratulating the user
+    alongside their current percent intake
+    */
+    if (curTotal > prevTotal) {
+      await intakeRecordNotification(intake + waterAmount, recommendation);
+    }
   };
 
   return (
