@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primary,
     borderRadius: 15,
     height: 50,
-    marginTop: 25,
+    marginTop: 95,
   },
   suggestionIntakeText: {
     color: COLORS.primary,
@@ -57,6 +57,15 @@ const styles = StyleSheet.create({
   },
   temperatureView: {
     marginTop: 20,
+  },
+  wrapRecommendation: {
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.primary,
+    borderRadius: 20,
+    borderWidth: 5,
+    marginTop: 15,
+    padding: -5,
+    paddingBottom: 15,
   },
 });
 
@@ -121,16 +130,19 @@ export default function HomeTab({recommendation, unit, temperature}) {
       </View>
       <View style={styles.suggestionTextView}>
         <Icon name="water" type="ionicon" color={COLORS.primary} size={200} />
-        <Text style={styles.suggestionText}>
-          Today&apos;s recommendation:{'\n'}
-        </Text>
-        <Text style={styles.suggestionIntakeText}>
-          {recommendation.toFixed(0)} {measurementType}
-        </Text>
+        <View style={styles.wrapRecommendation}>
+          <Text style={styles.suggestionText}>
+            Today&apos;s water intake recommendation:{'\n'}
+          </Text>
+
+          <Text style={styles.suggestionIntakeText}>
+            {recommendation.toFixed(0)} {measurementType}
+          </Text>
+        </View>
       </View>
       <View style={styles.suggestionIntakeView}>
         <Button
-          title="View Details"
+          title="My Drink Diary"
           buttonStyle={styles.submitButton}
           titleStyle={styles.largerTextWhite}
           onPress={() => setIsVisible(true)}
