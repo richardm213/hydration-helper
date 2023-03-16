@@ -11,25 +11,30 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: COLORS.white,
-    display: 'flex',
-    flexDirection: 'column',
+    flex: 1,
     justifyContent: 'center',
+  },
+  iconStyle: {
+    padding: 10,
   },
   largerTextWhite: {
     alignItems: 'center',
     color: COLORS.white,
     fontSize: 22,
     fontWeight: 'bold',
+    padding: 15,
   },
   modalContainer: {
     backgroundColor: COLORS.white,
-
+    flex: 1,
     marginHorizontal: 5,
     marginVertical: 100,
   },
   submitButton: {
     backgroundColor: COLORS.primary,
     borderRadius: 15,
+    height: 50,
+    marginTop: 95,
   },
   suggestionIntakeText: {
     color: COLORS.primary,
@@ -38,14 +43,20 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textDecorationLine: 'underline',
   },
-  suggestionIntakeView: {},
+  suggestionIntakeView: {
+    flex: 1,
+    marginBottom: 25,
+  },
   suggestionText: {
     color: COLORS.primary,
     fontSize: 26,
     fontWeight: 'bold',
+    marginHorizontal: 20,
+    marginTop: 10,
     textAlign: 'center',
   },
   suggestionTextView: {
+    flex: 1.5,
     justifyContent: 'center',
   },
   temperatureView: {
@@ -56,9 +67,9 @@ const styles = StyleSheet.create({
     borderColor: COLORS.primary,
     borderRadius: 20,
     borderWidth: 5,
-    // marginTop: 15,
-    // padding: -5,
-    // paddingBottom: 15,
+    marginBottom: -5,
+    marginTop: 25,
+    paddingBottom: 15,
   },
 });
 
@@ -122,7 +133,13 @@ export default function HomeTab({recommendation, unit, temperature}) {
         <Text h4>Weather: {temperature.toFixed(1)}&#8457;</Text>
       </View>
       <View style={styles.suggestionTextView}>
-        <Icon name="water" type="ionicon" color={COLORS.primary} size={200} />
+        <Icon
+          style={styles.iconStyle}
+          name="water"
+          type="ionicon"
+          color={COLORS.primary}
+          size={200}
+        />
         <View style={styles.wrapRecommendation}>
           <Text style={styles.suggestionText}>
             Today&apos;s water intake recommendation:{'\n'}
