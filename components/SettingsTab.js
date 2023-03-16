@@ -17,6 +17,11 @@ const styles = StyleSheet.create({
   label: {
     color: COLORS.primary,
   },
+  /* 
+  Margins for the pickers
+  aligns picker border and
+  removes wheel view 
+   */
   picker1: {
     height: 130,
     marginTop: -90,
@@ -27,6 +32,10 @@ const styles = StyleSheet.create({
     marginTop: -90,
     width: 180,
   },
+  /* 
+  Overflow attribute permits only one
+  picker value to be visible
+  */
   pickerView: {
     overflow: 'hidden',
   },
@@ -60,6 +69,14 @@ export default function SettingsTab({
   unit,
   setUnit,
 }) {
+  /*
+  Set up toggles for:
+  Health API,
+  Geolocation API,
+  Calendar API, and
+  Notifications (allow/don't allow)
+  */
+
   const [appleHealth, setAppleHealth] = useState(false);
   const toggleHealthSwitch = () => {
     setAppleHealth(previousState => !previousState);
@@ -90,6 +107,10 @@ export default function SettingsTab({
       console.log(`Notification status: ${status}`);
     }
   };
+  /* 
+  Updates stored values for properties
+  in local storage
+  */
   const updateAge = async val => {
     setAge(val);
     await AsyncStorage.setItem('@age', val);
@@ -201,7 +222,7 @@ export default function SettingsTab({
 
         <View style={styles.row}>
           <Text h4 style={styles.label}>
-            Height
+            Height ({heightType})
           </Text>
           <View style={styles.pickerView}>
             <Picker
@@ -216,7 +237,7 @@ export default function SettingsTab({
         </View>
         <View style={styles.row}>
           <Text h4 style={styles.label}>
-            Weight
+            Weight ({weightType})
           </Text>
           <View style={styles.pickerView}>
             <Picker
