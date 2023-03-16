@@ -18,6 +18,11 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     flex: 1,
   },
+  graphModeTab: {
+    marginTop: 7.5,
+    marginBottom: -5,
+    alignSelf: 'center',
+  },
   leftDot: {
     backgroundColor: COLORS.primary,
     borderRadius: 15,
@@ -49,7 +54,7 @@ const styles = StyleSheet.create({
   viewModeTab: {
     flex: 1,
     justifyContent: 'flex-end',
-    marginBottom: 120,
+    paddingBottom: 115,
     alignSelf: 'center',
   },
   viewModeIndicator: {
@@ -57,6 +62,8 @@ const styles = StyleSheet.create({
   },
   viewModeTitle: {
     color: COLORS.primary,
+    fontSize: 16,
+    marginVertical: -2.5,
   },
   xAxisLegendStyle: {
     fontSize: 15,
@@ -248,10 +255,35 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
   );
 
   const [viewMode, setViewMode] = useState(0);
+  const [graphMode, setGraphMode] = useState(0);
 
   return (
     <View style={styles.container}>
       {viewMode == 0 && (
+        <View style={styles.graphModeTab}>
+          <Tab
+            value={graphMode}
+            onChange={setGraphMode}
+            titleStyle={styles.viewModeTitle}
+            indicatorStyle={styles.viewModeIndicator}
+            scrollable>
+            <Tab.Item
+              containerStyle={active => ({
+                backgroundColor: active ? COLORS.iceBlue : COLORS.white,
+              })}>
+              Weekly
+            </Tab.Item>
+            <Tab.Item
+              containerStyle={active => ({
+                backgroundColor: active ? COLORS.iceBlue : undefined,
+              })}>
+              Monthly
+            </Tab.Item>
+          </Tab>
+        </View>
+      )}
+
+      {viewMode == 0 && graphMode == 0 && (
         <View style={styles.barChart}>
           <View style={styles.legend}>
             <View style={styles.align}>
@@ -274,13 +306,13 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
             noOfSections={7}
             maxValue={125}
             labelWidth={85}
-            height={400}
+            height={380}
             xAxisLabelTextStyle={styles.xAxisLegendStyle}
           />
         </View>
       )}
 
-      {viewMode == 1 && (
+      {viewMode == 0 && graphMode == 1 && (
         <View style={styles.barChart}>
           <View style={styles.legend}>
             <View style={styles.align}>
@@ -303,13 +335,13 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
             noOfSections={7}
             maxValue={125}
             labelWidth={85}
-            height={400}
+            height={380}
             xAxisLabelTextStyle={styles.xAxisLegendStyle}
           />
         </View>
       )}
 
-      {viewMode == 2 && (
+      {viewMode == 1 && (
         <View>
           <AccordionList
             marginTop={55}
@@ -320,7 +352,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
         </View>
       )}
 
-      {viewMode == 3 && (
+      {viewMode == 2 && (
         <View>
           <Text style={styles.scoresHeader} h4>
             User Performance Score
@@ -351,13 +383,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
             containerStyle={active => ({
               backgroundColor: active ? COLORS.iceBlue : COLORS.white,
             })}>
-            Weekly Graph
-          </Tab.Item>
-          <Tab.Item
-            containerStyle={active => ({
-              backgroundColor: active ? COLORS.iceBlue : undefined,
-            })}>
-            Monthly Graph
+            Graph
           </Tab.Item>
           <Tab.Item
             buttonStyle={active => ({
