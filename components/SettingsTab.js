@@ -47,6 +47,9 @@ const styles = StyleSheet.create({
   smallInputView: {
     width: 45,
   },
+  switch: {
+    paddingRight: 60,
+  },
 });
 
 export default function SettingsTab({
@@ -123,6 +126,7 @@ export default function SettingsTab({
             Apple Health
           </Text>
           <Switch
+            style={styles.switch}
             trackColor={{true: COLORS.primary}}
             thumbColor={appleHealth ? COLORS.white : COLORS.primary}
             onValueChange={toggleHealthSwitch}
@@ -135,6 +139,7 @@ export default function SettingsTab({
             Location Data
           </Text>
           <Switch
+            style={styles.switch}
             trackColor={{true: COLORS.primary}}
             thumbColor={canAccessLocationData ? COLORS.white : COLORS.primary}
             onValueChange={toggleLocationSwitch}
@@ -147,6 +152,7 @@ export default function SettingsTab({
             Calendar
           </Text>
           <Switch
+            style={styles.switch}
             trackColor={{true: COLORS.primary}}
             thumbColor={canAccessCalendar ? COLORS.white : COLORS.primary}
             onValueChange={toggleCalendarSwitch}
@@ -159,6 +165,7 @@ export default function SettingsTab({
             Allow Notifications
           </Text>
           <Switch
+            style={styles.switch}
             trackColor={{true: COLORS.primary}}
             thumbColor={canSendNotifications ? COLORS.white : COLORS.primary}
             onValueChange={toggleNotificationsSwitch}
