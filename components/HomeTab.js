@@ -7,7 +7,14 @@ import COLORS from './Colors';
 import DRINKS from './Drinks';
 
 const styles = StyleSheet.create({
-  cardStyle: {flexDirection: 'row', justifyContent: 'space-between'},
+  cardStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  closeButton: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 10,
+  },
   container: {
     alignItems: 'center',
     backgroundColor: COLORS.white,
@@ -26,9 +33,11 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     backgroundColor: COLORS.white,
+    borderRadius: 15,
     flex: 1,
     marginHorizontal: 5,
     marginVertical: 100,
+    padding: 10,
   },
   submitButton: {
     backgroundColor: COLORS.primary,
@@ -121,7 +130,11 @@ export default function HomeTab({recommendation, unit, temperature}) {
     <View style={styles.container}>
       <Modal isVisible={isVisible}>
         <View style={styles.modalContainer}>
-          <Button title="close" onPress={() => setIsVisible(false)} />
+          <Button
+            buttonStyle={styles.closeButton}
+            title="Close Drink Diary"
+            onPress={() => setIsVisible(false)}
+          />
           <FlatList
             data={cardData}
             renderItem={renderDrinkCard}
