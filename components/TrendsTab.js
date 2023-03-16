@@ -82,57 +82,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const data = [
-  {
-    date: '3-2-2023',
-    rec: 57,
-    intake: 23,
-    exercise: 30,
-    calorie_intake: 1222,
-    rec_drink: 'orange juice',
-  },
-  {
-    date: '3-3-2023',
-    rec: 69,
-    intake: 37,
-    exercise: 75,
-    calorie_intake: 757,
-    rec_drink: 'coffee',
-  },
-  {
-    date: '3-4-2023',
-    rec: 69,
-    intake: 37,
-    exercise: 75,
-    calorie_intake: 757,
-    rec_drink: 'orange juice',
-  },
-  {
-    date: '3-5-2023',
-    rec: 69,
-    intake: 37,
-    exercise: 75,
-    calorie_intake: 757,
-    rec_drink: 'apple juice',
-  },
-  {
-    date: '3-6-2023',
-    rec: 69,
-    intake: 37,
-    exercise: 75,
-    calorie_intake: 757,
-    rec_drink: 'sparkling water',
-  },
-  {
-    date: '3-7-2023',
-    rec: 69,
-    intake: 37,
-    exercise: 75,
-    calorie_intake: 757,
-    rec_drink: 'smoothie',
-  },
-];
-
 const listTitle = item => {
   return <Text>{item.date}</Text>;
 };
@@ -141,14 +90,12 @@ const listAttribute = (item, unit) => {
   return (
     <View>
       <Text>
-        Recommendation: {item.intake} {unit === 'us-system' ? 'oz' : 'ml'}
+        Recommendation: {item.goal} {unit === 'us-system' ? 'oz' : 'ml'}
       </Text>
-      <Text>Recommended drink: {item.rec_drink}</Text>
       <Text>
         Water intake: {item.intake} {unit === 'us-system' ? 'oz' : 'ml'}
       </Text>
       <Text>Exercise: {item.exercise} minutes</Text>
-      <Text>Calorie intake: {item.calorie_intake} cals</Text>
     </View>
   );
 };
@@ -158,11 +105,13 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
   const [dataBarsMonth, setDataBarsMonth] = useState([]);
   const [weeklyMax, setWeeklyMax] = useState(125);
   const [monthlyMax, setMonthlyMax] = useState(125);
+  const [accordianData, setAccordianData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       // fetch data for week chart
       setDataBarsWeek([]);
+      setAccordianData([]);
       let days = [];
       for (let i = 1; i <= 7; i += 1) {
         days.push(AsyncStorage.getItem(`@${getCurrentDate(7 - i)}`));
@@ -186,6 +135,13 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
             frontColor: COLORS.lighterBlue,
           };
           setDataBarsWeek(prev => [...prev, recommendationBar, intakeBar]);
+          const accordianEntry = {
+            date: getCurrentDate(6 - i),
+            goal: dailyEntry.recommendation,
+            intake: dailyEntry.intake,
+            exercise: dailyEntry.exercise,
+          };
+          setAccordianData(prev => [...prev, accordianEntry]);
         }
       }
       const todayRecommendationBar = {
@@ -374,7 +330,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
         <View>
           <AccordionList
             marginTop={55}
-            data={data}
+            data={accordianData}
             customTitle={item => listTitle(item)}
             customBody={item => listAttribute(item, unit)}
           />
