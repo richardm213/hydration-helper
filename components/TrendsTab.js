@@ -156,6 +156,8 @@ const listAttribute = (item, unit) => {
 export default function TrendsTab({recommendation, intake, unit, newDay}) {
   const [dataBarsWeek, setDataBarsWeek] = useState([]);
   const [dataBarsMonth, setDataBarsMonth] = useState([]);
+  const [weeklyMax, setWeeklyMax] = useState(125);
+  const [monthlyMax, setMonthlyMax] = useState(125);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -166,10 +168,13 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
         days.push(AsyncStorage.getItem(`@${getCurrentDate(7 - i)}`));
       }
       days = await Promise.all(days);
+      let maxVal = -1;
       for (let i = 0; i < 6; i += 1) {
         const day = days[i];
         if (day) {
           const dailyEntry = JSON.parse(day);
+          maxVal = Math.max(maxVal, dailyEntry.recommendation);
+          maxVal = Math.max(maxVal, dailyEntry.intake);
           const recommendationBar = {
             label: getDayOfWeek(6 - i),
             value: dailyEntry.recommendation,
@@ -193,6 +198,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
         value: intake,
         frontColor: COLORS.lighterBlue,
       };
+      setWeeklyMax(maxVal);
       setDataBarsWeek(prev => [
         ...prev,
         todayRecommendationBar,
@@ -200,6 +206,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
       ]);
 
       // fetch data for month chart
+      let maxVal2 = -1;
       setDataBarsMonth([]);
       let daysMonth = [];
       for (let i = 1; i <= 30; i += 1) {
@@ -210,6 +217,8 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
         const day = daysMonth[i];
         if (day) {
           const dailyEntry = JSON.parse(day);
+          maxVal2 = Math.max(maxVal, dailyEntry.recommendation);
+          maxVal2 = Math.max(maxVal, dailyEntry.intake);
           const recommendationBar = {
             label: getDayOfMonth(29 - i),
             value: dailyEntry.recommendation,
@@ -223,6 +232,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
           setDataBarsMonth(prev => [...prev, recommendationBar, intakeBar]);
         }
       }
+      setMonthlyMax(maxVal2);
       const todayRecommendationBar2 = {
         label: getDayOfMonth(0),
         value: recommendation,
@@ -322,7 +332,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
             yAxisThickness={1}
             yAxisTextStyle={styles.yAxisTextStyle}
             noOfSections={7}
-            maxValue={125}
+            maxValue={weeklyMax}
             labelWidth={85}
             height={380}
             xAxisLabelTextStyle={styles.xAxisLegendStyle}
@@ -351,7 +361,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
             yAxisThickness={1}
             yAxisTextStyle={styles.yAxisTextStyle}
             noOfSections={7}
-            maxValue={125}
+            maxValue={monthlyMax}
             labelWidth={85}
             height={380}
             autoShiftLabels
