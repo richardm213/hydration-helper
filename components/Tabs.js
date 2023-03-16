@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import HomeTab from './HomeTab';
@@ -20,6 +20,7 @@ import DailyEntry from './DailyEntry';
 import {getCurrentDate} from '../util/getCurrentDate';
 import APICalculator from '../util/APICalculator';
 import useStorageData from '../hooks/useStorageData';
+import useUnitChange from '../hooks/useUnitChange';
 
 const Tab = createBottomTabNavigator();
 // const healthAPI = new HealthAPI();
@@ -44,6 +45,14 @@ export default function Tabs() {
     setWeight,
     setUnit,
     setTemperature,
+  );
+  useUnitChange(
+    unit,
+    recommendation,
+    setRecommendation,
+    setIntake,
+    setHeight,
+    setWeight,
   );
 
   const getTimeCategory = time => {
@@ -155,47 +164,6 @@ export default function Tabs() {
     };
     updateRecommendation();
   }, [dataFetched, age, gender, height, weight, exercise]);
-
-  const firstUpdate = useRef(true);
-  useEffect(() => {
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-      return;
-    }
-    /* 
-    Convert from metric to us-system on unit change;
-    Update height from cm to in
-    Update weight from kg to lbs
-    */
-    if (unit === 'us-system' && recommendation > 300) {
-      setRecommendation(val => val / 30);
-      setIntake(val => val / 30);
-      setHeight(val => {
-        const num = parseInt(val, 10) / 2.54;
-        return Math.round(num).toString();
-      });
-      setWeight(val => {
-        const num = parseInt(val, 10) / 0.453592;
-        return Math.round(num).toString();
-      });
-      /* 
-    Convert from us-system to metric on unit change;
-    Update height from in to cm
-    Update weight from lbs to kg
-    */
-    } else if (unit === 'metric' && recommendation < 300) {
-      setRecommendation(val => val * 30);
-      setIntake(val => val * 30);
-      setHeight(val => {
-        const num = parseInt(val, 10) * 2.54;
-        return Math.round(num).toString();
-      });
-      setWeight(val => {
-        const num = parseInt(val, 10) * 0.453592;
-        return Math.round(num).toString();
-      });
-    }
-  }, [unit]);
 
   return (
     <Tab.Navigator
