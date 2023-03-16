@@ -13,14 +13,13 @@ import {
   settingsIcon,
   trendsIcon,
 } from './TabIcons';
-import SimpleCalculator from '../util/SimpleCalculator';
 import COLORS from './Colors';
 // import HealthAPI from '../services/healthKitAPI';
 import DailyEntry from './DailyEntry';
 import {getCurrentDate} from '../util/getCurrentDate';
-import APICalculator from '../util/APICalculator';
 import useStorageData from '../hooks/useStorageData';
 import useUnitChange from '../hooks/useUnitChange';
+import useRecommendation from '../hooks/useRecommendation';
 
 const Tab = createBottomTabNavigator();
 // const healthAPI = new HealthAPI();
@@ -53,6 +52,17 @@ export default function Tabs() {
     setIntake,
     setHeight,
     setWeight,
+  );
+  useRecommendation(
+    dataFetched,
+    temperature,
+    unit,
+    age,
+    gender,
+    height,
+    weight,
+    exercise,
+    setRecommendation,
   );
 
   const getTimeCategory = time => {
@@ -129,41 +139,6 @@ export default function Tabs() {
     };
     checkCurrentDay();
   }, [dataFetched]);
-
-  useEffect(() => {
-    const updateRecommendation = async () => {
-      if (!dataFetched) return;
-      let calculator = null;
-      if (temperature !== 0) {
-        calculator = new APICalculator(
-          unit,
-          age,
-          gender,
-          height,
-          weight,
-          exercise,
-          {temperature},
-          null,
-        );
-      } else {
-        calculator = new SimpleCalculator(
-          unit,
-          age,
-          gender,
-          height,
-          weight,
-          exercise,
-        );
-      }
-      const newRecommendation = calculator.calculate();
-      setRecommendation(newRecommendation);
-      await AsyncStorage.setItem(
-        '@recommendation',
-        newRecommendation.toFixed(1).toString(),
-      );
-    };
-    updateRecommendation();
-  }, [dataFetched, age, gender, height, weight, exercise]);
 
   return (
     <Tab.Navigator
