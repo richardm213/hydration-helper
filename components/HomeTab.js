@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: COLORS.white,
-    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
   },
   largerTextWhite: {
@@ -19,19 +20,16 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontSize: 22,
     fontWeight: 'bold',
-    padding: 15,
   },
   modalContainer: {
     backgroundColor: COLORS.white,
-    flex: 1,
+
     marginHorizontal: 5,
     marginVertical: 100,
   },
   submitButton: {
     backgroundColor: COLORS.primary,
     borderRadius: 15,
-    height: 50,
-    marginTop: 95,
   },
   suggestionIntakeText: {
     color: COLORS.primary,
@@ -40,19 +38,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textDecorationLine: 'underline',
   },
-  suggestionIntakeView: {
-    flex: 1,
-  },
+  suggestionIntakeView: {},
   suggestionText: {
     color: COLORS.primary,
     fontSize: 26,
     fontWeight: 'bold',
-    marginHorizontal: 20,
-    marginTop: 10,
     textAlign: 'center',
   },
   suggestionTextView: {
-    flex: 1.5,
     justifyContent: 'center',
   },
   temperatureView: {
@@ -63,9 +56,9 @@ const styles = StyleSheet.create({
     borderColor: COLORS.primary,
     borderRadius: 20,
     borderWidth: 5,
-    marginTop: 15,
-    padding: -5,
-    paddingBottom: 15,
+    // marginTop: 15,
+    // padding: -5,
+    // paddingBottom: 15,
   },
 });
 
