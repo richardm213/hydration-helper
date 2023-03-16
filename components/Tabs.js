@@ -204,6 +204,11 @@ export default function Tabs() {
       firstUpdate.current = false;
       return;
     }
+    /* 
+    Convert from metric to us-system on unit change;
+    Update height from cm to in
+    Update weight from kg to lbs
+    */
     if (unit === 'us-system' && recommendation > 300) {
       setRecommendation(val => val / 30);
       setIntake(val => val / 30);
@@ -215,6 +220,11 @@ export default function Tabs() {
         const num = parseInt(val, 10) / 0.453592;
         return Math.round(num).toString();
       });
+      /* 
+    Convert from us-system to metric on unit change;
+    Update height from in to cm
+    Update weight from lbs to kg
+    */
     } else if (unit === 'metric' && recommendation < 300) {
       setRecommendation(val => val * 30);
       setIntake(val => val * 30);
