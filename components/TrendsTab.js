@@ -110,8 +110,8 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
   useEffect(() => {
     const fetchData = async () => {
       // fetch data for week chart
-      setDataBarsWeek([]);
-      setAccordianData([]);
+      const newDataBarsWeek = [];
+      const newAccordianData = [];
       let days = [];
       for (let i = 1; i <= 7; i += 1) {
         days.push(AsyncStorage.getItem(`@${getCurrentDate(7 - i)}`));
@@ -134,14 +134,14 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
             value: dailyEntry.intake,
             frontColor: COLORS.lighterBlue,
           };
-          setDataBarsWeek(prev => [...prev, recommendationBar, intakeBar]);
+          newDataBarsWeek.push(recommendationBar, intakeBar);
           const accordianEntry = {
             date: getCurrentDate(6 - i),
             goal: dailyEntry.recommendation,
             intake: dailyEntry.intake,
             exercise: dailyEntry.exercise,
           };
-          setAccordianData(prev => [...prev, accordianEntry]);
+          newAccordianData.push(accordianEntry);
         }
       }
       const todayRecommendationBar = {
@@ -155,15 +155,13 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
         frontColor: COLORS.lighterBlue,
       };
       setWeeklyMax(maxVal);
-      setDataBarsWeek(prev => [
-        ...prev,
-        todayRecommendationBar,
-        todayIntakeBar,
-      ]);
+      newDataBarsWeek.push(todayRecommendationBar, todayIntakeBar);
+      setDataBarsWeek(newDataBarsWeek);
+      setAccordianData(newAccordianData);
 
       // fetch data for month chart
       let maxVal2 = -1;
-      setDataBarsMonth([]);
+      const newDataBarsMonth = [];
       let daysMonth = [];
       for (let i = 1; i <= 30; i += 1) {
         daysMonth.push(AsyncStorage.getItem(`@${getCurrentDate(30 - i)}`));
@@ -185,7 +183,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
             value: dailyEntry.intake,
             frontColor: COLORS.lighterBlue,
           };
-          setDataBarsMonth(prev => [...prev, recommendationBar, intakeBar]);
+          newDataBarsMonth.push(recommendationBar, intakeBar);
         }
       }
       setMonthlyMax(maxVal2);
@@ -195,11 +193,8 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
         spacing: 2,
         frontColor: COLORS.primary,
       };
-      setDataBarsMonth(prev => [
-        ...prev,
-        todayRecommendationBar2,
-        todayIntakeBar,
-      ]);
+      newDataBarsMonth.push(todayRecommendationBar2, todayIntakeBar);
+      setDataBarsMonth(newDataBarsMonth);
     };
     fetchData();
   }, [intake, newDay]);
