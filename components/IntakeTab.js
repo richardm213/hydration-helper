@@ -12,11 +12,11 @@ import {Button, Icon} from '@rneui/base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import {SelectList} from 'react-native-dropdown-select-list';
+import {startCase, camelCase} from 'lodash';
 import DrinkSlider from './DrinkSlider';
 import COLORS from './Colors';
-import DRINKS from './Drinks';
 import DrinkEntry from './DrinkEntry';
-import {getWaterRank} from '../services/foodDataAPI';
+import {DRINKS, getWaterRank} from '../services/foodDataAPI';
 import DrinkLogEntry from './DrinkLogEntry';
 
 const styles = StyleSheet.create({
@@ -87,17 +87,12 @@ async function intakeRecordNotification(intake, recommendation) {
   });
 }
 
-const drinks = [
-  {key: '1', value: 'Water'},
-  {key: '2', value: 'Soda'},
-  {key: '3', value: 'Milk'},
-  {key: '4', value: 'Orange Juice'},
-  {key: '5', value: 'Coffee'},
-];
-
 export default function IntakeTab({intake, setIntake, recommendation, unit}) {
   const [drinkAmount, setDrinkAmount] = useState(0);
   const [drinkType, setDrinkType] = useState('water');
+  const drinksList = Object.keys(DRINKS).map(val => ({
+    value: startCase(val),
+  }));
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const [visible, setVisible] = useState(false);
   const [drinkLog, setDrinkLog] = useState(async () => {
@@ -118,13 +113,9 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
     setVisible(true);
   };
   const hideDrinkLog = () => setVisible(false);
-  const camalize = str =>
-    str
-      .toLowerCase()
-      .replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
   const updateDrinkType = text => {
     setDrinkType(text);
-    if (camalize(text) in DRINKS) setSubmitDisabled(false);
+    if (Object.keys(DRINKS).includes(camelCase(text))) setSubmitDisabled(false);
     else setSubmitDisabled(true);
   };
   const getTime = () => {
@@ -142,7 +133,7 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
   };
   const submitIntakeEntry = async () => {
     Alert.alert('Your entry has been recorded.');
-    const drinkTypeKey = camalize(drinkType);
+    const drinkTypeKey = camelCase(drinkType);
     const waterAmount =
       drinkAmount * ((await getWaterRank(drinkTypeKey)) / 100);
     const newIntake = intake + waterAmount;
@@ -203,7 +194,7 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
         </Text>
         <SelectList
           setSelected={val => updateDrinkType(val)}
-          data={drinks}
+          data={drinksList}
           save="value"
           boxStyles={styles.boxStyles}
           dropdownStyles={styles.dropDownStyles}

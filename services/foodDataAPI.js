@@ -2,7 +2,7 @@ import axios from 'axios';
 // eslint-disable-next-line import/no-unresolved
 import {FOOD_DATA_API_KEY} from '@env';
 
-const DRINKS = {
+export const DRINKS = {
   water: 174158,
   appleJuice: 2003590,
   orangeJuice: 2003591,
