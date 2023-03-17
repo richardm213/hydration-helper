@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   largerTextWhite: {
     alignItems: 'center',
     color: COLORS.white,
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: 'bold',
     padding: 20,
   },
@@ -39,6 +39,8 @@ const styles = StyleSheet.create({
   submitButton: {
     backgroundColor: COLORS.primary,
     borderRadius: 15,
+  },
+  submitButtonContainer: {
     height: 50,
   },
 });
@@ -48,7 +50,7 @@ export default function ExerciseTab({exercise, setExercise}) {
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const updateExerciseAmount = val => {
     setInput(val);
-    setSubmitDisabled(isNaN(val));
+    setSubmitDisabled(val === 0);
   };
   const submitExerciseEntry = async () => {
     Alert.alert('Your exercise has been recorded!');
@@ -80,6 +82,7 @@ export default function ExerciseTab({exercise, setExercise}) {
         disabled={submitDisabled}
         buttonStyle={styles.submitButton}
         titleStyle={styles.largerTextWhite}
+        containerStyle={styles.submitButtonContainer}
         title="Submit"
         onPress={submitExerciseEntry}
       />

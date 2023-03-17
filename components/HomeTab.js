@@ -20,6 +20,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  diaryButton: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 15,
+  },
+  diaryButtonContainer: {
+    height: 50,
+    marginTop: 95,
+  },
   iconStyle: {
     padding: 10,
   },
@@ -37,12 +45,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     marginVertical: 100,
     padding: 10,
-  },
-  submitButton: {
-    backgroundColor: COLORS.primary,
-    borderRadius: 15,
-    height: 50,
-    marginTop: 95,
   },
   suggestionIntakeText: {
     color: COLORS.primary,
@@ -163,8 +165,9 @@ export default function HomeTab({recommendation, unit, temperature}) {
       <View style={styles.suggestionIntakeView}>
         <Button
           title="My Drink Diary"
-          buttonStyle={styles.submitButton}
+          buttonStyle={styles.diaryButton}
           titleStyle={styles.largerTextWhite}
+          containerStyle={styles.diaryButtonContainer}
           onPress={() => setIsVisible(true)}
         />
       </View>

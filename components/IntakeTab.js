@@ -28,9 +28,11 @@ const styles = StyleSheet.create({
   drinkLogButton: {
     backgroundColor: COLORS.primaryFaded,
     borderRadius: 15,
+  },
+  drinkLogButtonContainer: {
+    alignSelf: 'center',
     height: 35,
     marginBottom: 60,
-    marginHorizontal: 135,
   },
   dropDownStyles: {alignSelf: 'center', width: 200},
   icon: {
@@ -62,9 +64,11 @@ const styles = StyleSheet.create({
   submitButton: {
     backgroundColor: COLORS.primary,
     borderRadius: 15,
+  },
+  submitButtonContainer: {
+    alignSelf: 'center',
     height: 50,
     marginBottom: 10,
-    marginHorizontal: 125,
   },
 });
 
@@ -209,6 +213,7 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
           disabled={submitDisabled}
           buttonStyle={styles.submitButton}
           titleStyle={styles.largerTextWhite}
+          containerStyle={styles.submitButtonContainer}
           title="Submit"
           onPress={submitIntakeEntry}
         />
@@ -217,6 +222,7 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
           onPress={showDrinkLog}
           buttonStyle={styles.drinkLogButton}
           titleStyle={styles.smallerTextWhite}
+          containerStyle={styles.drinkLogButtonContainer}
         />
         <Modal visible={visible} animationType="slide">
           <SafeAreaView style={styles.scrollView}>
