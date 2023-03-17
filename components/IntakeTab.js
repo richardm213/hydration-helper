@@ -159,15 +159,20 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
     since the user will likely not have increased their intake 
     by precisely 10 percent (e.g. 11.1 percent, etc.)
     */
-    const prevTotal = Math.floor((intake * 100) / recommendation / 10);
+    const intervalPercent = 10;
+    const prevTotal = Math.floor(
+      (intake * 100) / recommendation / intervalPercent,
+    );
     const curTotal = Math.floor(
-      ((intake + waterAmount) * 100) / recommendation / 10,
+      ((intake + waterAmount) * 100) / recommendation / intervalPercent,
     );
 
     console.log(
-      Math.floor(((intake + waterAmount) * 100) / recommendation / 10),
+      Math.floor(
+        ((intake + waterAmount) * 100) / recommendation / intervalPercent,
+      ),
     );
-    console.log(Math.floor((intake * 100) / recommendation / 10));
+    console.log(Math.floor((intake * 100) / recommendation / intervalPercent));
 
     /*
     If the percent intake changes by at least ten percent,
