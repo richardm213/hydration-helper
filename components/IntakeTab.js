@@ -68,8 +68,12 @@ const styles = StyleSheet.create({
   },
 });
 
-/* TODO: Modify to include percent water intake achieved
-and only be sent when some amount was recorded etc */
+/* 
+This intake notification is sent when the user
+records some water intake. 
+The notifications are sent at some set intervals of progress,
+e.g. every 10 percent increase in intake towards goal
+*/
 async function intakeRecordNotification(intake, recommendation) {
   await Notifications.scheduleNotificationAsync({
     content: {
@@ -79,7 +83,7 @@ async function intakeRecordNotification(intake, recommendation) {
       body: 'Keep up the good work; Every intake record counts.',
       data: {data: 'goes here'},
     },
-    trigger: {seconds: 5},
+    trigger: {seconds: 1},
   });
 }
 
