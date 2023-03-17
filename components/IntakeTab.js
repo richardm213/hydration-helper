@@ -155,9 +155,9 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
     (e.g. every 10 percent increase towards goal),
     calculate the previous and current percent intake
 
-    Calculate it as a multiple of 5 and remove the remainder,
+    Calculate it as a multiple of intervalPercent and remove the remainder,
     since the user will likely not have increased their intake 
-    by precisely 10 percent (e.g. 11.1 percent, etc.)
+    by precisely e.g. 10 percent (e.g. 11.1 percent, etc.)
     */
     const intervalPercent = 10;
     const prevTotal = Math.floor(
