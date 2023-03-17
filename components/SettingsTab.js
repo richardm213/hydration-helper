@@ -51,7 +51,10 @@ const styles = StyleSheet.create({
     marginVertical: 250,
     paddingHorizontal: 10,
   },
-  rightText: {paddingRight: 15},
+  rightText: {
+    color: COLORS.gray,
+    paddingRight: 15,
+  },
   row: {
     borderBottomColor: COLORS.lightGray2,
     borderBottomWidth: 1,
