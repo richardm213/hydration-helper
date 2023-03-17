@@ -3,9 +3,9 @@ import * as BackgroundFetch from 'expo-background-fetch';
 import * as TaskManager from 'expo-task-manager';
 import * as Calendar from 'expo-calendar';
 import * as Notifications from 'expo-notifications';
-import Tabs from './components/Tabs';
+import Tabs from './pages/Tabs';
 import NotificationSystem from './components/NotificationSystem';
-import {getCurrentDate} from './util/DateUtils';
+import {getCurrentDate} from './utils/DateUtils';
 import GetEventTimes from './services/CalendarAPI';
 
 const BACKGROUND_FETCH_TASK = 'background-fetch';

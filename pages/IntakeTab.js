@@ -13,11 +13,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import {SelectList} from 'react-native-dropdown-select-list';
 import {startCase, camelCase} from 'lodash';
-import DrinkSlider from './DrinkSlider';
-import COLORS from './Colors';
-import DrinkEntry from './DrinkEntry';
-import {DRINKS, getWaterRank} from '../services/foodDataAPI';
-import DrinkLogEntry from './DrinkLogEntry';
+import DrinkSlider from '../components/DrinkSlider';
+import COLORS from '../theme/Colors';
+import DrinkEntry from '../utils/DrinkEntry';
+import {DRINKS, getWaterRank} from '../services/FoodDataAPI';
+import DrinkLogEntry from '../components/DrinkLogEntry';
 
 const styles = StyleSheet.create({
   boxStyles: {marginHorizontal: 50, marginTop: 10},

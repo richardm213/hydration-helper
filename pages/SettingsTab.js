@@ -12,7 +12,7 @@ import {Button, Text} from '@rneui/base';
 import * as Calendar from 'expo-calendar';
 import {requestPermissionsAsync} from 'expo-notifications';
 import Modal from 'react-native-modal';
-import COLORS from './Colors';
+import COLORS from '../theme/Colors';
 import GetEventTimes from '../services/CalendarAPI';
 import {
   agePicker,
@@ -20,7 +20,7 @@ import {
   heightPicker,
   unitPicker,
   weightPicker,
-} from './SettingsPickers';
+} from '../components/SettingsPickers';
 
 const styles = StyleSheet.create({
   button: {

@@ -1,5 +1,5 @@
 import {Text, View, StyleSheet} from 'react-native';
-import COLORS from './Colors';
+import COLORS from '../theme/Colors';
 
 const styles = StyleSheet.create({
   card: {

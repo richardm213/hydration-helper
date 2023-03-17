@@ -3,8 +3,8 @@ import {useState} from 'react';
 import {Text, View, StyleSheet, Alert} from 'react-native';
 import {Button, Icon} from '@rneui/base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import COLORS from './Colors';
-import ExerciseSlider from './ExerciseSlider';
+import COLORS from '../theme/Colors';
+import ExerciseSlider from '../components/ExerciseSlider';
 
 const styles = StyleSheet.create({
   container: {

@@ -4,8 +4,8 @@ import {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {AccordionList} from 'react-native-accordion-list-view';
 import {BarChart} from 'react-native-gifted-charts';
-import {getCurrentDate, getDayOfMonth, getDayOfWeek} from '../util/DateUtils';
-import COLORS from './Colors';
+import {getCurrentDate, getDayOfMonth, getDayOfWeek} from '../utils/DateUtils';
+import COLORS from '../theme/Colors';
 
 const styles = StyleSheet.create({
   align: {

@@ -12,8 +12,8 @@ import {
   waterIcon,
   settingsIcon,
   trendsIcon,
-} from './TabIcons';
-import COLORS from './Colors';
+} from '../components/TabIcons';
+import COLORS from '../theme/Colors';
 // import HealthAPI from '../services/healthKitAPI';
 import useStorageData from '../hooks/useStorageData';
 import useUnitChange from '../hooks/useUnitChange';

@@ -1,6 +1,6 @@
 import {Slider, Icon, Text} from '@rneui/base';
 import {StyleSheet, View} from 'react-native';
-import COLORS from './Colors';
+import COLORS from '../theme/Colors';
 
 const styles = StyleSheet.create({
   iconContainerStyle: {bottom: 20, right: 20},

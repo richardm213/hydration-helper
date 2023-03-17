@@ -4,8 +4,8 @@ import Modal from 'react-native-modal';
 import {useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {startCase} from 'lodash';
-import COLORS from './Colors';
-import {DRINKS} from '../services/foodDataAPI';
+import COLORS from '../theme/Colors';
+import {DRINKS} from '../services/FoodDataAPI';
 
 const styles = StyleSheet.create({
   cardStyle: {

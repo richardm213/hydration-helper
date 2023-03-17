@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useEffect} from 'react';
-import APICalculator from '../util/APICalculator';
-import SimpleCalculator from '../util/SimpleCalculator';
+import APICalculator from '../utils/APICalculator';
+import SimpleCalculator from '../utils/SimpleCalculator';
 
 export default function useRecommendation(
   dataFetched,

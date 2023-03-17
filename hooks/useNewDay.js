@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useEffect, useState} from 'react';
-import DailyEntry from '../components/DailyEntry';
-import {getCurrentDate, getTimeCategory} from '../util/DateUtils';
+import DailyEntry from '../utils/DailyEntry';
+import {getCurrentDate, getTimeCategory} from '../utils/DateUtils';
 
 export default function useNewDay(
   intake,
