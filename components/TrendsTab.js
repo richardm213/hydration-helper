@@ -4,11 +4,7 @@ import {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {AccordionList} from 'react-native-accordion-list-view';
 import {BarChart} from 'react-native-gifted-charts';
-import {
-  getCurrentDate,
-  getDayOfMonth,
-  getDayOfWeek,
-} from '../util/getCurrentDate';
+import {getCurrentDate, getDayOfMonth, getDayOfWeek} from '../util/DateUtils';
 import COLORS from './Colors';
 
 const styles = StyleSheet.create({

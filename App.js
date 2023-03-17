@@ -5,19 +5,11 @@ import * as Calendar from 'expo-calendar';
 import * as Notifications from 'expo-notifications';
 import Tabs from './components/Tabs';
 import NotificationSystem from './components/NotificationSystem';
-import {getCurrentDate} from './util/getCurrentDate';
+import {getCurrentDate} from './util/DateUtils';
 import GetEventTimes from './services/CalendarAPI';
 
 const BACKGROUND_FETCH_TASK = 'background-fetch';
 let currentDate = getCurrentDate(0);
-
-/* TODO: Implement new day tasks
-1. Find unbusy times based on today's calendar events
-2. Choose drink to recommend today
-3. Update current date 
-4. Add API calls
-5. Update sodium and calorie intakes in AsyncStorage, from React Native Health API
-6. Generate new intake recommendation */
 
 async function calendarNotification(time) {
   await Notifications.scheduleNotificationAsync({

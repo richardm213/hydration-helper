@@ -1,24 +1,24 @@
-function getCurrentDate(daysBeforeToday) {
+const getCurrentDate = daysBefore => {
   const datetime = new Date();
-  datetime.setDate(datetime.getDate() - daysBeforeToday);
+  datetime.setDate(datetime.getDate() - daysBefore);
   const year = datetime.getFullYear();
   const month = datetime.getMonth() + 1;
   const date = datetime.getDate();
   return `${month}-${date}-${year}`;
-}
+};
 
 const weekday = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-function getDayOfWeek(daysBeforeToday) {
+const getDayOfWeek = daysBefore => {
   const date = new Date();
-  date.setDate(date.getDate() - daysBeforeToday);
+  date.setDate(date.getDate() - daysBefore);
   return weekday[date.getDay()];
-}
+};
 
-function getDayOfMonth(daysBeforeToday) {
+const getDayOfMonth = daysBefore => {
   const date = new Date();
-  date.setDate(date.getDate() - daysBeforeToday);
+  date.setDate(date.getDate() - daysBefore);
   return date.getDate();
-}
+};
 
 const getTimeCategory = time => {
   const hours = time.split(':')[0];
