@@ -20,4 +20,11 @@ function getDayOfMonth(daysBeforeToday) {
   return date.getDate();
 }
 
-export {getCurrentDate, getDayOfWeek, getDayOfMonth};
+const getTimeCategory = time => {
+  const hours = time.split(':')[0];
+  if (hours <= 12) return 'morning';
+  if (hours <= 18) return 'afternoon';
+  return 'evening';
+};
+
+export {getCurrentDate, getDayOfWeek, getDayOfMonth, getTimeCategory};
