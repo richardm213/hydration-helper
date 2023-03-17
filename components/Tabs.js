@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import {StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import HomeTab from './HomeTab';
@@ -20,6 +21,32 @@ import {getCurrentDate} from '../util/getCurrentDate';
 import useStorageData from '../hooks/useStorageData';
 import useUnitChange from '../hooks/useUnitChange';
 import useRecommendation from '../hooks/useRecommendation';
+
+const styles = StyleSheet.create({
+  headerStyle: {
+    backgroundColor: COLORS.iceBlue,
+    height: 110,
+  },
+  headerTitleStyle: {
+    color: COLORS.primarySelected,
+    flex: 1,
+    fontSize: 18,
+    marginTop: 15,
+  },
+  tabBarItemStyle: {
+    height: 50,
+    marginTop: 20,
+  },
+  tabBarLabelStyle: {
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+  tabBarStyle: {
+    backgroundColor: COLORS.iceBlue,
+    height: 100,
+    position: 'absolute',
+  },
+});
 
 const Tab = createBottomTabNavigator();
 // const healthAPI = new HealthAPI();
@@ -144,32 +171,13 @@ export default function Tabs() {
     <Tab.Navigator
       initialRouteName="Water Intake"
       screenOptions={{
-        tabBarStyle: {
-          position: 'absolute',
-          backgroundColor: COLORS.iceBlue,
-          height: 100,
-        },
-        tabBarItemStyle: {
-          height: 50,
-          marginTop: 20,
-        },
-        tabBarLabelStyle: {
-          fontSize: 12,
-          fontWeight: 'bold',
-        },
+        tabBarStyle: styles.tabBarStyle,
+        tabBarItemStyle: styles.tabBarItemStyle,
+        tabBarLabelStyle: styles.tabBarLabelStyle,
         tabBarActiveTintColor: COLORS.primarySelected,
         tabBarInactiveTintColor: COLORS.primaryFaded,
-
-        headerStyle: {
-          height: 110,
-          backgroundColor: COLORS.iceBlue,
-        },
-        headerTitleStyle: {
-          flex: 1,
-          color: COLORS.primarySelected,
-          fontSize: 18,
-          marginTop: 15,
-        },
+        headerStyle: styles.headerStyle,
+        headerTitleStyle: styles.headerTitleStyle,
       }}>
       <Tab.Screen
         name="Home"
