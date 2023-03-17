@@ -4,7 +4,6 @@ import Modal from 'react-native-modal';
 import {useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import COLORS from './Colors';
-import DRINKS from './Drinks';
 
 const styles = StyleSheet.create({
   cardStyle: {
@@ -99,9 +98,7 @@ export default function HomeTab({recommendation, unit, temperature}) {
           .split('-')[0];
         const cardObj = {
           drinkType,
-          drinkAmount: Math.ceil(
-            recommendation / ((6 * DRINKS[drinkType]) / 100),
-          ),
+          drinkAmount: Math.ceil(recommendation / 6),
           drinkTime: time,
         };
         const cardObj2 = {
