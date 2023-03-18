@@ -84,6 +84,7 @@ export default function SettingsTab({
   setWeight,
   unit,
   setUnit,
+  setCalories,
   setProtein,
 }) {
   /*
@@ -98,6 +99,7 @@ export default function SettingsTab({
   const toggleHealthSwitch = () => {
     setAppleHealth(previousState => !previousState);
     healthAPI.init();
+    healthAPI.energyConsumed(setCalories);
     healthAPI.protein(setProtein);
   };
 

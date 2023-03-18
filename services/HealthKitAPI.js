@@ -21,14 +21,29 @@ class HealthAPI {
     });
   }
 
-  calorieIntake() {
+  energyConsumed(setCalories) {
     const calorieIntake = AppleHealthKit.getEnergyConsumedSamples(
       this.options,
       (err, results) => {
         if (err) {
-          return 0;
+          return;
         }
-        return results;
+        let todayCalories = 0;
+        const historicalCalories = {};
+        results.forEach(entry => {
+          const daysBefore =
+            new Date().getDate() - new Date(entry.startDate).getDate();
+          if (daysBefore === 0) {
+            todayCalories += entry.value;
+          } else if (daysBefore in historicalCalories) {
+            historicalCalories[daysBefore] += entry.value;
+          } else {
+            historicalCalories[daysBefore] = entry.value;
+          }
+        });
+        const average = array => array.reduce((a, b) => a + b) / array.length;
+        const averageCalories = average(Object.values(historicalCalories));
+        setCalories({today: todayCalories, average: averageCalories});
       },
     );
 
