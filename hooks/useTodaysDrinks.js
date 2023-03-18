@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {startCase} from 'lodash';
+import {lowerCase} from 'lodash';
 import {useEffect, useState} from 'react';
 import {DRINKS} from '../services/FoodDataAPI';
 
@@ -23,12 +23,12 @@ export default function useTodaysDrinks(recommendation) {
           .split('-')[0];
         drinkTypes.add(drinkType);
         const drink1 = {
-          drinkType: startCase(drinkType),
+          drinkType: lowerCase(drinkType),
           drinkAmount: Math.ceil(recommendation / 6),
           drinkTime: time,
         };
         const drink2 = {
-          drinkType: 'Water',
+          drinkType: 'water',
           drinkAmount: Math.ceil(recommendation / 6),
           drinkTime: time,
         };
@@ -37,7 +37,7 @@ export default function useTodaysDrinks(recommendation) {
       });
       if (performanceScore < 70) {
         const drinksList = Object.keys(DRINKS).filter(d => !drinkTypes.has(d));
-        const newDrink = `${startCase(
+        const newDrink = `${lowerCase(
           drinksList[Math.floor(Math.random() * drinksList.length)],
         )} * new *`;
         tempCardData[1].drinkType = newDrink;
