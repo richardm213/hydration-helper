@@ -12,6 +12,7 @@ export default function useRecommendation(
   height,
   weight,
   exercise,
+  protein,
   setRecommendation,
 ) {
   useEffect(() => {
@@ -27,6 +28,7 @@ export default function useRecommendation(
           weight,
           exercise,
           {temperature},
+          protein,
           null,
         );
       } else {
@@ -47,5 +49,5 @@ export default function useRecommendation(
       );
     };
     updateRecommendation();
-  }, [dataFetched, age, gender, height, weight, exercise]);
+  }, [dataFetched, age, gender, height, weight, exercise, protein]);
 }

@@ -104,6 +104,7 @@ export default function Tabs() {
     height,
     weight,
     exercise,
+    protein,
     setRecommendation,
   );
   return (
