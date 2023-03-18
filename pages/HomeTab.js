@@ -1,11 +1,9 @@
 import {FlatList, StyleSheet, View} from 'react-native';
 import {Button, Card, Icon, Text} from '@rneui/base';
 import Modal from 'react-native-modal';
-import {useEffect, useState} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {startCase} from 'lodash';
+import {useState} from 'react';
 import COLORS from '../theme/Colors';
-import {DRINKS} from '../services/FoodDataAPI';
+import useTodaysDrinks from '../hooks/useTodaysDrinks';
 
 const styles = StyleSheet.create({
   cardStyle: {
@@ -97,50 +95,7 @@ const styles = StyleSheet.create({
 export default function HomeTab({recommendation, unit, intake}) {
   const [isVisible, setIsVisible] = useState(false);
   const measurementType = unit === 'us-system' ? 'oz' : 'ml';
-  const [cardData, setCardData] = useState([]);
-  useEffect(() => {
-    const getDetailedRecommendation = async () => {
-      const drinkScores = JSON.parse(
-        await AsyncStorage.getItem('@drinkScores'),
-      );
-      const performanceScore = parseInt(
-        await AsyncStorage.getItem('@performanceScore'),
-        10,
-      );
-      const tempCardData = [];
-      const todaysDrinks = new Set(['water']);
-      ['morning', 'afternoon', 'evening'].forEach(time => {
-        const drinkType = Object.entries(drinkScores)
-          .filter(entry => entry[0].includes(time))
-          .sort((a, b) => b[1] - a[1])[0][0]
-          .split('-')[0];
-        todaysDrinks.add(drinkType);
-        const cardObj = {
-          drinkType: startCase(drinkType),
-          drinkAmount: Math.ceil(recommendation / 6),
-          drinkTime: time,
-        };
-        const cardObj2 = {
-          drinkType: 'Water',
-          drinkAmount: Math.ceil(recommendation / 6),
-          drinkTime: time,
-        };
-        tempCardData.push(cardObj);
-        tempCardData.push(cardObj2);
-      });
-      if (performanceScore < 70) {
-        const drinksList = Object.keys(DRINKS).filter(
-          d => !todaysDrinks.has(d),
-        );
-        const newDrink = `${startCase(
-          drinksList[Math.floor(Math.random() * drinksList.length)],
-        )} * new *`;
-        tempCardData[1].drinkType = newDrink;
-      }
-      setCardData(tempCardData);
-    };
-    getDetailedRecommendation();
-  }, []);
+  const cardData = useTodaysDrinks(recommendation);
 
   const renderDrinkCard = ({item}) => (
     <Card wrapperStyle={styles.cardStyle}>
