@@ -26,7 +26,7 @@ const fileHeaders = {
   'Content-Type': 'application/json',
 };
 
-export const getWaterRank = async foodName => {
+export const getWaterAmount = async foodName => {
   try {
     const fdcId = DRINKS[foodName];
     const url = `https://api.nal.usda.gov/fdc/v1/food/${fdcId}`;
@@ -38,8 +38,7 @@ export const getWaterRank = async foodName => {
     const waterNutrient = response.data.foodNutrients.find(
       nutrient => nutrient.nutrient.number === '255',
     );
-    const waterRank = waterNutrient ? waterNutrient.nutrient.rank : null;
-    return waterRank;
+    return waterNutrient ? waterNutrient.amount : null;
   } catch (error) {
     console.error(error);
     return null;

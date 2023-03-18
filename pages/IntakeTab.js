@@ -16,7 +16,7 @@ import {Button, Icon} from '@rneui/themed';
 import DrinkSlider from '../components/DrinkSlider';
 import COLORS from '../theme/Colors';
 import DrinkEntry from '../utils/DrinkEntry';
-import {DRINKS, getWaterRank} from '../services/FoodDataAPI';
+import {DRINKS, getWaterAmount} from '../services/FoodDataAPI';
 import DrinkLogEntry from '../components/DrinkLogEntry';
 
 const styles = StyleSheet.create({
@@ -133,7 +133,7 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
     Alert.alert('Your entry has been recorded.');
     const drinkTypeKey = camelCase(drinkType);
     const waterAmount =
-      drinkAmount * ((await getWaterRank(drinkTypeKey)) / 100);
+      drinkAmount * ((await getWaterAmount(drinkTypeKey)) / 100);
     const newIntake = intake + waterAmount;
     setIntake(newIntake);
     await AsyncStorage.setItem('@intake', newIntake.toString());
