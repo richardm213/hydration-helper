@@ -1,13 +1,5 @@
 import {useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  Alert,
-  ScrollView,
-  SafeAreaView,
-  Modal,
-  FlatList,
-} from 'react-native';
+import {StyleSheet, Text, Alert, ScrollView, SafeAreaView} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import {SelectList} from 'react-native-dropdown-select-list';
@@ -17,16 +9,12 @@ import DrinkSlider from '../components/DrinkSlider';
 import COLORS from '../theme/Colors';
 import DrinkEntry from '../utils/DrinkEntry';
 import {DRINKS, getWaterAmount} from '../services/FoodDataAPI';
-import DrinkLogEntry from '../components/DrinkLogEntry';
 import Style from '../theme/Style';
 import {getTime} from '../utils/DateUtils';
+import DrinkLogModal from '../components/DrinkLogModal';
 
 const styles = StyleSheet.create({
   boxStyles: {marginHorizontal: 50, marginTop: 10},
-  closeButtonContainer: {
-    marginBottom: 10,
-    marginHorizontal: 10,
-  },
   drinkLogButton: {
     backgroundColor: COLORS.primaryFaded,
   },
@@ -34,10 +22,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     height: 35,
     marginBottom: 60,
-  },
-  drinksContainer: {
-    marginHorizontal: 5,
-    marginVertical: 100,
   },
   dropDownStyles: {alignSelf: 'center', width: 200},
   icon: {
@@ -78,7 +62,7 @@ async function intakeRecordNotification(intake, recommendation) {
 
 export default function IntakeTab({intake, setIntake, recommendation, unit}) {
   const [drinkAmount, setDrinkAmount] = useState(0);
-  const [drinkType, setDrinkType] = useState('water');
+  const [drinkType, setDrinkType] = useState(null);
   const drinksList = Object.keys(DRINKS).map(val => ({
     value: startCase(val),
   }));
@@ -98,10 +82,8 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
   };
   const showDrinkLog = async () => {
     updateDrinkLog();
-    console.log(drinkLog);
     setVisible(true);
   };
-  const hideDrinkLog = () => setVisible(false);
   const updateDrinkType = text => {
     setDrinkType(text);
     if (Object.keys(DRINKS).includes(camelCase(text))) setSubmitDisabled(false);
@@ -200,23 +182,13 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
           titleStyle={styles.smallerTextWhite}
           containerStyle={styles.drinkLogButtonContainer}
         />
-        <Modal visible={visible} animationType="slide">
-          <SafeAreaView style={styles.drinksContainer}>
-            <Button
-              title="Close"
-              containerStyle={styles.closeButtonContainer}
-              onPress={hideDrinkLog}
-            />
-            <FlatList
-              data={drinkLog}
-              extraData={drinkLog}
-              renderItem={({item}) => (
-                <DrinkLogEntry drinkEntry={item} unit={unit} />
-              )}
-            />
-          </SafeAreaView>
-        </Modal>
       </ScrollView>
+      <DrinkLogModal
+        visible={visible}
+        setVisible={setVisible}
+        drinkLog={drinkLog}
+        unit={unit}
+      />
     </SafeAreaView>
   );
 }
