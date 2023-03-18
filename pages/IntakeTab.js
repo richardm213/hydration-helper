@@ -21,6 +21,10 @@ import DrinkLogEntry from '../components/DrinkLogEntry';
 
 const styles = StyleSheet.create({
   boxStyles: {marginHorizontal: 50, marginTop: 10},
+  closeButton: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 10,
+  },
   container: {
     backgroundColor: COLORS.white,
     flex: 1,
@@ -226,7 +230,11 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
         />
         <Modal visible={visible} animationType="slide">
           <SafeAreaView style={styles.scrollView}>
-            <Button title="Close" onPress={hideDrinkLog} />
+            <Button
+              buttonStyle={styles.closeButton}
+              title="Close"
+              onPress={hideDrinkLog}
+            />
             <FlatList
               data={drinkLog}
               extraData={drinkLog}
