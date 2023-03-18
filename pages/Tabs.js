@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeTab from './HomeTab';
 import IntakeTab from './IntakeTab';
@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     color: COLORS.primarySelected,
     flex: 1,
     fontSize: 18,
+    fontWeight: 'bold',
     marginTop: 15,
   },
   tabBarItemStyle: {
@@ -45,6 +46,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 });
+
+function WeatherDisplay({temperature}) {
+  return (
+    <Text style={styles.headerTitleStyle}>
+      &#9729; Weather: {temperature.toFixed(1)}&#8457; &#9729;
+    </Text>
+  );
+}
 
 const Tab = createBottomTabNavigator();
 // const healthAPI = new HealthAPI();
@@ -112,7 +121,8 @@ export default function Tabs() {
         name="Home"
         options={{
           tabBarIcon: waterIcon,
-          headerTitle: `Weather: ${temperature.toFixed(1)}°F`,
+          // eslint-disable-next-line react/no-unstable-nested-components
+          headerTitle: () => <WeatherDisplay temperature={temperature} />,
         }}>
         {() => (
           <HomeTab
