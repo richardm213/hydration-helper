@@ -15,6 +15,8 @@ export default function DrinksAccordian({data, unit}) {
           Water intake: {item.intake} {unit === 'us-system' ? 'oz' : 'ml'}
         </Text>
         <Text>Exercise: {item.exercise} minutes</Text>
+        <Text>Calories: {item.calories} calories</Text>
+        <Text>Protein: {item.protein}g</Text>
       </View>
     ),
     [],

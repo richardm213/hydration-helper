@@ -11,6 +11,8 @@ export default function useNewDay(
   setIntake,
   setExercise,
   exercise,
+  calories,
+  protein,
 ) {
   const [newDay, setNewDay] = useState(false);
 
@@ -72,6 +74,8 @@ export default function useNewDay(
           intake,
           drinkEntries,
           exercise,
+          calories.today,
+          protein.today,
         );
         await AsyncStorage.setItem(`@${d1}`, JSON.stringify(dailyEntry));
         resetDay(d2);

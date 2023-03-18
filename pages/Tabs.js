@@ -90,6 +90,8 @@ export default function Tabs() {
     setIntake,
     setExercise,
     exercise,
+    calories,
+    protein,
   );
   useUnitChange(
     unit,

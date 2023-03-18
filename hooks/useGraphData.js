@@ -50,6 +50,8 @@ export default function useGraphData(
             goal: dailyEntry.recommendation,
             intake: dailyEntry.intake,
             exercise: dailyEntry.exercise,
+            calories: dailyEntry.calories,
+            protein: dailyEntry.protein,
           };
           newAccordianData.push(accordianEntry);
         }
