@@ -7,6 +7,7 @@ import {BarChart} from 'react-native-gifted-charts';
 import {getCurrentDate, getDayOfMonth, getDayOfWeek} from '../utils/DateUtils';
 import COLORS from '../theme/Colors';
 import {Tab} from '@rneui/themed';
+import Style from '../theme/Style';
 
 const styles = StyleSheet.create({
   align: {
@@ -15,10 +16,6 @@ const styles = StyleSheet.create({
   },
   barChart: {paddingHorizontal: 20},
   cardStyle: {flexDirection: 'row', justifyContent: 'space-between'},
-  container: {
-    backgroundColor: COLORS.white,
-    flex: 1,
-  },
   graphModeTab: {
     marginTop: 7.5,
     marginBottom: -5,
@@ -254,7 +251,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
   const [graphMode, setGraphMode] = useState(0);
 
   return (
-    <View style={styles.container}>
+    <View style={Style.container}>
       {viewMode == VIEWMODE.graph && (
         <View style={styles.graphModeTab}>
           <Tab

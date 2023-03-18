@@ -3,25 +3,12 @@ import {useState} from 'react';
 import {Text, View, StyleSheet, Alert} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Button, Icon} from '@rneui/themed';
-import COLORS from '../theme/Colors';
 import ExerciseSlider from '../components/ExerciseSlider';
+import Style from '../theme/Style';
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: COLORS.white,
-    flex: 1,
-  },
   icon: {
     marginTop: 20,
-  },
-  largerTextBlueBold: {
-    alignItems: 'center',
-    color: COLORS.primary,
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    padding: 20,
   },
 });
 
@@ -39,15 +26,15 @@ export default function ExerciseTab({exercise, setExercise}) {
     await AsyncStorage.setItem('@exercise', newExercise.toString());
   };
   return (
-    <View style={styles.container}>
+    <View style={Style.container}>
       <Icon
         style={styles.icon}
         name="run-circle"
         type="material-icons"
         size={200}
       />
-      <Text style={styles.largerTextBlueBold}>
-        Please enter your minutes of exercise below:
+      <Text style={Style.largeBlueText}>
+        Please enter your minutes of exercise below
       </Text>
       <ExerciseSlider
         exerciseAmount={input}

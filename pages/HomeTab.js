@@ -5,17 +5,12 @@ import {useState} from 'react';
 import {Button, Icon} from '@rneui/themed';
 import COLORS from '../theme/Colors';
 import useTodaysDrinks from '../hooks/useTodaysDrinks';
+import Style from '../theme/Style';
 
 const styles = StyleSheet.create({
   cardStyle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-  },
-  container: {
-    alignItems: 'center',
-    backgroundColor: COLORS.white,
-    flex: 1,
-    justifyContent: 'center',
   },
   diaryButtonContainer: {
     marginTop: 95,
@@ -32,13 +27,8 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   progressText: {
-    color: COLORS.primary,
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginBottom: 25,
-    marginHorizontal: 20,
-    marginTop: 15,
-    textAlign: 'center',
+    marginBottom: 20,
+    marginTop: -5,
   },
   suggestionIntakeText: {
     color: COLORS.primary,
@@ -52,14 +42,11 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   suggestionText: {
-    color: COLORS.primary,
     fontSize: 26,
-    fontWeight: 'bold',
-    marginHorizontal: 20,
-    marginTop: 10,
-    textAlign: 'center',
+    paddingVertical: 0,
   },
   suggestionTextView: {
+    alignItems: 'center',
     flex: 1.5,
     justifyContent: 'center',
   },
@@ -71,9 +58,9 @@ const styles = StyleSheet.create({
     borderColor: COLORS.primary,
     borderRadius: 20,
     borderWidth: 5,
-    marginBottom: -5,
     marginTop: 25,
     paddingBottom: 15,
+    paddingTop: 10,
   },
 });
 
@@ -92,7 +79,7 @@ export default function HomeTab({recommendation, unit, intake}) {
     </Card>
   );
   return (
-    <View style={styles.container}>
+    <View style={Style.container}>
       <Modal isVisible={isVisible}>
         <View style={styles.modalContainer}>
           <Button
@@ -107,14 +94,14 @@ export default function HomeTab({recommendation, unit, intake}) {
         </View>
       </Modal>
       <View style={styles.temperatureView}>
-        <Text style={styles.progressText}>
+        <Text style={[Style.largeBlueText, styles.progressText]}>
           Your Progress: {((intake * 100) / recommendation).toFixed(1)}%
         </Text>
       </View>
       <View style={styles.suggestionTextView}>
         <Icon style={styles.iconStyle} name="water" type="ionicon" size={200} />
         <View style={styles.wrapRecommendation}>
-          <Text style={styles.suggestionText}>
+          <Text style={[Style.largeBlueText, styles.suggestionText]}>
             Today&apos;s water intake recommendation:{'\n'}
           </Text>
 

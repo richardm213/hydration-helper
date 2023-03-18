@@ -18,16 +18,13 @@ import COLORS from '../theme/Colors';
 import DrinkEntry from '../utils/DrinkEntry';
 import {DRINKS, getWaterAmount} from '../services/FoodDataAPI';
 import DrinkLogEntry from '../components/DrinkLogEntry';
+import Style from '../theme/Style';
 
 const styles = StyleSheet.create({
   boxStyles: {marginHorizontal: 50, marginTop: 10},
   closeButtonContainer: {
     marginBottom: 10,
     marginHorizontal: 10,
-  },
-  container: {
-    backgroundColor: COLORS.white,
-    flex: 1,
   },
   drinkLogButton: {
     backgroundColor: COLORS.primaryFaded,
@@ -44,13 +41,6 @@ const styles = StyleSheet.create({
   dropDownStyles: {alignSelf: 'center', width: 200},
   icon: {
     marginTop: 20,
-  },
-  largerTextBlue: {
-    color: COLORS.primary,
-    fontSize: 24,
-    fontWeight: 'bold',
-    margin: 15,
-    textAlign: 'center',
   },
   scrollView: {
     marginBottom: 60,
@@ -178,7 +168,7 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={Style.container}>
       <ScrollView style={styles.scrollView}>
         <Icon
           style={styles.icon}
@@ -186,7 +176,7 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
           type="material"
           size={160}
         />
-        <Text style={styles.largerTextBlue}>
+        <Text style={Style.largeBlueText}>
           Please enter your new liquid intake below
         </Text>
         <SelectList

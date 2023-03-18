@@ -21,6 +21,7 @@ import {
   unitPicker,
   weightPicker,
 } from '../components/SettingsPickers';
+import Style from '../theme/Style';
 
 const styles = StyleSheet.create({
   buttonContainer: {
@@ -33,10 +34,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   buttonTitle: {fontSize: 18, fontWeight: 'normal', padding: 0},
-  container: {
-    backgroundColor: COLORS.white,
-    flex: 1,
-  },
   label: {
     color: COLORS.primary,
   },
@@ -156,7 +153,7 @@ export default function SettingsTab({
   const saveChange = () => setIsVisible(false);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={Style.container}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.row}>
           <Text h4 style={styles.label}>
