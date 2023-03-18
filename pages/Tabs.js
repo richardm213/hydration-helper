@@ -69,8 +69,8 @@ export default function Tabs() {
   const [weight, setWeight] = useState('160');
   const [unit, setUnit] = useState('us-system');
   const [temperature, setTemperature] = useState(0);
-  const [calories, setCalories] = useState(null);
-  const [protein, setProtein] = useState(null);
+  const [calories, setCalories] = useState({today: 0, average: 0});
+  const [protein, setProtein] = useState({today: 0, average: 0});
   const dataFetched = useStorageData(
     setIntake,
     setEntries,
