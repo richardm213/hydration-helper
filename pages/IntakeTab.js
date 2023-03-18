@@ -8,11 +8,11 @@ import {
   Modal,
   FlatList,
 } from 'react-native';
-import {Button, Icon} from '@rneui/base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import {SelectList} from 'react-native-dropdown-select-list';
 import {startCase, camelCase} from 'lodash';
+import {Button, Icon} from '@rneui/themed';
 import DrinkSlider from '../components/DrinkSlider';
 import COLORS from '../theme/Colors';
 import DrinkEntry from '../utils/DrinkEntry';
@@ -21,9 +21,7 @@ import DrinkLogEntry from '../components/DrinkLogEntry';
 
 const styles = StyleSheet.create({
   boxStyles: {marginHorizontal: 50, marginTop: 10},
-  closeButton: {
-    backgroundColor: COLORS.primary,
-    borderRadius: 10,
+  closeButtonContainer: {
     marginBottom: 10,
     marginHorizontal: 10,
   },
@@ -33,7 +31,6 @@ const styles = StyleSheet.create({
   },
   drinkLogButton: {
     backgroundColor: COLORS.primaryFaded,
-    borderRadius: 15,
   },
   drinkLogButtonContainer: {
     alignSelf: 'center',
@@ -55,13 +52,6 @@ const styles = StyleSheet.create({
     margin: 15,
     textAlign: 'center',
   },
-  largerTextWhite: {
-    alignItems: 'center',
-    color: COLORS.white,
-    fontSize: 24,
-    fontWeight: 'bold',
-    padding: 20,
-  },
   scrollView: {
     marginBottom: 60,
   },
@@ -71,13 +61,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  submitButton: {
-    backgroundColor: COLORS.primary,
-    borderRadius: 15,
-  },
   submitButtonContainer: {
-    alignSelf: 'center',
-    height: 50,
     marginBottom: 10,
   },
 });
@@ -200,7 +184,6 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
           style={styles.icon}
           name="local-drink"
           type="material"
-          color={COLORS.primary}
           size={160}
         />
         <Text style={styles.largerTextBlue}>
@@ -221,8 +204,6 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
         />
         <Button
           disabled={submitDisabled}
-          buttonStyle={styles.submitButton}
-          titleStyle={styles.largerTextWhite}
           containerStyle={styles.submitButtonContainer}
           title="Submit"
           onPress={submitIntakeEntry}
@@ -237,8 +218,8 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
         <Modal visible={visible} animationType="slide">
           <SafeAreaView style={styles.drinksContainer}>
             <Button
-              buttonStyle={styles.closeButton}
               title="Close"
+              containerStyle={styles.closeButtonContainer}
               onPress={hideDrinkLog}
             />
             <FlatList

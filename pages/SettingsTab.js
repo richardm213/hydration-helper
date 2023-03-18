@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {
-  Switch,
   StyleSheet,
   View,
   ScrollView,
@@ -8,10 +7,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Button, Text} from '@rneui/base';
+import {Text} from '@rneui/base';
 import * as Calendar from 'expo-calendar';
 import {requestPermissionsAsync} from 'expo-notifications';
 import Modal from 'react-native-modal';
+import {Button, Switch} from '@rneui/themed';
 import COLORS from '../theme/Colors';
 import GetEventTimes from '../services/CalendarAPI';
 import {
@@ -23,10 +23,6 @@ import {
 } from '../components/SettingsPickers';
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: COLORS.primary,
-    borderRadius: 10,
-  },
   buttonContainer: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -36,6 +32,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 20,
   },
+  buttonTitle: {fontSize: 18, fontWeight: 'normal', padding: 0},
   container: {
     backgroundColor: COLORS.white,
     flex: 1,
@@ -167,7 +164,6 @@ export default function SettingsTab({
           </Text>
           <Switch
             style={styles.switch}
-            trackColor={{true: COLORS.primary}}
             thumbColor={appleHealth ? COLORS.white : COLORS.primary}
             onValueChange={toggleHealthSwitch}
             value={appleHealth}
@@ -180,7 +176,6 @@ export default function SettingsTab({
           </Text>
           <Switch
             style={styles.switch}
-            trackColor={{true: COLORS.primary}}
             thumbColor={canAccessLocationData ? COLORS.white : COLORS.primary}
             onValueChange={toggleLocationSwitch}
             value={canAccessLocationData}
@@ -193,7 +188,6 @@ export default function SettingsTab({
           </Text>
           <Switch
             style={styles.switch}
-            trackColor={{true: COLORS.primary}}
             thumbColor={canAccessCalendar ? COLORS.white : COLORS.primary}
             onValueChange={toggleCalendarSwitch}
             value={canAccessCalendar}
@@ -206,7 +200,6 @@ export default function SettingsTab({
           </Text>
           <Switch
             style={styles.switch}
-            trackColor={{true: COLORS.primary}}
             thumbColor={canSendNotifications ? COLORS.white : COLORS.primary}
             onValueChange={toggleNotificationsSwitch}
             value={canSendNotifications}
@@ -299,12 +292,12 @@ export default function SettingsTab({
                 <Button
                   title="Cancel"
                   onPress={cancelChange}
-                  buttonStyle={styles.button}
+                  titleStyle={styles.buttonTitle}
                 />
                 <Button
                   title="Save"
                   onPress={saveChange}
-                  buttonStyle={styles.button}
+                  titleStyle={styles.buttonTitle}
                 />
               </View>
             </View>

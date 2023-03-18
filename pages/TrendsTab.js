@@ -1,11 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Card, Tab, Text} from '@rneui/base';
+import {Card, Text} from '@rneui/base';
 import {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {AccordionList} from 'react-native-accordion-list-view';
 import {BarChart} from 'react-native-gifted-charts';
 import {getCurrentDate, getDayOfMonth, getDayOfWeek} from '../utils/DateUtils';
 import COLORS from '../theme/Colors';
+import {Tab} from '@rneui/themed';
 
 const styles = StyleSheet.create({
   align: {
@@ -56,9 +57,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingBottom: 115,
     alignSelf: 'center',
-  },
-  viewModeIndicator: {
-    backgroundColor: COLORS.primary,
   },
   viewModeTitle: {
     color: COLORS.primary,
@@ -263,7 +261,6 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
             value={graphMode}
             onChange={setGraphMode}
             titleStyle={styles.viewModeTitle}
-            indicatorStyle={styles.viewModeIndicator}
             scrollable>
             <Tab.Item containerStyle={active => buttonStyle(active)}>
               Weekly
@@ -370,7 +367,6 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
           value={viewMode}
           onChange={setViewMode}
           titleStyle={styles.viewModeTitle}
-          indicatorStyle={styles.viewModeIndicator}
           scrollable>
           <Tab.Item containerStyle={active => buttonStyle(active)}>
             Graph

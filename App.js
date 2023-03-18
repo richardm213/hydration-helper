@@ -3,10 +3,12 @@ import * as BackgroundFetch from 'expo-background-fetch';
 import * as TaskManager from 'expo-task-manager';
 import * as Calendar from 'expo-calendar';
 import * as Notifications from 'expo-notifications';
+import {ThemeProvider} from '@rneui/themed';
 import Tabs from './pages/Tabs';
 import NotificationSystem from './components/NotificationSystem';
 import {getCurrentDate} from './utils/DateUtils';
 import GetEventTimes from './services/CalendarAPI';
+import theme from './theme/Theme';
 
 const BACKGROUND_FETCH_TASK = 'background-fetch';
 let currentDate = getCurrentDate(0);
@@ -77,9 +79,11 @@ async function registerBackgroundFetchAsync() {
 export default function App() {
   registerBackgroundFetchAsync();
   return (
-    <NavigationContainer>
-      <Tabs />
-      <NotificationSystem />
-    </NavigationContainer>
+    <ThemeProvider theme={theme}>
+      <NavigationContainer>
+        <Tabs />
+        <NotificationSystem />
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }

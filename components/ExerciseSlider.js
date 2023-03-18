@@ -1,6 +1,6 @@
-import {Slider, Icon, Text} from '@rneui/base';
+import {Text} from '@rneui/base';
+import {Icon, Slider} from '@rneui/themed';
 import {StyleSheet, View} from 'react-native';
-import COLORS from '../theme/Colors';
 
 const styles = StyleSheet.create({
   iconContainerStyle: {bottom: 20, right: 20},
@@ -23,12 +23,8 @@ export default function ExerciseSlider({exerciseAmount, setExerciseAmount}) {
   return (
     <View style={styles.viewStyle}>
       <Slider
-        maximumTrackTintColor={COLORS.lightGray1}
         maximumValue={maxAmount}
-        minimumTrackTintColor={COLORS.fadedBlack}
-        minimumValue={0}
         onValueChange={value => setExerciseAmount(value)}
-        orientation="horizontal"
         step={5}
         style={styles.sliderStyle}
         thumbStyle={styles.thumbStyle}
@@ -40,7 +36,6 @@ export default function ExerciseSlider({exerciseAmount, setExerciseAmount}) {
               size={20}
               reverse
               containerStyle={styles.iconContainerStyle}
-              color={COLORS.primary}
             />
           ),
         }}

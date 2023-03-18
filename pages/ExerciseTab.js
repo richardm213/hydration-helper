@@ -1,8 +1,8 @@
 import {StatusBar} from 'expo-status-bar';
 import {useState} from 'react';
 import {Text, View, StyleSheet, Alert} from 'react-native';
-import {Button, Icon} from '@rneui/base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Button, Icon} from '@rneui/themed';
 import COLORS from '../theme/Colors';
 import ExerciseSlider from '../components/ExerciseSlider';
 
@@ -22,20 +22,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
     padding: 20,
-  },
-  largerTextWhite: {
-    alignItems: 'center',
-    color: COLORS.white,
-    fontSize: 24,
-    fontWeight: 'bold',
-    padding: 20,
-  },
-  submitButton: {
-    backgroundColor: COLORS.primary,
-    borderRadius: 15,
-  },
-  submitButtonContainer: {
-    height: 50,
   },
 });
 
@@ -58,7 +44,6 @@ export default function ExerciseTab({exercise, setExercise}) {
         style={styles.icon}
         name="run-circle"
         type="material-icons"
-        color={COLORS.primary}
         size={200}
       />
       <Text style={styles.largerTextBlueBold}>
@@ -70,9 +55,6 @@ export default function ExerciseTab({exercise, setExercise}) {
       />
       <Button
         disabled={submitDisabled}
-        buttonStyle={styles.submitButton}
-        titleStyle={styles.largerTextWhite}
-        containerStyle={styles.submitButtonContainer}
         title="Submit"
         onPress={submitExerciseEntry}
       />
