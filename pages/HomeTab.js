@@ -52,8 +52,9 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
     fontSize: 22,
     fontWeight: 'bold',
+    marginBottom: 25,
     marginHorizontal: 20,
-    marginTop: 10,
+    marginTop: 15,
     textAlign: 'center',
   },
   suggestionIntakeText: {
