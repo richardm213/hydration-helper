@@ -11,45 +11,13 @@ import MonthlyTrendsGraph from '../components/MonthlyTrendsGraph';
 import DrinksAccordian from '../components/DrinksAccordian';
 
 const styles = StyleSheet.create({
-  align: {
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  barChart: {paddingHorizontal: 20},
   cardStyle: {flexDirection: 'row', justifyContent: 'space-between'},
   graphModeTab: {
     alignSelf: 'center',
     marginBottom: -5,
     marginTop: 7.5,
   },
-  leftDot: {
-    backgroundColor: COLORS.primary,
-    borderRadius: 15,
-    height: 15,
-    marginBottom: 6,
-    marginRight: 8,
-    width: 15,
-  },
-  legend: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    marginBottom: 25,
-    marginTop: 25,
-  },
-  rightDot: {
-    backgroundColor: COLORS.lighterBlue,
-    borderRadius: 15,
-    height: 15,
-    marginBottom: 6,
-    marginRight: 8,
-    width: 15,
-  },
   scoresHeader: {color: COLORS.primary, marginTop: 15, textAlign: 'center'},
-  textLegend: {
-    color: COLORS.primary,
-    fontSize: 15,
-    height: 25,
-  },
   viewModeTab: {
     alignSelf: 'center',
     flex: 1,
@@ -242,35 +210,11 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
       )}
 
       {viewMode === VIEWMODE.graph && graphMode === GRAPHMODE.weekly && (
-        <View style={styles.barChart}>
-          <View style={styles.legend}>
-            <View style={styles.align}>
-              <View style={styles.leftDot} />
-              <Text style={styles.textLegend}>Recommended Intake</Text>
-            </View>
-            <View style={styles.align}>
-              <View style={styles.rightDot} />
-              <Text style={styles.textLegend}>Recorded Intake</Text>
-            </View>
-          </View>
-          <WeeklyTrendsGraph data={dataBarsWeek} maxValue={weeklyMax} />
-        </View>
+        <WeeklyTrendsGraph data={dataBarsWeek} maxValue={weeklyMax} />
       )}
 
       {viewMode === VIEWMODE.graph && graphMode === GRAPHMODE.monthly && (
-        <View style={styles.barChart}>
-          <View style={styles.legend}>
-            <View style={styles.align}>
-              <View style={styles.leftDot} />
-              <Text style={styles.textLegend}>Recommended Intake</Text>
-            </View>
-            <View style={styles.align}>
-              <View style={styles.rightDot} />
-              <Text style={styles.textLegend}>Recorded Intake</Text>
-            </View>
-          </View>
-          <MonthlyTrendsGraph data={dataBarsMonth} maxValue={monthlyMax} />
-        </View>
+        <MonthlyTrendsGraph data={dataBarsMonth} maxValue={monthlyMax} />
       )}
 
       {viewMode === VIEWMODE.drinks && (
