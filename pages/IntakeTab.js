@@ -24,6 +24,8 @@ const styles = StyleSheet.create({
   closeButton: {
     backgroundColor: COLORS.primary,
     borderRadius: 10,
+    marginBottom: 10,
+    marginHorizontal: 10,
   },
   container: {
     backgroundColor: COLORS.white,
@@ -37,6 +39,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     height: 35,
     marginBottom: 60,
+  },
+  drinksContainer: {
+    marginHorizontal: 5,
+    marginVertical: 100,
   },
   dropDownStyles: {alignSelf: 'center', width: 200},
   icon: {
@@ -229,7 +235,7 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
           containerStyle={styles.drinkLogButtonContainer}
         />
         <Modal visible={visible} animationType="slide">
-          <SafeAreaView style={styles.scrollView}>
+          <SafeAreaView style={styles.drinksContainer}>
             <Button
               buttonStyle={styles.closeButton}
               title="Close"
