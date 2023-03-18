@@ -20,18 +20,16 @@ export default function useGraphData(
   useEffect(() => {
     const fetchData = async () => {
       // fetch data for week chart
+      const historicalData = JSON.parse(
+        await AsyncStorage.getItem('@historical_data'),
+      );
       const newDataBarsWeek = [];
       const newAccordianData = [];
-      let days = [];
-      for (let i = 1; i <= 7; i += 1) {
-        days.push(AsyncStorage.getItem(`@${getCurrentDate(7 - i)}`));
-      }
-      days = await Promise.all(days);
       let maxVal = -1;
       for (let i = 0; i < 6; i += 1) {
-        const day = days[i];
-        if (day) {
-          const dailyEntry = JSON.parse(day);
+        const day = getCurrentDate(6 - i);
+        if (day in historicalData) {
+          const dailyEntry = historicalData[day];
           maxVal = Math.max(maxVal, dailyEntry.recommendation);
           maxVal = Math.max(maxVal, dailyEntry.intake);
           const recommendationBar = {
@@ -47,8 +45,8 @@ export default function useGraphData(
           newDataBarsWeek.push(recommendationBar, intakeBar);
           const accordianEntry = {
             date: getCurrentDate(6 - i),
-            goal: dailyEntry.recommendation,
-            intake: dailyEntry.intake,
+            goal: dailyEntry.recommendation.toFixed(0),
+            intake: dailyEntry.intake.toFixed(0),
             exercise: dailyEntry.exercise,
             calories: dailyEntry.calories,
             protein: dailyEntry.protein,
@@ -74,15 +72,10 @@ export default function useGraphData(
       // fetch data for month chart
       let maxVal2 = -1;
       const newDataBarsMonth = [];
-      let daysMonth = [];
-      for (let i = 1; i <= 30; i += 1) {
-        daysMonth.push(AsyncStorage.getItem(`@${getCurrentDate(30 - i)}`));
-      }
-      daysMonth = await Promise.all(daysMonth);
       for (let i = 0; i < 30; i += 1) {
-        const day = daysMonth[i];
-        if (day) {
-          const dailyEntry = JSON.parse(day);
+        const day = getCurrentDate(30 - i);
+        if (day in historicalData) {
+          const dailyEntry = historicalData[day];
           maxVal2 = Math.max(maxVal, dailyEntry.recommendation);
           maxVal2 = Math.max(maxVal, dailyEntry.intake);
           const recommendationBar = {

@@ -77,7 +77,15 @@ export default function useNewDay(
           calories.today,
           protein.today,
         );
-        await AsyncStorage.setItem(`@${d1}`, JSON.stringify(dailyEntry));
+        let historicalData = JSON.parse(
+          await AsyncStorage.getItem('@historical_data'),
+        );
+        if (!historicalData) historicalData = {};
+        historicalData[d1] = dailyEntry;
+        await AsyncStorage.setItem(
+          `@historical_data`,
+          JSON.stringify(historicalData),
+        );
         resetDay(d2);
         setNewDay(true);
       }
