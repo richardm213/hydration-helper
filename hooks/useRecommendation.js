@@ -12,6 +12,7 @@ export default function useRecommendation(
   height,
   weight,
   exercise,
+  calories,
   protein,
   setRecommendation,
 ) {
@@ -28,8 +29,8 @@ export default function useRecommendation(
           weight,
           exercise,
           {temperature},
+          calories,
           protein,
-          null,
         );
       } else {
         calculator = new SimpleCalculator(
@@ -49,5 +50,5 @@ export default function useRecommendation(
       );
     };
     updateRecommendation();
-  }, [dataFetched, age, gender, height, weight, exercise, protein]);
+  }, [dataFetched, age, gender, height, weight, exercise, calories, protein]);
 }
