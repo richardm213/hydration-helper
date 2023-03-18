@@ -84,6 +84,16 @@ const BARCHART = {
   xAxisThickness: 1,
 };
 
+const VIEWMODE = {
+  graph: 0,
+  drinks: 1,
+  scores: 2,
+};
+
+const GRAPHMODE = {
+  weekly: 0,
+  monthly: 1,
+};
 const listTitle = item => {
   return <Text>{item.date}</Text>;
 };
@@ -240,7 +250,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
 
   return (
     <View style={styles.container}>
-      {viewMode == 0 && (
+      {viewMode == VIEWMODE.graph && (
         <View style={styles.graphModeTab}>
           <Tab
             value={graphMode}
@@ -264,7 +274,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
         </View>
       )}
 
-      {viewMode == 0 && graphMode == 0 && (
+      {viewMode == VIEWMODE.graph && graphMode == GRAPHMODE.weekly && (
         <View style={styles.barChart}>
           <View style={styles.legend}>
             <View style={styles.align}>
@@ -293,7 +303,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
         </View>
       )}
 
-      {viewMode == 0 && graphMode == 1 && (
+      {viewMode == VIEWMODE.graph && graphMode == GRAPHMODE.monthly && (
         <View style={styles.barChart}>
           <View style={styles.legend}>
             <View style={styles.align}>
@@ -323,7 +333,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
         </View>
       )}
 
-      {viewMode == 1 && (
+      {viewMode == VIEWMODE.drinks && (
         <View>
           <AccordionList
             marginTop={55}
@@ -334,7 +344,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
         </View>
       )}
 
-      {viewMode == 2 && (
+      {viewMode == VIEWMODE.scores && (
         <View>
           <Text style={styles.scoresHeader} h4>
             User Performance Score
