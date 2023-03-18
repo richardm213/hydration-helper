@@ -14,7 +14,7 @@ import {
   trendsIcon,
 } from '../components/TabIcons';
 import COLORS from '../theme/Colors';
-// import HealthAPI from '../services/HealthKitAPI';
+import HealthAPI from '../services/HealthKitAPI';
 import useStorageData from '../hooks/useStorageData';
 import useUnitChange from '../hooks/useUnitChange';
 import useRecommendation from '../hooks/useRecommendation';
@@ -56,7 +56,7 @@ function WeatherDisplay({temperature}) {
 }
 
 const Tab = createBottomTabNavigator();
-// const healthAPI = new HealthAPI();
+const healthAPI = new HealthAPI();
 
 export default function Tabs() {
   const [recommendation, setRecommendation] = useState(120);
@@ -68,6 +68,7 @@ export default function Tabs() {
   const [weight, setWeight] = useState('160');
   const [unit, setUnit] = useState('us-system');
   const [temperature, setTemperature] = useState(0);
+  const [protein, setProtein] = useState(null);
   const dataFetched = useStorageData(
     setIntake,
     setExercise,
@@ -181,7 +182,7 @@ export default function Tabs() {
         }}>
         {() => (
           <SettingsTab
-            // healthAPI={healthAPI}
+            healthAPI={healthAPI}
             age={age}
             setAge={setAge}
             gender={gender}
@@ -192,6 +193,7 @@ export default function Tabs() {
             setWeight={setWeight}
             unit={unit}
             setUnit={setUnit}
+            setProtein={setProtein}
           />
         )}
       </Tab.Screen>
