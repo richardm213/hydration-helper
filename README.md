@@ -43,7 +43,7 @@
 <div align="center">
   <a href="https://github.com/richardm213/hydration-helper">
     <img
-      src="https://user-images.githubusercontent.com/92076990/222995798-5e1e23a1-ae56-43e5-bc41-333946b1a755.png"
+      src="https://user-images.githubusercontent.com/92076990/226101839-93fa988c-080d-46ba-8456-3d798fc6662c.png"
       width="250" />
   </a>
 </div>
@@ -83,8 +83,9 @@ To get a local copy of our app up and running, follow the steps below.
 
 ### Installation
 
-1. Get a Weather API Key at [https://openweathermap.org/api](https://openweathermap.org/api)
-2. Clone the repo
+1. Get an OpenWeather API Key at [https://openweathermap.org/api](https://openweathermap.org/api)
+2. Get a FoodData Central Key at [https://fdc.nal.usda.gov/api-guide.html](https://fdc.nal.usda.gov/api-guide.html)
+3. Clone the repo
 
 ```sh
 git clone https://github.com/richardm213/hydration-helper.git
@@ -96,10 +97,11 @@ git clone https://github.com/richardm213/hydration-helper.git
 npm install
 ```
 
-4. Enter your API in `.env`
+1. Enter your API keys into `.env`
 
 ```sh
 WEATHER_API_KEY='ENTER YOUR KEY'
+FOOD_DATA_API_KEY='ENTER YOUR KEY'
 ```
 
 ### How to Run
