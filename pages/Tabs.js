@@ -14,7 +14,7 @@ import {
   trendsIcon,
 } from '../components/TabIcons';
 import COLORS from '../theme/Colors';
-// import HealthAPI from '../services/healthKitAPI';
+// import HealthAPI from '../services/HealthKitAPI';
 import useStorageData from '../hooks/useStorageData';
 import useUnitChange from '../hooks/useUnitChange';
 import useRecommendation from '../hooks/useRecommendation';
