@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Card, Text} from '@rneui/base';
 import {useEffect, useState} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Tab} from '@rneui/themed';
 import {getCurrentDate, getDayOfMonth, getDayOfWeek} from '../utils/DateUtils';
 import COLORS from '../theme/Colors';
@@ -9,15 +8,14 @@ import Style from '../theme/Style';
 import WeeklyTrendsGraph from '../components/WeeklyTrendsGraph';
 import MonthlyTrendsGraph from '../components/MonthlyTrendsGraph';
 import DrinksAccordian from '../components/DrinksAccordian';
+import ScoresList from '../components/ScoresList';
 
 const styles = StyleSheet.create({
-  cardStyle: {flexDirection: 'row', justifyContent: 'space-between'},
   graphModeTab: {
     alignSelf: 'center',
     marginBottom: -5,
     marginTop: 7.5,
   },
-  scoresHeader: {color: COLORS.primary, marginTop: 15, textAlign: 'center'},
   viewModeTab: {
     alignSelf: 'center',
     flex: 1,
@@ -178,13 +176,6 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
     fetchPerformanceScore();
   }, [newDay]);
 
-  const renderScores = ({item}) => (
-    <Card wrapperStyle={styles.cardStyle}>
-      <Text>{item.name}</Text>
-      <Text>{item.score}</Text>
-    </Card>
-  );
-
   const [viewMode, setViewMode] = useState(0);
   const [graphMode, setGraphMode] = useState(0);
 
@@ -222,23 +213,10 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
       )}
 
       {viewMode === VIEWMODE.scores && (
-        <View>
-          <Text style={styles.scoresHeader} h4>
-            User Performance Score
-          </Text>
-          <Card wrapperStyle={styles.cardStyle}>
-            <Text>Performance score</Text>
-            <Text>{performanceScore}</Text>
-          </Card>
-          <Text style={styles.scoresHeader} h4>
-            Drink Tendency Scores
-          </Text>
-          <FlatList
-            data={dataScores}
-            renderItem={renderScores}
-            keyExtractor={item => item.name}
-          />
-        </View>
+        <ScoresList
+          performanceScore={performanceScore}
+          drinkScores={dataScores}
+        />
       )}
 
       <View style={styles.viewModeTab}>
