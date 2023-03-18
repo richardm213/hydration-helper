@@ -78,6 +78,12 @@ const styles = StyleSheet.create({
   },
 });
 
+const BARCHART = {
+  spacing: 2,
+  yAxisThickness: 1,
+  xAxisThickness: 1,
+};
+
 const listTitle = item => {
   return <Text>{item.date}</Text>;
 };
@@ -123,7 +129,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
           const recommendationBar = {
             label: getDayOfWeek(6 - i),
             value: dailyEntry.recommendation,
-            spacing: 2,
+            spacing: BARCHART.spacing,
             frontColor: COLORS.primary,
           };
           const intakeBar = {
@@ -143,7 +149,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
       const todayRecommendationBar = {
         label: getDayOfWeek(0),
         value: recommendation,
-        spacing: 2,
+        spacing: BARCHART.spacing,
         frontColor: COLORS.primary,
       };
       const todayIntakeBar = {
@@ -172,7 +178,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
           const recommendationBar = {
             label: getDayOfMonth(29 - i),
             value: dailyEntry.recommendation,
-            spacing: 2,
+            spacing: BARCHART.spacing,
             frontColor: COLORS.primary,
           };
           const intakeBar = {
@@ -186,7 +192,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
       const todayRecommendationBar2 = {
         label: getDayOfMonth(0),
         value: recommendation,
-        spacing: 2,
+        spacing: BARCHART.spacing,
         frontColor: COLORS.primary,
       };
       newDataBarsMonth.push(todayRecommendationBar2, todayIntakeBar);
@@ -274,10 +280,10 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
             data={dataBarsWeek}
             spacing={27}
             barWidth={20}
-            xAxisThickness={1}
-            labelsExtraHeight={15}
-            yAxisThickness={1}
+            xAxisThickness={BARCHART.xAxisThickness}
+            yAxisThickness={BARCHART.yAxisThickness}
             yAxisTextStyle={styles.yAxisTextStyle}
+            labelsExtraHeight={15}
             noOfSections={7}
             maxValue={weeklyMax}
             labelWidth={85}
@@ -304,8 +310,8 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
             initialSpacing={25}
             spacing={13}
             barWidth={15}
-            xAxisThickness={1}
-            yAxisThickness={1}
+            xAxisThickness={BARCHART.xAxisThickness}
+            yAxisThickness={BARCHART.yAxisThickness}
             yAxisTextStyle={styles.yAxisTextStyle}
             noOfSections={7}
             maxValue={monthlyMax}
