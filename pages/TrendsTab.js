@@ -94,6 +94,13 @@ const GRAPHMODE = {
   weekly: 0,
   monthly: 1,
 };
+
+const buttonStyle = active => {
+  return {
+    backgroundColor: active ? COLORS.iceBlue : COLORS.white,
+  };
+};
+
 const listTitle = item => {
   return <Text>{item.date}</Text>;
 };
@@ -258,16 +265,10 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
             titleStyle={styles.viewModeTitle}
             indicatorStyle={styles.viewModeIndicator}
             scrollable>
-            <Tab.Item
-              containerStyle={active => ({
-                backgroundColor: active ? COLORS.iceBlue : COLORS.white,
-              })}>
+            <Tab.Item containerStyle={active => buttonStyle(active)}>
               Weekly
             </Tab.Item>
-            <Tab.Item
-              containerStyle={active => ({
-                backgroundColor: active ? COLORS.iceBlue : undefined,
-              })}>
+            <Tab.Item containerStyle={active => buttonStyle(active)}>
               Monthly
             </Tab.Item>
           </Tab>
@@ -371,22 +372,13 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
           titleStyle={styles.viewModeTitle}
           indicatorStyle={styles.viewModeIndicator}
           scrollable>
-          <Tab.Item
-            containerStyle={active => ({
-              backgroundColor: active ? COLORS.iceBlue : COLORS.white,
-            })}>
+          <Tab.Item containerStyle={active => buttonStyle(active)}>
             Graph
           </Tab.Item>
-          <Tab.Item
-            buttonStyle={active => ({
-              backgroundColor: active ? COLORS.iceBlue : COLORS.white,
-            })}>
+          <Tab.Item buttonStyle={active => buttonStyle(active)}>
             Drinks
           </Tab.Item>
-          <Tab.Item
-            buttonStyle={active => ({
-              backgroundColor: active ? COLORS.iceBlue : COLORS.white,
-            })}>
+          <Tab.Item buttonStyle={active => buttonStyle(active)}>
             Scores
           </Tab.Item>
         </Tab>
