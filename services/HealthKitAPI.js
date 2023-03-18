@@ -21,30 +21,6 @@ class HealthAPI {
     });
   }
 
-  calorieExpended() {
-    const activeCalories = AppleHealthKit.getActiveEnergyBurned(
-      this.options,
-      (err, results) => {
-        if (err) {
-          return 0;
-        }
-        return results;
-      },
-    );
-
-    const basalCalories = AppleHealthKit.getBasalEnergyBurned(
-      this.options,
-      (err, results) => {
-        if (err) {
-          return 0;
-        }
-        return results;
-      },
-    );
-
-    return activeCalories + basalCalories;
-  }
-
   calorieIntake() {
     const calorieIntake = AppleHealthKit.getEnergyConsumedSamples(
       this.options,
@@ -57,24 +33,6 @@ class HealthAPI {
     );
 
     return calorieIntake;
-  }
-
-  exerciseTime() {
-    const activitySummary = AppleHealthKit.getActivitySummary(
-      this.options,
-      (err, results) => {
-        if (err) {
-          return {};
-        }
-        return results;
-      },
-    );
-
-    if ('appleExerciseTime' in activitySummary) {
-      return activitySummary.appleExerciseTime;
-    }
-
-    return 'no exercise time found';
   }
 
   protein(setProtein) {
