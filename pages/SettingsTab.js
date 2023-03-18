@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  SafeAreaView,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, View, ScrollView, SafeAreaView} from 'react-native';
 import {Text} from '@rneui/base';
 import * as Calendar from 'expo-calendar';
 import {requestPermissionsAsync} from 'expo-notifications';
@@ -14,14 +8,11 @@ import COLORS from '../theme/Colors';
 import GetEventTimes from '../services/CalendarAPI';
 import Style from '../theme/Style';
 import SettingsModal from '../components/SettingsModal';
+import SettingsInputRow from '../components/SettingsInputRow';
 
 const styles = StyleSheet.create({
   label: {
     color: COLORS.primary,
-  },
-  rightText: {
-    color: COLORS.gray,
-    paddingRight: 15,
   },
   row: {
     borderColor: COLORS.lightGray2,
@@ -152,75 +143,42 @@ export default function SettingsTab({
           />
         </View>
 
-        <TouchableOpacity
-          style={styles.row}
-          onPress={() => {
-            setPicker('age');
-            setIsVisible(true);
-          }}>
-          <Text h4 style={styles.label}>
-            Age
-          </Text>
-          <Text h4 style={styles.rightText}>
-            {age}
-          </Text>
-        </TouchableOpacity>
+        <SettingsInputRow
+          field="age"
+          value={age}
+          setPicker={setPicker}
+          setIsVisible={setIsVisible}
+        />
 
-        <TouchableOpacity
-          style={styles.row}
-          onPress={() => {
-            setPicker('gender');
-            setIsVisible(true);
-          }}>
-          <Text h4 style={styles.label}>
-            Gender
-          </Text>
-          <Text h4 style={styles.rightText}>
-            {gender}
-          </Text>
-        </TouchableOpacity>
+        <SettingsInputRow
+          field="gender"
+          value={gender}
+          setPicker={setPicker}
+          setIsVisible={setIsVisible}
+        />
 
-        <TouchableOpacity
-          style={styles.row}
-          onPress={() => {
-            setPicker('height');
-            setIsVisible(true);
-          }}>
-          <Text h4 style={styles.label}>
-            Height
-          </Text>
-          <Text h4 style={styles.rightText}>
-            {height} {heightType}
-          </Text>
-        </TouchableOpacity>
+        <SettingsInputRow
+          field="height"
+          value={height}
+          setPicker={setPicker}
+          setIsVisible={setIsVisible}
+          unit={heightType}
+        />
 
-        <TouchableOpacity
-          style={styles.row}
-          onPress={() => {
-            setPicker('weight');
-            setIsVisible(true);
-          }}>
-          <Text h4 style={styles.label}>
-            Weight
-          </Text>
-          <Text h4 style={styles.rightText}>
-            {weight} {weightType}
-          </Text>
-        </TouchableOpacity>
+        <SettingsInputRow
+          field="weight"
+          value={weight}
+          setPicker={setPicker}
+          setIsVisible={setIsVisible}
+          unit={weightType}
+        />
 
-        <TouchableOpacity
-          style={styles.row}
-          onPress={() => {
-            setPicker('unit');
-            setIsVisible(true);
-          }}>
-          <Text h4 style={styles.label}>
-            Unit
-          </Text>
-          <Text h4 style={styles.rightText}>
-            {unit}
-          </Text>
-        </TouchableOpacity>
+        <SettingsInputRow
+          field="unit"
+          value={unit}
+          setPicker={setPicker}
+          setIsVisible={setIsVisible}
+        />
 
         <SettingsModal
           isVisible={isVisible}
