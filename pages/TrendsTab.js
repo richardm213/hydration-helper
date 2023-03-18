@@ -3,11 +3,12 @@ import {Card, Text} from '@rneui/base';
 import {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {AccordionList} from 'react-native-accordion-list-view';
-import {BarChart} from 'react-native-gifted-charts';
 import {Tab} from '@rneui/themed';
 import {getCurrentDate, getDayOfMonth, getDayOfWeek} from '../utils/DateUtils';
 import COLORS from '../theme/Colors';
 import Style from '../theme/Style';
+import WeeklyTrendsGraph from '../components/WeeklyTrendsGraph';
+import MonthlyTrendsGraph from '../components/MonthlyTrendsGraph';
 
 const styles = StyleSheet.create({
   align: {
@@ -60,23 +61,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginVertical: -2.5,
   },
-  xAxisLegendStyle: {
-    fontSize: 15,
-    marginBottom: -5,
-    marginLeft: 12.5,
-  },
-  xAxisLegendStyle2: {
-    marginLeft: 10,
-  },
-  yAxisTextStyle: {
-    fontSize: 15,
-  },
 });
 
 const BARCHART = {
   spacing: 2,
-  yAxisThickness: 1,
-  xAxisThickness: 1,
 };
 
 const VIEWMODE = {
@@ -279,20 +267,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
               <Text style={styles.textLegend}>Recorded Intake</Text>
             </View>
           </View>
-          <BarChart
-            data={dataBarsWeek}
-            spacing={27}
-            barWidth={20}
-            xAxisThickness={BARCHART.xAxisThickness}
-            yAxisThickness={BARCHART.yAxisThickness}
-            yAxisTextStyle={styles.yAxisTextStyle}
-            labelsExtraHeight={15}
-            noOfSections={7}
-            maxValue={weeklyMax}
-            labelWidth={85}
-            height={380}
-            xAxisLabelTextStyle={styles.xAxisLegendStyle}
-          />
+          <WeeklyTrendsGraph data={dataBarsWeek} maxValue={weeklyMax} />
         </View>
       )}
 
@@ -308,21 +283,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
               <Text style={styles.textLegend}>Recorded Intake</Text>
             </View>
           </View>
-          <BarChart
-            data={dataBarsMonth}
-            initialSpacing={25}
-            spacing={13}
-            barWidth={15}
-            xAxisThickness={BARCHART.xAxisThickness}
-            yAxisThickness={BARCHART.yAxisThickness}
-            yAxisTextStyle={styles.yAxisTextStyle}
-            noOfSections={7}
-            maxValue={monthlyMax}
-            labelWidth={85}
-            height={380}
-            autoShiftLabels
-            xAxisLabelTextStyle={styles.xAxisLegendStyle2}
-          />
+          <MonthlyTrendsGraph data={dataBarsMonth} maxValue={monthlyMax} />
         </View>
       )}
 
