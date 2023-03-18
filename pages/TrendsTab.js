@@ -76,7 +76,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
         }),
       );
       temp.sort((a, b) => b.score - a.score);
-      setDataScores(temp);
+      setDataScores(temp.slice(0, 6));
     };
     const fetchPerformanceScore = async () => {
       let score = await AsyncStorage.getItem('@performanceScore');
