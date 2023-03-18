@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
     paddingRight: 15,
   },
   row: {
-    borderBottomColor: COLORS.lightGray2,
-    borderBottomWidth: 1,
+    borderColor: COLORS.lightGray2,
+    borderWidth: 0.5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 15,
