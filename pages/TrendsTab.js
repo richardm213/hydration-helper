@@ -4,9 +4,9 @@ import {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {AccordionList} from 'react-native-accordion-list-view';
 import {BarChart} from 'react-native-gifted-charts';
+import {Tab} from '@rneui/themed';
 import {getCurrentDate, getDayOfMonth, getDayOfWeek} from '../utils/DateUtils';
 import COLORS from '../theme/Colors';
-import {Tab} from '@rneui/themed';
 import Style from '../theme/Style';
 
 const styles = StyleSheet.create({
@@ -17,9 +17,9 @@ const styles = StyleSheet.create({
   barChart: {paddingHorizontal: 20},
   cardStyle: {flexDirection: 'row', justifyContent: 'space-between'},
   graphModeTab: {
-    marginTop: 7.5,
-    marginBottom: -5,
     alignSelf: 'center',
+    marginBottom: -5,
+    marginTop: 7.5,
   },
   leftDot: {
     backgroundColor: COLORS.primary,
@@ -43,17 +43,17 @@ const styles = StyleSheet.create({
     marginRight: 8,
     width: 15,
   },
+  scoresHeader: {color: COLORS.primary, marginTop: 15, textAlign: 'center'},
   textLegend: {
     color: COLORS.primary,
     fontSize: 15,
     height: 25,
   },
-  scoresHeader: {textAlign: 'center', color: COLORS.primary, marginTop: 15},
   viewModeTab: {
+    alignSelf: 'center',
     flex: 1,
     justifyContent: 'flex-end',
     paddingBottom: 115,
-    alignSelf: 'center',
   },
   viewModeTitle: {
     color: COLORS.primary,
@@ -62,8 +62,8 @@ const styles = StyleSheet.create({
   },
   xAxisLegendStyle: {
     fontSize: 15,
-    marginLeft: 12.5,
     marginBottom: -5,
+    marginLeft: 12.5,
   },
   xAxisLegendStyle2: {
     marginLeft: 10,
@@ -90,29 +90,23 @@ const GRAPHMODE = {
   monthly: 1,
 };
 
-const buttonStyle = active => {
-  return {
-    backgroundColor: active ? COLORS.iceBlue : COLORS.white,
-  };
-};
+const buttonStyle = active => ({
+  backgroundColor: active ? COLORS.iceBlue : COLORS.white,
+});
 
-const listTitle = item => {
-  return <Text>{item.date}</Text>;
-};
+const listTitle = item => <Text>{item.date}</Text>;
 
-const listAttribute = (item, unit) => {
-  return (
-    <View>
-      <Text>
-        Recommendation: {item.goal} {unit === 'us-system' ? 'oz' : 'ml'}
-      </Text>
-      <Text>
-        Water intake: {item.intake} {unit === 'us-system' ? 'oz' : 'ml'}
-      </Text>
-      <Text>Exercise: {item.exercise} minutes</Text>
-    </View>
-  );
-};
+const listAttribute = (item, unit) => (
+  <View>
+    <Text>
+      Recommendation: {item.goal} {unit === 'us-system' ? 'oz' : 'ml'}
+    </Text>
+    <Text>
+      Water intake: {item.intake} {unit === 'us-system' ? 'oz' : 'ml'}
+    </Text>
+    <Text>Exercise: {item.exercise} minutes</Text>
+  </View>
+);
 
 export default function TrendsTab({recommendation, intake, unit, newDay}) {
   const [dataBarsWeek, setDataBarsWeek] = useState([]);
@@ -217,8 +211,10 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
   const [performanceScore, setPerformanceScore] = useState(75);
   useEffect(() => {
     const fetchDrinkScores = async () => {
-      drinkScores = JSON.parse(await AsyncStorage.getItem('@drinkScores'));
-      let temp = [];
+      const drinkScores = JSON.parse(
+        await AsyncStorage.getItem('@drinkScores'),
+      );
+      const temp = [];
       Object.entries(drinkScores).forEach(entry =>
         temp.push({
           name: entry[0],
@@ -252,24 +248,26 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
 
   return (
     <View style={Style.container}>
-      {viewMode == VIEWMODE.graph && (
+      {viewMode === VIEWMODE.graph && (
         <View style={styles.graphModeTab}>
           <Tab
             value={graphMode}
             onChange={setGraphMode}
             titleStyle={styles.viewModeTitle}
             scrollable>
-            <Tab.Item containerStyle={active => buttonStyle(active)}>
-              Weekly
-            </Tab.Item>
-            <Tab.Item containerStyle={active => buttonStyle(active)}>
-              Monthly
-            </Tab.Item>
+            <Tab.Item
+              title="Weekly"
+              containerStyle={active => buttonStyle(active)}
+            />
+            <Tab.Item
+              title="Monthly"
+              containerStyle={active => buttonStyle(active)}
+            />
           </Tab>
         </View>
       )}
 
-      {viewMode == VIEWMODE.graph && graphMode == GRAPHMODE.weekly && (
+      {viewMode === VIEWMODE.graph && graphMode === GRAPHMODE.weekly && (
         <View style={styles.barChart}>
           <View style={styles.legend}>
             <View style={styles.align}>
@@ -298,7 +296,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
         </View>
       )}
 
-      {viewMode == VIEWMODE.graph && graphMode == GRAPHMODE.monthly && (
+      {viewMode === VIEWMODE.graph && graphMode === GRAPHMODE.monthly && (
         <View style={styles.barChart}>
           <View style={styles.legend}>
             <View style={styles.align}>
@@ -328,7 +326,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
         </View>
       )}
 
-      {viewMode == VIEWMODE.drinks && (
+      {viewMode === VIEWMODE.drinks && (
         <View>
           <AccordionList
             marginTop={55}
@@ -339,7 +337,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
         </View>
       )}
 
-      {viewMode == VIEWMODE.scores && (
+      {viewMode === VIEWMODE.scores && (
         <View>
           <Text style={styles.scoresHeader} h4>
             User Performance Score
@@ -365,15 +363,18 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
           onChange={setViewMode}
           titleStyle={styles.viewModeTitle}
           scrollable>
-          <Tab.Item containerStyle={active => buttonStyle(active)}>
-            Graph
-          </Tab.Item>
-          <Tab.Item buttonStyle={active => buttonStyle(active)}>
-            Drinks
-          </Tab.Item>
-          <Tab.Item buttonStyle={active => buttonStyle(active)}>
-            Scores
-          </Tab.Item>
+          <Tab.Item
+            title="Graph"
+            containerStyle={active => buttonStyle(active)}
+          />
+          <Tab.Item
+            title="Drinks"
+            buttonStyle={active => buttonStyle(active)}
+          />
+          <Tab.Item
+            title="Scores"
+            buttonStyle={active => buttonStyle(active)}
+          />
         </Tab>
       </View>
     </View>
