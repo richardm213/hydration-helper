@@ -169,7 +169,7 @@ export default function HomeTab({recommendation, unit, intake}) {
       </Modal>
       <View style={styles.temperatureView}>
         <Text style={styles.progressText}>
-          Progress: {((intake * 100) / recommendation).toFixed(1)}%
+          Your Progress: {((intake * 100) / recommendation).toFixed(1)}%
         </Text>
       </View>
       <View style={styles.suggestionTextView}>
