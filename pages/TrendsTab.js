@@ -2,13 +2,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Card, Text} from '@rneui/base';
 import {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {AccordionList} from 'react-native-accordion-list-view';
 import {Tab} from '@rneui/themed';
 import {getCurrentDate, getDayOfMonth, getDayOfWeek} from '../utils/DateUtils';
 import COLORS from '../theme/Colors';
 import Style from '../theme/Style';
 import WeeklyTrendsGraph from '../components/WeeklyTrendsGraph';
 import MonthlyTrendsGraph from '../components/MonthlyTrendsGraph';
+import DrinksAccordian from '../components/DrinksAccordian';
 
 const styles = StyleSheet.create({
   align: {
@@ -81,20 +81,6 @@ const GRAPHMODE = {
 const buttonStyle = active => ({
   backgroundColor: active ? COLORS.iceBlue : COLORS.white,
 });
-
-const listTitle = item => <Text>{item.date}</Text>;
-
-const listAttribute = (item, unit) => (
-  <View>
-    <Text>
-      Recommendation: {item.goal} {unit === 'us-system' ? 'oz' : 'ml'}
-    </Text>
-    <Text>
-      Water intake: {item.intake} {unit === 'us-system' ? 'oz' : 'ml'}
-    </Text>
-    <Text>Exercise: {item.exercise} minutes</Text>
-  </View>
-);
 
 export default function TrendsTab({recommendation, intake, unit, newDay}) {
   const [dataBarsWeek, setDataBarsWeek] = useState([]);
@@ -288,14 +274,7 @@ export default function TrendsTab({recommendation, intake, unit, newDay}) {
       )}
 
       {viewMode === VIEWMODE.drinks && (
-        <View>
-          <AccordionList
-            marginTop={55}
-            data={accordianData}
-            customTitle={item => listTitle(item)}
-            customBody={item => listAttribute(item, unit)}
-          />
-        </View>
+        <DrinksAccordian data={accordianData} unit={unit} />
       )}
 
       {viewMode === VIEWMODE.scores && (
