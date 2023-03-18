@@ -19,6 +19,7 @@ import DrinkEntry from '../utils/DrinkEntry';
 import {DRINKS, getWaterAmount} from '../services/FoodDataAPI';
 import DrinkLogEntry from '../components/DrinkLogEntry';
 import Style from '../theme/Style';
+import {getTime} from '../utils/DateUtils';
 
 const styles = StyleSheet.create({
   boxStyles: {marginHorizontal: 50, marginTop: 10},
@@ -105,12 +106,6 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
     setDrinkType(text);
     if (Object.keys(DRINKS).includes(camelCase(text))) setSubmitDisabled(false);
     else setSubmitDisabled(true);
-  };
-  const getTime = () => {
-    const date = new Date();
-    const hour = `${date.getHours()}`;
-    const minutes = `0${date.getMinutes()}`.slice(-2);
-    return `${hour.toString()}:${minutes.toString()}`;
   };
   const storeEntry = async e => {
     let entries = await AsyncStorage.getItem('@entries');

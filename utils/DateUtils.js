@@ -27,4 +27,11 @@ const getTimeCategory = time => {
   return 'evening';
 };
 
-export {getCurrentDate, getDayOfWeek, getDayOfMonth, getTimeCategory};
+const getTime = () => {
+  const date = new Date();
+  const hour = `${date.getHours()}`;
+  const minutes = `0${date.getMinutes()}`.slice(-2);
+  return `${hour.toString()}:${minutes.toString()}`;
+};
+
+export {getCurrentDate, getDayOfWeek, getDayOfMonth, getTimeCategory, getTime};
