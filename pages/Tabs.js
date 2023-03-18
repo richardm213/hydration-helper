@@ -96,7 +96,6 @@ export default function Tabs() {
     exercise,
     setRecommendation,
   );
-
   return (
     <Tab.Navigator
       initialRouteName="Water Intake"
@@ -113,15 +112,14 @@ export default function Tabs() {
         name="Home"
         options={{
           tabBarIcon: waterIcon,
-          headerTitle: `Progress: ${((intake * 100) / recommendation).toFixed(
-            1,
-          )}%`,
+          headerTitle: `Weather: ${temperature.toFixed(1)}°F`,
         }}>
         {() => (
           <HomeTab
             recommendation={recommendation}
             unit={unit}
             temperature={temperature}
+            intake={intake}
           />
         )}
       </Tab.Screen>

@@ -48,6 +48,14 @@ const styles = StyleSheet.create({
     marginVertical: 100,
     padding: 10,
   },
+  progressText: {
+    color: COLORS.primary,
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginHorizontal: 20,
+    marginTop: 10,
+    textAlign: 'center',
+  },
   suggestionIntakeText: {
     color: COLORS.primary,
     fontSize: 30,
@@ -85,7 +93,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function HomeTab({recommendation, unit, temperature}) {
+export default function HomeTab({recommendation, unit, intake}) {
   const [isVisible, setIsVisible] = useState(false);
   const measurementType = unit === 'us-system' ? 'oz' : 'ml';
   const [cardData, setCardData] = useState([]);
@@ -159,7 +167,9 @@ export default function HomeTab({recommendation, unit, temperature}) {
         </View>
       </Modal>
       <View style={styles.temperatureView}>
-        <Text h4>Weather: {temperature.toFixed(1)}&#8457;</Text>
+        <Text style={styles.progressText}>
+          Progress: {((intake * 100) / recommendation).toFixed(1)}%
+        </Text>
       </View>
       <View style={styles.suggestionTextView}>
         <Icon
