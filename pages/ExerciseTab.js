@@ -10,11 +10,10 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: COLORS.white,
-    bottom: 60,
     flex: 1,
   },
   icon: {
-    marginTop: 40,
+    marginTop: 20,
   },
   largerTextBlueBold: {
     alignItems: 'center',
@@ -30,11 +29,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     padding: 20,
-  },
-  moreDetails: {
-    color: COLORS.primary,
-    marginHorizontal: 50,
-    textAlign: 'center',
   },
   submitButton: {
     backgroundColor: COLORS.primary,
@@ -60,10 +54,6 @@ export default function ExerciseTab({exercise, setExercise}) {
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.moreDetails}>
-        Exercise is beneficial for your health, but it also increases your need
-        for water.
-      </Text>
       <Icon
         style={styles.icon}
         name="run-circle"
