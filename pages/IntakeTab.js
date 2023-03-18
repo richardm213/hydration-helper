@@ -60,7 +60,14 @@ async function intakeRecordNotification(intake, recommendation) {
   });
 }
 
-export default function IntakeTab({intake, setIntake, recommendation, unit}) {
+export default function IntakeTab({
+  intake,
+  setIntake,
+  entries,
+  setEntries,
+  recommendation,
+  unit,
+}) {
   const [drinkAmount, setDrinkAmount] = useState(0);
   const [drinkType, setDrinkType] = useState(null);
   const drinksList = Object.keys(DRINKS).map(val => ({
@@ -68,33 +75,13 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
   }));
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const [visible, setVisible] = useState(false);
-  const [drinkLog, setDrinkLog] = useState(async () => {
-    let data = await AsyncStorage.getItem('@entries');
-    if (data) data = JSON.parse(data);
-    else data = [];
-    setDrinkLog(data);
-  });
-  const updateDrinkLog = async () => {
-    let data = await AsyncStorage.getItem('@entries');
-    if (data) data = JSON.parse(data);
-    else data = [];
-    setDrinkLog(data);
-  };
   const showDrinkLog = async () => {
-    updateDrinkLog();
     setVisible(true);
   };
   const updateDrinkType = text => {
     setDrinkType(text);
     if (Object.keys(DRINKS).includes(camelCase(text))) setSubmitDisabled(false);
     else setSubmitDisabled(true);
-  };
-  const storeEntry = async e => {
-    let entries = await AsyncStorage.getItem('@entries');
-    if (entries) entries = JSON.parse(entries);
-    else entries = [];
-    entries.push(e);
-    await AsyncStorage.setItem('@entries', JSON.stringify(entries));
   };
   const submitIntakeEntry = async () => {
     Alert.alert('Your entry has been recorded.');
@@ -106,7 +93,8 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
     await AsyncStorage.setItem('@intake', newIntake.toString());
     const drinkTime = getTime();
     const e = new DrinkEntry(drinkTypeKey, drinkAmount, drinkTime);
-    storeEntry(e);
+    setEntries(prev => [...prev, e]);
+    await AsyncStorage.setItem('@entries', JSON.stringify(entries));
 
     /*
     In order to have the notifications 
@@ -186,7 +174,7 @@ export default function IntakeTab({intake, setIntake, recommendation, unit}) {
       <DrinkLogModal
         visible={visible}
         setVisible={setVisible}
-        drinkLog={drinkLog}
+        drinkLog={entries}
         unit={unit}
       />
     </SafeAreaView>

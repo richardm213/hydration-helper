@@ -61,6 +61,7 @@ const healthAPI = new HealthAPI();
 export default function Tabs() {
   const [recommendation, setRecommendation] = useState(120);
   const [intake, setIntake] = useState(0);
+  const [entries, setEntries] = useState([]);
   const [exercise, setExercise] = useState(0);
   const [age, setAge] = useState('21');
   const [gender, setGender] = useState('male');
@@ -72,6 +73,7 @@ export default function Tabs() {
   const [protein, setProtein] = useState(null);
   const dataFetched = useStorageData(
     setIntake,
+    setEntries,
     setExercise,
     setAge,
     setGender,
@@ -82,6 +84,7 @@ export default function Tabs() {
   );
   const newDay = useNewDay(
     intake,
+    entries,
     recommendation,
     dataFetched,
     setIntake,
@@ -149,6 +152,8 @@ export default function Tabs() {
           <IntakeTab
             intake={intake}
             setIntake={setIntake}
+            entries={entries}
+            setEntries={setEntries}
             recommendation={recommendation}
             unit={unit}
           />

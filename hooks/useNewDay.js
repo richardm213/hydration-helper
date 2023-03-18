@@ -5,6 +5,7 @@ import {getCurrentDate, getTimeCategory} from '../utils/DateUtils';
 
 export default function useNewDay(
   intake,
+  entries,
   recommendation,
   dataFetched,
   setIntake,
@@ -18,8 +19,7 @@ export default function useNewDay(
     if (drinkScores) drinkScores = JSON.parse(drinkScores);
     else drinkScores = {};
     const keyList = [];
-    const entriesList = JSON.parse(await AsyncStorage.getItem('@entries'));
-    if (!entriesList) return;
+    const entriesList = entries;
     for (let i = 0; i < entriesList.length; i += 1) {
       if (entriesList[i].drinkType === 'water') continue;
       const timeCategory = getTimeCategory(entriesList[i].drinkTime);

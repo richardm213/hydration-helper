@@ -4,6 +4,7 @@ import {useEffect, useState} from 'react';
 
 export default function useStorageData(
   setIntake,
+  setEntries,
   setExercise,
   setAge,
   setGender,
@@ -20,6 +21,11 @@ export default function useStorageData(
       i.push(
         AsyncStorage.getItem('@intake').then(val => {
           if (val) setIntake(parseInt(val, 10));
+        }),
+      );
+      i.push(
+        AsyncStorage.getItem('@entries').then(val => {
+          if (val) setEntries(JSON.parse(val));
         }),
       );
       i.push(
