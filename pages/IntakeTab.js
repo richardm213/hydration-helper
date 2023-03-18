@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import {StyleSheet, Text, Alert, ScrollView, SafeAreaView} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as Notifications from 'expo-notifications';
 import {SelectList} from 'react-native-dropdown-select-list';
 import {startCase, camelCase} from 'lodash';
 import {Button, Icon} from '@rneui/themed';
@@ -12,6 +11,10 @@ import {DRINKS, getWaterAmount} from '../services/FoodDataAPI';
 import Style from '../theme/Style';
 import {getTime} from '../utils/DateUtils';
 import DrinkLogModal from '../components/DrinkLogModal';
+import {
+  intakeNotification,
+  sendNotification,
+} from '../components/IntakeNotification';
 
 const styles = StyleSheet.create({
   boxStyles: {marginHorizontal: 50, marginTop: 10},
@@ -40,25 +43,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
-
-/* 
-This intake notification is sent when the user
-records some water intake. 
-The notifications are sent at some set intervals of progress,
-e.g. every 10 percent increase in intake towards goal
-*/
-async function intakeRecordNotification(intake, recommendation) {
-  await Notifications.scheduleNotificationAsync({
-    content: {
-      title: `You have reached ${((intake * 100) / recommendation).toFixed(
-        1,
-      )}% of today's water goal!`,
-      body: 'Keep up the good work; Every intake record counts.',
-      data: {data: 'goes here'},
-    },
-    trigger: {seconds: 1},
-  });
-}
 
 export default function IntakeTab({
   intake,
@@ -95,41 +79,8 @@ export default function IntakeTab({
     const e = new DrinkEntry(drinkTypeKey, drinkAmount, drinkTime);
     setEntries(prev => [...prev, e]);
     await AsyncStorage.setItem('@entries', JSON.stringify(entries));
-
-    /*
-    In order to have the notifications 
-    congratulating the user for their intake
-    submission and progress be sent at interval moments
-    (e.g. every 10 percent increase towards goal),
-    calculate the previous and current percent intake
-
-    Calculate it as a multiple of intervalPercent and remove the remainder,
-    since the user will likely not have increased their intake 
-    by precisely e.g. 10 percent (e.g. 11.1 percent, etc.)
-    */
-    const intervalPercent = 10;
-    const prevTotal = Math.floor(
-      (intake * 100) / recommendation / intervalPercent,
-    );
-    const curTotal = Math.floor(
-      ((intake + waterAmount) * 100) / recommendation / intervalPercent,
-    );
-
-    console.log(
-      Math.floor(
-        ((intake + waterAmount) * 100) / recommendation / intervalPercent,
-      ),
-    );
-    console.log(Math.floor((intake * 100) / recommendation / intervalPercent));
-
-    /*
-    If the percent intake changes by at least ten percent,
-    send a notification congratulating the user
-    alongside their current percent intake
-    */
-    if (curTotal > prevTotal) {
-      await intakeRecordNotification(intake + waterAmount, recommendation);
-    }
+    if (sendNotification(intake, recommendation, waterAmount))
+      await intakeNotification(intake + waterAmount, recommendation);
   };
 
   return (
