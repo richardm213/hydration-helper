@@ -12,12 +12,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  diaryButtonContainer: {
-    marginTop: 95,
-  },
-  iconStyle: {
-    padding: 10,
-  },
   modalContainer: {
     backgroundColor: COLORS.white,
     borderRadius: 15,
@@ -27,8 +21,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   progressText: {
-    marginBottom: 20,
-    marginTop: -5,
+    marginTop: 10,
   },
   suggestionIntakeText: {
     color: COLORS.primary,
@@ -37,27 +30,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textDecorationLine: 'underline',
   },
-  suggestionIntakeView: {
-    flex: 1,
-    marginBottom: 25,
-  },
   suggestionText: {
     fontSize: 26,
     paddingVertical: 0,
   },
-  suggestionTextView: {
-    alignItems: 'center',
-    flex: 1.5,
-    justifyContent: 'center',
-  },
-  temperatureView: {
-    marginTop: 20,
-  },
   wrapRecommendation: {
+    alignSelf: 'center',
     backgroundColor: COLORS.white,
     borderColor: COLORS.primary,
     borderRadius: 20,
     borderWidth: 5,
+    marginBottom: 50,
     marginTop: 25,
     paddingBottom: 15,
     paddingTop: 10,
@@ -93,30 +76,20 @@ export default function HomeTab({recommendation, unit, intake}) {
           />
         </View>
       </Modal>
-      <View style={styles.temperatureView}>
-        <Text style={[Style.largeBlueText, styles.progressText]}>
-          Your Progress: {((intake * 100) / recommendation).toFixed(1)}%
+
+      <Text style={[Style.largeBlueText, styles.progressText]}>
+        Your Progress: {((intake * 100) / recommendation).toFixed(1)}%
+      </Text>
+      <Icon name="water" type="ionicon" size={200} />
+      <View style={styles.wrapRecommendation}>
+        <Text style={[Style.largeBlueText, styles.suggestionText]}>
+          Today&apos;s water intake recommendation:{'\n'}
+        </Text>
+        <Text style={styles.suggestionIntakeText}>
+          {recommendation.toFixed(0)} {measurementType}
         </Text>
       </View>
-      <View style={styles.suggestionTextView}>
-        <Icon style={styles.iconStyle} name="water" type="ionicon" size={200} />
-        <View style={styles.wrapRecommendation}>
-          <Text style={[Style.largeBlueText, styles.suggestionText]}>
-            Today&apos;s water intake recommendation:{'\n'}
-          </Text>
-
-          <Text style={styles.suggestionIntakeText}>
-            {recommendation.toFixed(0)} {measurementType}
-          </Text>
-        </View>
-      </View>
-      <View style={styles.suggestionIntakeView}>
-        <Button
-          title="My Drink Diary"
-          containerStyle={styles.diaryButtonContainer}
-          onPress={() => setIsVisible(true)}
-        />
-      </View>
+      <Button title="My Drink Diary" onPress={() => setIsVisible(true)} />
     </View>
   );
 }
