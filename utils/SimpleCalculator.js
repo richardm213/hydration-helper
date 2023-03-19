@@ -1,3 +1,5 @@
+import UNITS from '../components/UNITS';
+
 export default class SimpleCalculator {
   constructor(unit, age, gender, height, weight, exercise) {
     this.unit = unit;
@@ -28,7 +30,7 @@ export default class SimpleCalculator {
     const avgHeight = Math.sqrt((703 * this.weight) / 26);
     let diff = this.height - avgHeight;
     if (diff > 0) {
-      if (this.unit === 'metric') diff /= 2.54;
+      if (this.unit === UNITS.metric) diff /= 2.54;
       this.recommendation += diff;
     }
   }
@@ -39,7 +41,7 @@ export default class SimpleCalculator {
   exercise to bring the recommended amount up. If unit is metric, 
   convert user's weight from kg to lbs. */
   weightFactor() {
-    if (this.unit === 'metric') {
+    if (this.unit === UNITS.metric) {
       this.recommendation += (this.weight / 0.453592) * 0.5;
     } else {
       this.recommendation += this.weight * 0.5;
@@ -48,7 +50,7 @@ export default class SimpleCalculator {
 
   /* Water unit factor: if unit is metric, convert oz to ml. */
   waterUnitFactor() {
-    if (this.unit === 'metric') {
+    if (this.unit === UNITS.metric) {
       this.recommendation *= 30;
     }
   }

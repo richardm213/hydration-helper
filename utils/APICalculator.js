@@ -1,3 +1,4 @@
+import UNITS from '../components/UNITS';
 import SimpleCalculator from './SimpleCalculator';
 
 export default class APICalculator extends SimpleCalculator {
@@ -54,7 +55,7 @@ export default class APICalculator extends SimpleCalculator {
   2,300mg, then add 1 cup = 8 oz = 237 ml */
   sodiumFactor() {
     if (this.food.sodiumIntake > 2300) {
-      this.recommendation += this.unit === 'us-system' ? 8 : 237;
+      this.recommendation += this.unit === UNITS.usSystem ? 8 : 237;
     }
   }
 
@@ -63,7 +64,7 @@ export default class APICalculator extends SimpleCalculator {
   temperatureFactor() {
     if (this.weather.temperature > 80) {
       let amount = 8 * Math.floor((this.weather.temperature - 80) / 10);
-      if (this.unit === 'metric') amount *= 30;
+      if (this.unit === UNITS.metric) amount *= 30;
       this.recommendation += amount;
     }
   }

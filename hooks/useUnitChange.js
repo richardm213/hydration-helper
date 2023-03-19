@@ -1,4 +1,5 @@
 import {useEffect, useRef} from 'react';
+import UNITS from '../components/UNITS';
 
 export default function useUnitChange(
   unit,
@@ -19,7 +20,7 @@ export default function useUnitChange(
     Update height from cm to in
     Update weight from kg to lbs
     */
-    if (unit === 'us-system' && recommendation > 300) {
+    if (unit === UNITS.usSystem && recommendation > 300) {
       setRecommendation(val => val / 30);
       setIntake(val => val / 30);
       setHeight(val => {
@@ -35,7 +36,7 @@ export default function useUnitChange(
     Update height from in to cm
     Update weight from lbs to kg
     */
-    } else if (unit === 'metric' && recommendation < 300) {
+    } else if (unit === UNITS.metric && recommendation < 300) {
       setRecommendation(val => val * 30);
       setIntake(val => val * 30);
       setHeight(val => {

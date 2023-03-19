@@ -19,6 +19,7 @@ import useStorageData from '../hooks/useStorageData';
 import useUnitChange from '../hooks/useUnitChange';
 import useRecommendation from '../hooks/useRecommendation';
 import useNewDay from '../hooks/useNewDay';
+import UNITS from '../components/UNITS';
 
 const styles = StyleSheet.create({
   headerStyle: {
@@ -147,7 +148,7 @@ export default function Tabs() {
         options={{
           tabBarIcon: intakeIcon,
           headerTitle: `Current water intake: ${intake.toFixed(0)} ${
-            unit === 'us-system' ? 'oz' : 'ml'
+            unit === UNITS.usSystem ? UNITS.oz : UNITS.ml
           }`,
         }}>
         {() => (

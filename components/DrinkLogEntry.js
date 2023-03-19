@@ -1,6 +1,7 @@
 import {Text, View, StyleSheet} from 'react-native';
 import {lowerCase} from 'lodash';
 import COLORS from '../theme/Colors';
+import UNITS from './UNITS';
 
 const styles = StyleSheet.create({
   card: {
@@ -30,8 +31,9 @@ export default function DrinkLogEntry({drinkEntry, unit}) {
   return (
     <View style={styles.card}>
       <Text style={styles.entry}>
-        You drank {drinkEntry.drinkAmount} {unit === 'us-system' ? 'oz' : 'ml'}{' '}
-        of {lowerCase(drinkEntry.drinkType)}
+        You drank {drinkEntry.drinkAmount}{' '}
+        {unit === UNITS.usSystem ? UNITS.oz : UNITS.ml} of{' '}
+        {lowerCase(drinkEntry.drinkType)}
         {'\n'}
         at {formatTime(drinkEntry.drinkTime)}.
       </Text>

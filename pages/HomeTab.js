@@ -20,6 +20,7 @@ import COLORS from '../theme/Colors';
 import useTodaysDrinks from '../hooks/useTodaysDrinks';
 import Style from '../theme/Style';
 import DiaryModal from '../components/DiaryModal';
+import UNITS from '../components/UNITS';
 
 const styles = StyleSheet.create({
   progressText: {
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
 
 export default function HomeTab({recommendation, unit, intake}) {
   const [isVisible, setIsVisible] = useState(false);
-  const measurementType = unit === 'us-system' ? 'oz' : 'ml';
+  const measurementType = unit === UNITS.usSystem ? UNITS.oz : UNITS.ml;
   const cardData = useTodaysDrinks(recommendation);
 
   return (

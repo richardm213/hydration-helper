@@ -1,6 +1,7 @@
 import {Text} from '@rneui/base';
 import {Icon, Slider} from '@rneui/themed';
 import {StyleSheet, View} from 'react-native';
+import UNITS from './UNITS';
 
 const styles = StyleSheet.create({
   iconContainerStyle: {bottom: 20, right: 20},
@@ -19,8 +20,8 @@ const styles = StyleSheet.create({
 });
 
 export default function DrinkSlider({drinkAmount, setDrinkAmount, unit}) {
-  const measurementType = unit === 'us-system' ? 'oz' : 'ml';
-  const maxAmount = unit === 'us-system' ? 40 : 1200;
+  const measurementType = unit === UNITS.usSystem ? UNITS.oz : UNITS.ml;
+  const maxAmount = unit === UNITS.usSystem ? 40 : 1200;
 
   return (
     <View style={styles.viewStyle}>

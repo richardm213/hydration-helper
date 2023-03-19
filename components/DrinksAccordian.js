@@ -2,6 +2,7 @@ import {Text} from '@rneui/base';
 import {useCallback} from 'react';
 import {View} from 'react-native';
 import {AccordionList} from 'react-native-accordion-list-view';
+import UNITS from './UNITS';
 
 export default function DrinksAccordian({data, unit}) {
   const listTitle = useCallback(item => <Text>{item.date}</Text>, []);
@@ -9,10 +10,12 @@ export default function DrinksAccordian({data, unit}) {
     item => (
       <View>
         <Text>
-          Recommendation: {item.goal} {unit === 'us-system' ? 'oz' : 'ml'}
+          Recommendation: {item.goal}{' '}
+          {unit === UNITS.usSystem ? UNITS.oz : UNITS.ml}
         </Text>
         <Text>
-          Water intake: {item.intake} {unit === 'us-system' ? 'oz' : 'ml'}
+          Water intake: {item.intake}{' '}
+          {unit === UNITS.usSystem ? UNITS.oz : UNITS.ml}
         </Text>
         <Text>Exercise: {item.exercise} minutes</Text>
         <Text>Calories: {item.calories} calories</Text>

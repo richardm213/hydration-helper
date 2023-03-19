@@ -16,6 +16,7 @@ import GetEventTimes from '../services/CalendarAPI';
 import Style from '../theme/Style';
 import SettingsModal from '../components/SettingsModal';
 import SettingsInputRow from '../components/SettingsInputRow';
+import UNITS from '../components/UNITS';
 
 const styles = StyleSheet.create({
   label: {
@@ -94,8 +95,8 @@ export default function SettingsTab({
     }
   };
 
-  const heightType = unit === 'us-system' ? 'in' : 'cm';
-  const weightType = unit === 'us-system' ? 'lbs' : 'kg';
+  const heightType = unit === UNITS.usSystem ? 'in' : 'cm';
+  const weightType = unit === UNITS.usSystem ? 'lbs' : 'kg';
   const [isVisible, setIsVisible] = useState(false);
   const [picker, setPicker] = useState(null);
 
