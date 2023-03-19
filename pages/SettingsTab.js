@@ -1,3 +1,10 @@
+/*
+The Settings Tab allows the user
+to view and edit their biometric data,
+app permissions, and the unit system
+(US or metric) for the app. The user
+can also allow notifications.
+ */
 import React, {useState} from 'react';
 import {StyleSheet, View, ScrollView, SafeAreaView} from 'react-native';
 import {Text} from '@rneui/base';
