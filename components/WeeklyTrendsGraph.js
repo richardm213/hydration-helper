@@ -19,18 +19,19 @@ export default function WeeklyTrendsGraph({data, maxValue}) {
     <View style={styles.container}>
       <GraphLegend />
       <BarChart
-        data={data}
-        spacing={27}
         barWidth={20}
-        xAxisThickness={1}
-        yAxisThickness={1}
-        yAxisTextStyle={styles.yAxisTextStyle}
-        labelsExtraHeight={15}
-        noOfSections={7}
-        maxValue={maxValue}
-        labelWidth={85}
+        data={data}
         height={380}
+        initialSpacing={25}
+        labelsExtraHeight={15}
+        labelWidth={85}
+        maxValue={maxValue}
+        noOfSections={7}
+        spacing={27}
         xAxisLabelTextStyle={styles.xAxisLegendStyle}
+        xAxisThickness={1}
+        yAxisTextStyle={styles.yAxisTextStyle}
+        yAxisThickness={1}
       />
     </View>
   );
