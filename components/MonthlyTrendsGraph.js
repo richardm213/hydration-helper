@@ -17,19 +17,19 @@ export default function MonthlyTrendsGraph({data, maxValue}) {
     <View style={styles.container}>
       <GraphLegend />
       <BarChart
-        data={data}
-        initialSpacing={25}
-        spacing={13}
-        barWidth={15}
-        xAxisThickness={1}
-        yAxisThickness={1}
-        yAxisTextStyle={styles.yAxisTextStyle}
-        noOfSections={7}
-        maxValue={maxValue}
-        labelWidth={85}
-        height={380}
         autoShiftLabels
+        barWidth={15}
+        data={data}
+        height={380}
+        initialSpacing={25}
+        labelWidth={85}
+        maxValue={maxValue}
+        noOfSections={7}
+        spacing={26}
         xAxisLabelTextStyle={styles.xAxisLegendStyle}
+        xAxisThickness={1}
+        yAxisTextStyle={styles.yAxisTextStyle}
+        yAxisThickness={1}
       />
     </View>
   );
