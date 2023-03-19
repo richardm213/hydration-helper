@@ -1,6 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 import {BarChart} from 'react-native-gifted-charts';
 import GraphLegend from './GraphLegend';
+import GRAPH from './GRAPH';
 
 const styles = StyleSheet.create({
   container: {paddingHorizontal: 20},
@@ -20,16 +21,16 @@ export default function MonthlyTrendsGraph({data, maxValue}) {
         autoShiftLabels
         barWidth={15}
         data={data}
-        height={380}
-        initialSpacing={25}
-        labelWidth={85}
+        height={GRAPH.height}
+        initialSpacing={GRAPH.initialSpacing}
+        labelWidth={GRAPH.labelWidth}
         maxValue={maxValue}
-        noOfSections={7}
-        spacing={26}
+        noOfSections={GRAPH.noOfSections}
+        spacing={GRAPH.spacing}
         xAxisLabelTextStyle={styles.xAxisLegendStyle}
-        xAxisThickness={1}
+        xAxisThickness={GRAPH.xAxisThickness}
         yAxisTextStyle={styles.yAxisTextStyle}
-        yAxisThickness={1}
+        yAxisThickness={GRAPH.yAxisThickness}
       />
     </View>
   );

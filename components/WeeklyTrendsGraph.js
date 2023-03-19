@@ -1,6 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 import {BarChart} from 'react-native-gifted-charts';
 import GraphLegend from './GraphLegend';
+import GRAPH from './GRAPH';
 
 const styles = StyleSheet.create({
   container: {paddingHorizontal: 20},
@@ -21,17 +22,17 @@ export default function WeeklyTrendsGraph({data, maxValue}) {
       <BarChart
         barWidth={20}
         data={data}
-        height={380}
-        initialSpacing={25}
+        height={GRAPH.height}
+        initialSpacing={GRAPH.initialSpacing}
         labelsExtraHeight={15}
-        labelWidth={85}
+        labelWidth={GRAPH.labelWidth}
         maxValue={maxValue}
-        noOfSections={7}
-        spacing={27}
+        noOfSections={GRAPH.noOfSections}
+        spacing={GRAPH.spacing}
         xAxisLabelTextStyle={styles.xAxisLegendStyle}
-        xAxisThickness={1}
+        xAxisThickness={GRAPH.xAxisThickness}
         yAxisTextStyle={styles.yAxisTextStyle}
-        yAxisThickness={1}
+        yAxisThickness={GRAPH.yAxisThickness}
       />
     </View>
   );
