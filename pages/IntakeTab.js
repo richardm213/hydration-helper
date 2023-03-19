@@ -1,3 +1,16 @@
+/* 
+The Intake Tab provides an interface 
+for the user to record a new drink intake.
+
+The user can select a drink type 
+(e.g. orange juice) from the available list
+of drinks and input the amount of the drink. 
+Once submitted, the record is added to
+the user's progress towards their goal intake.
+
+The user can also view the drinks that
+they previously recorded today.
+*/
 import {useState} from 'react';
 import {StyleSheet, Text, Alert, ScrollView, SafeAreaView} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
