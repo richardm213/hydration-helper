@@ -1,3 +1,17 @@
+/* 
+The Home Tab displays the user's water
+intake recommendation, but also has
+additional features. 
+
+The current temperature is fetched and 
+displayed in the header.
+
+The user's current progress to reaching
+their daily goal is presented in percent.
+
+Lastly, the user can view and hide
+their Drink Diary.
+*/
 import {StyleSheet, View} from 'react-native';
 import {Text} from '@rneui/base';
 import {useState} from 'react';
