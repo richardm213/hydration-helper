@@ -34,7 +34,7 @@ export default function ExerciseTab({exercise, setExercise}) {
         size={200}
       />
       <Text style={Style.largeBlueText}>
-        Please enter your minutes of exercise below
+        Please enter your minutes of exercise below:
       </Text>
       <ExerciseSlider
         exerciseAmount={input}
