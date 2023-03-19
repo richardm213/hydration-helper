@@ -1,3 +1,17 @@
+/* 
+The Trends Tab is composed of three parts:
+
+1. Graphs page: this page allows the user
+to view trends in their recommended and
+recorded intake, in a weekly or monthly view. 
+
+2. Drinks page: this page displays each day's
+previously recorded data as an accordion 
+expandable list.
+
+3. Scores page: this page displays the user's
+performance score and drink tendency scores.
+*/
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
