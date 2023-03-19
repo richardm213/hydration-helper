@@ -1,3 +1,12 @@
+/*
+  The Exercise Tab provides an interface
+  for the user to input their minutes
+  of exercise, between a range of 
+  1 to 180 minutes (3 hours). 
+
+  Once submitted, the exercise record is
+  used to update the recommended water intake.
+ */
 import {StatusBar} from 'expo-status-bar';
 import {useState} from 'react';
 import {Text, View, StyleSheet, Alert} from 'react-native';
