@@ -1,6 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useEffect, useState} from 'react';
-// import WeatherAPI from '../services/WeatherAPI';
+import WeatherAPI from '../services/WeatherAPI';
+
+const w = new WeatherAPI();
 
 export default function useStorageData(
   setIntake,
@@ -13,7 +15,6 @@ export default function useStorageData(
   setUnit,
   setTemperature,
 ) {
-  // const w = new WeatherAPI();
   const [dataFetched, setDataFetched] = useState(false);
   useEffect(() => {
     const fetchStorageValues = async () => {
@@ -62,8 +63,8 @@ export default function useStorageData(
       setDataFetched(true);
     };
     const fetchTemperature = async () => {
-      // await w.getTemperature(setTemperature);
-      setTemperature(Math.random() * (110 - 40) + 40);
+      await w.getTemperature(setTemperature);
+      // setTemperature(Math.random() * (110 - 40) + 40);
     };
     fetchStorageValues();
     fetchTemperature();
