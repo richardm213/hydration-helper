@@ -1,4 +1,4 @@
-import UNITS from '../components/UNITS';
+import {UNITS} from './Constants';
 
 export default class SimpleCalculator {
   constructor(unit, age, gender, height, weight, exercise) {

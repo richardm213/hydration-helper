@@ -2,7 +2,7 @@ import {Text} from '@rneui/base';
 import {useCallback} from 'react';
 import {View} from 'react-native';
 import {AccordionList} from 'react-native-accordion-list-view';
-import UNITS from './UNITS';
+import {UNITS} from '../utils/Constants';
 
 export default function DrinksAccordian({data, unit}) {
   const listTitle = useCallback(item => <Text>{item.date}</Text>, []);

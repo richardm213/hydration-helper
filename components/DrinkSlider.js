@@ -1,7 +1,7 @@
 import {Text} from '@rneui/base';
 import {Icon, Slider} from '@rneui/themed';
 import {StyleSheet, View} from 'react-native';
-import UNITS from './UNITS';
+import {UNITS} from '../utils/Constants';
 
 const styles = StyleSheet.create({
   iconContainerStyle: {bottom: 20, right: 20},

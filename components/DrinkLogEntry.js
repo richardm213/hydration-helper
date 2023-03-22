@@ -1,7 +1,7 @@
 import {Text, View, StyleSheet} from 'react-native';
 import {lowerCase} from 'lodash';
 import COLORS from '../theme/Colors';
-import UNITS from './UNITS';
+import {UNITS} from '../utils/Constants';
 
 const styles = StyleSheet.create({
   card: {

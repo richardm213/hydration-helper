@@ -1,4 +1,4 @@
-import UNITS from '../components/UNITS';
+import {UNITS} from './Constants';
 import SimpleCalculator from './SimpleCalculator';
 
 export default class APICalculator extends SimpleCalculator {

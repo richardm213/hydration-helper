@@ -16,7 +16,7 @@ import GetEventTimes from '../services/CalendarAPI';
 import Style from '../theme/Style';
 import SettingsModal from '../components/SettingsModal';
 import SettingsInputRow from '../components/SettingsInputRow';
-import UNITS from '../components/UNITS';
+import {UNITS} from '../utils/Constants';
 
 const styles = StyleSheet.create({
   label: {

@@ -1,3 +1,10 @@
+const UNITS = {
+  metric: 'metric',
+  usSystem: 'us-system',
+  ml: 'ml',
+  oz: 'oz',
+};
+
 const GRAPH = {
   height: 380,
   initialSpacing: 25,
@@ -8,4 +15,4 @@ const GRAPH = {
   yAxisThickness: 1,
 };
 
-export default GRAPH;
+export {UNITS, GRAPH};

@@ -19,7 +19,7 @@ import useStorageData from '../hooks/useStorageData';
 import useUnitChange from '../hooks/useUnitChange';
 import useRecommendation from '../hooks/useRecommendation';
 import useNewDay from '../hooks/useNewDay';
-import UNITS from '../components/UNITS';
+import {UNITS} from '../utils/Constants';
 
 const styles = StyleSheet.create({
   headerStyle: {

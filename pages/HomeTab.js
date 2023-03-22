@@ -20,7 +20,7 @@ import COLORS from '../theme/Colors';
 import useTodaysDrinks from '../hooks/useTodaysDrinks';
 import Style from '../theme/Style';
 import DiaryModal from '../components/DiaryModal';
-import UNITS from '../components/UNITS';
+import {UNITS} from '../utils/Constants';
 
 const styles = StyleSheet.create({
   progressText: {

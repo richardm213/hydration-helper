@@ -1,7 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 import {BarChart} from 'react-native-gifted-charts';
+import {GRAPH} from '../utils/Constants';
 import GraphLegend from './GraphLegend';
-import GRAPH from './GRAPH';
 
 const styles = StyleSheet.create({
   container: {paddingHorizontal: 20},
