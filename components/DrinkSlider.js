@@ -18,10 +18,17 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
-
+const MAX = {
+  maxOZ: 40,
+  maxML: 1200,
+};
 export default function DrinkSlider({drinkAmount, setDrinkAmount, unit}) {
   const measurementType = unit === UNITS.usSystem ? UNITS.oz : UNITS.ml;
-  const maxAmount = unit === UNITS.usSystem ? 40 : 1200;
+  /* 
+  Determine maximum value for the
+  slider based on unit system chosen by user
+  */
+  const maxAmount = unit === UNITS.usSystem ? MAX.maxOZ : MAX.maxML;
 
   return (
     <View style={styles.viewStyle}>
@@ -34,11 +41,11 @@ export default function DrinkSlider({drinkAmount, setDrinkAmount, unit}) {
         thumbProps={{
           children: (
             <Icon
+              containerStyle={styles.iconContainerStyle}
               name="tint"
+              reverse
               type="font-awesome"
               size={20}
-              reverse
-              containerStyle={styles.iconContainerStyle}
             />
           ),
         }}
