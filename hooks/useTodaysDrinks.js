@@ -45,6 +45,6 @@ export default function useTodaysDrinks(recommendation) {
       setTodaysDrinks(tempCardData);
     };
     getDetailedRecommendation();
-  }, []);
+  }, [recommendation]);
   return todaysDrinks;
 }
