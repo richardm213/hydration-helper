@@ -19,6 +19,10 @@ const styles = StyleSheet.create({
 });
 
 export default function ExerciseSlider({exerciseAmount, setExerciseAmount}) {
+  /* 
+  Determine the maximum value for the
+  slider to be 180 minutes, aka 3 hours
+  */
   const maxAmount = 3 * 60;
   return (
     <View style={styles.viewStyle}>
@@ -31,11 +35,11 @@ export default function ExerciseSlider({exerciseAmount, setExerciseAmount}) {
         thumbProps={{
           children: (
             <Icon
-              name="run-circle"
-              type="material-icons"
-              size={20}
-              reverse
               containerStyle={styles.iconContainerStyle}
+              name="run-circle"
+              reverse
+              size={20}
+              type="material-icons"
             />
           ),
         }}
