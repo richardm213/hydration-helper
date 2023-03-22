@@ -73,7 +73,7 @@ export default function useGraphData(
       let maxVal2 = -1;
       const newDataBarsMonth = [];
       for (let i = 0; i < 30; i += 1) {
-        const day = getCurrentDate(30 - i);
+        const day = getCurrentDate(29 - i);
         if (day in historicalData) {
           const dailyEntry = historicalData[day];
           maxVal2 = Math.max(maxVal, dailyEntry.recommendation);
