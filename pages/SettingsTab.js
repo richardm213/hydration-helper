@@ -95,7 +95,7 @@ export default function SettingsTab({
     }
   };
 
-  const heightType = unit === UNITS.usSystem ? 'in' : 'cm';
+  const heightType = unit === UNITS.usSystem ? UNITS.in : UNITS.cm;
   const weightType = unit === UNITS.usSystem ? 'lbs' : 'kg';
   const [isVisible, setIsVisible] = useState(false);
   const [picker, setPicker] = useState(null);

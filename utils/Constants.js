@@ -3,6 +3,8 @@ const UNITS = {
   usSystem: 'us-system',
   ml: 'ml',
   oz: 'oz',
+  in: 'in',
+  cm: 'cm',
 };
 
 const GRAPH = {
