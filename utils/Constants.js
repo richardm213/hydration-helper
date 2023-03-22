@@ -5,6 +5,8 @@ const UNITS = {
   oz: 'oz',
   in: 'in',
   cm: 'cm',
+  lbs: 'lbs',
+  kg: 'kg',
 };
 
 const GRAPH = {
