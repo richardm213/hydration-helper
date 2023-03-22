@@ -91,7 +91,7 @@ export default function IntakeTab({
     const drinkTime = getTime();
     const e = new DrinkEntry(drinkTypeKey, drinkAmount, drinkTime);
     setEntries(prev => [...prev, e]);
-    await AsyncStorage.setItem('@entries', JSON.stringify(entries));
+    await AsyncStorage.setItem('@entries', JSON.stringify([...entries, e]));
     if (sendNotification(intake, recommendation, waterAmount))
       await intakeNotification(intake + waterAmount, recommendation);
   };
